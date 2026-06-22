@@ -1,0 +1,1042 @@
+{
+  "id": "2026-06-20T20-46-11-106Z-fb6ea128",
+  "timestamp_iso": "2026-06-20T20:46:11.106Z",
+  "timestamp_display": "Minggu, 21 Juni 2026, 03.46 WIB",
+  "model": "gpt-4o-mini",
+  "datasets": [
+    {
+      "exp": "EXP-01",
+      "sha256": "9ac97d70f0099bb29f8c143500ed37ff698cbade92ad2f23a42f94def6c8ba7d"
+    },
+    {
+      "exp": "EXP-02",
+      "sha256": "6159ce1c3d269de6c0cd450fb29b6995a258b2df99483c41073ce141b1c5132b"
+    }
+  ],
+  "metrics_live": {
+    "tp": 10,
+    "fp": 6,
+    "fn": 20,
+    "precision": 0.625,
+    "recall": 0.333,
+    "f1": 0.435,
+    "recall_ctdl": 0.533,
+    "recall_wika": 0.133
+  },
+  "per_rule": [
+    {
+      "rule_id": "CTDL-01",
+      "domain": "CTDL",
+      "expert_verdict": "TP",
+      "detected": true,
+      "finding": {
+        "description": "The search method uses raw SQL queries, which can lead to SQL injection vulnerabilities.",
+        "check_name": "SAST | [CTDL-01] Raw SQL query — SQL injection vulnerability",
+        "severity": "critical",
+        "confidence": "high",
+        "categories": [
+          "Security"
+        ],
+        "fingerprint": "mno345",
+        "location": {
+          "path": "app/Http/Controllers/PurchaseOrderController.php",
+          "lines": {
+            "begin": 51
+          }
+        },
+        "references": [],
+        "recommendation": "Use Eloquent ORM methods to safely query the database.",
+        "tests": [
+          "Test for SQL injection by attempting to manipulate the search query."
+        ],
+        "notes": "Rule ID: CTDL-01"
+      }
+    },
+    {
+      "rule_id": "CTDL-02",
+      "domain": "CTDL",
+      "expert_verdict": "TP",
+      "detected": true,
+      "finding": {
+        "description": "The Vendor model uses $fillable instead of $guarded, violating the convention for mass assignment protection.",
+        "check_name": "SAST | [CTDL-02] Model uses $fillable",
+        "severity": "major",
+        "confidence": "high",
+        "categories": [
+          "Security",
+          "Maintainability"
+        ],
+        "fingerprint": "d1e2f3g4h5i6j7k8l9m0",
+        "location": {
+          "path": "app/Models/Vendor.php",
+          "lines": {
+            "begin": 8
+          }
+        },
+        "references": [],
+        "recommendation": "Change the model to use $guarded = ['id']; instead of $fillable.",
+        "tests": [
+          "Test that mass assignment works correctly with the new guarded setting."
+        ],
+        "notes": "Refer to rule CTDL-02 for mass assignment conventions."
+      }
+    },
+    {
+      "rule_id": "CTDL-03",
+      "domain": "CTDL",
+      "expert_verdict": "TP",
+      "detected": true,
+      "finding": {
+        "description": "The search view uses {!! !!} for outputting vendor names, which can lead to XSS vulnerabilities if not properly sanitized.",
+        "check_name": "SAST | [CTDL-03] XSS vulnerability in search view",
+        "severity": "major",
+        "confidence": "high",
+        "categories": [
+          "Security",
+          "Correctness"
+        ],
+        "fingerprint": "h1i2j3k4l5m6n7o8p9q0",
+        "location": {
+          "path": "resources/views/vendor/search.blade.php",
+          "lines": {
+            "begin": 10
+          }
+        },
+        "references": [],
+        "recommendation": "Change {!! $vendor->name !!} to {{ $vendor->name }} to ensure proper escaping.",
+        "tests": [
+          "Test that the output is properly escaped and does not allow XSS."
+        ],
+        "notes": "Refer to rule CTDL-03 for XSS prevention."
+      }
+    },
+    {
+      "rule_id": "CTDL-04",
+      "domain": "CTDL",
+      "expert_verdict": "FN",
+      "detected": false,
+      "finding": null
+    },
+    {
+      "rule_id": "CTDL-05",
+      "domain": "CTDL",
+      "expert_verdict": "TP",
+      "detected": true,
+      "finding": {
+        "description": "The store method does not validate the request data before processing.",
+        "check_name": "SAST | [CTDL-05] Missing validation in store()",
+        "severity": "major",
+        "confidence": "high",
+        "categories": [
+          "Correctness",
+          "Security"
+        ],
+        "fingerprint": "def456",
+        "location": {
+          "path": "app/Http/Controllers/PurchaseOrderController.php",
+          "lines": {
+            "begin": 20
+          }
+        },
+        "references": [],
+        "recommendation": "Add $request->validate([...]) to ensure data integrity and security.",
+        "tests": [
+          "Test that invalid data returns a validation error.",
+          "Verify that valid data creates a purchase order."
+        ],
+        "notes": "Rule ID: CTDL-05, WIKA-Q02"
+      }
+    },
+    {
+      "rule_id": "CTDL-06",
+      "domain": "CTDL",
+      "expert_verdict": "TP",
+      "detected": false,
+      "finding": null
+    },
+    {
+      "rule_id": "CTDL-07",
+      "domain": "CTDL",
+      "expert_verdict": "TP",
+      "detected": true,
+      "finding": {
+        "description": "The Vendor model is missing the HasCreator trait, which is required for tracking the creator of the model instance.",
+        "check_name": "SAST | [CTDL-07] Missing HasCreator trait",
+        "severity": "major",
+        "confidence": "high",
+        "categories": [
+          "Maintainability",
+          "Convention"
+        ],
+        "fingerprint": "f1g2h3i4j5k6l7m8n9o0",
+        "location": {
+          "path": "app/Models/Vendor.php",
+          "lines": {
+            "begin": 10
+          }
+        },
+        "references": [],
+        "recommendation": "Implement the HasCreator trait in the Vendor model.",
+        "tests": [
+          "Test that the created_by field is populated correctly."
+        ],
+        "notes": "Refer to rule CTDL-07 for audit requirements."
+      }
+    },
+    {
+      "rule_id": "CTDL-08",
+      "domain": "CTDL",
+      "expert_verdict": "FN",
+      "detected": false,
+      "finding": null
+    },
+    {
+      "rule_id": "CTDL-09",
+      "domain": "CTDL",
+      "expert_verdict": "FN",
+      "detected": false,
+      "finding": null
+    },
+    {
+      "rule_id": "CTDL-10",
+      "domain": "CTDL",
+      "expert_verdict": "TP",
+      "detected": true,
+      "finding": {
+        "description": "The Vendor model is missing the explicit $table property with the escm_ prefix, violating the convention for model definitions.",
+        "check_name": "SAST | [CTDL-10] Missing explicit $table property",
+        "severity": "minor",
+        "confidence": "medium",
+        "categories": [
+          "Maintainability",
+          "Convention"
+        ],
+        "fingerprint": "e1f2g3h4i5j6k7l8m9n0",
+        "location": {
+          "path": "app/Models/Vendor.php",
+          "lines": {
+            "begin": 9
+          }
+        },
+        "references": [],
+        "recommendation": "Add the property protected $table = 'escm_vendors'; to the Vendor model.",
+        "tests": [
+          "Test that the model correctly references the database table."
+        ],
+        "notes": "Refer to rule CTDL-10 for model conventions."
+      }
+    },
+    {
+      "rule_id": "CTDL-11",
+      "domain": "CTDL",
+      "expert_verdict": "TP",
+      "detected": true,
+      "finding": {
+        "description": "The index method does not call checkAccessPermission() and lacks multi-tenant isolation with ESCM::scopeProject(auth()->user()).",
+        "check_name": "SAST | [CTDL-11] Missing checkAccessPermission()",
+        "severity": "major",
+        "confidence": "high",
+        "categories": [
+          "Security",
+          "Correctness"
+        ],
+        "fingerprint": "abc123",
+        "location": {
+          "path": "app/Http/Controllers/PurchaseOrderController.php",
+          "lines": {
+            "begin": 12
+          }
+        },
+        "references": [],
+        "recommendation": "Add checkAccessPermission() at the start of the index method and use ESCM::scopeProject(auth()->user()) for data retrieval.",
+        "tests": [
+          "Test that unauthorized access is blocked.",
+          "Verify that only relevant purchase orders are returned based on user permissions."
+        ],
+        "notes": "Rule ID: CTDL-11, WIKA-Q07"
+      }
+    },
+    {
+      "rule_id": "CTDL-12",
+      "domain": "CTDL",
+      "expert_verdict": "FN",
+      "detected": true,
+      "finding": {
+        "description": "The update_status method combines multiple non-CRUD actions in a single method.",
+        "check_name": "SAST | [CTDL-12] Non-CRUD actions in generic method",
+        "severity": "major",
+        "confidence": "high",
+        "categories": [
+          "Correctness"
+        ],
+        "fingerprint": "stu901",
+        "location": {
+          "path": "app/Http/Controllers/PurchaseOrderController.php",
+          "lines": {
+            "begin": 66
+          }
+        },
+        "references": [],
+        "recommendation": "Separate non-CRUD actions into distinct methods.",
+        "tests": [
+          "Verify that each action (approve, release, propose) has its own method."
+        ],
+        "notes": "Rule ID: CTDL-12"
+      }
+    },
+    {
+      "rule_id": "CTDL-13",
+      "domain": "CTDL",
+      "expert_verdict": "FN",
+      "detected": false,
+      "finding": null
+    },
+    {
+      "rule_id": "CTDL-14",
+      "domain": "CTDL",
+      "expert_verdict": "FN",
+      "detected": false,
+      "finding": null
+    },
+    {
+      "rule_id": "CTDL-15",
+      "domain": "CTDL",
+      "expert_verdict": "FN",
+      "detected": false,
+      "finding": null
+    },
+    {
+      "rule_id": "WIKA-Q01",
+      "domain": "WIKA",
+      "expert_verdict": "FN",
+      "detected": false,
+      "finding": null
+    },
+    {
+      "rule_id": "WIKA-Q02",
+      "domain": "WIKA",
+      "expert_verdict": "FN",
+      "detected": false,
+      "finding": null
+    },
+    {
+      "rule_id": "WIKA-Q03",
+      "domain": "WIKA",
+      "expert_verdict": "FN",
+      "detected": false,
+      "finding": null
+    },
+    {
+      "rule_id": "WIKA-Q04",
+      "domain": "WIKA",
+      "expert_verdict": "FN",
+      "detected": false,
+      "finding": null
+    },
+    {
+      "rule_id": "WIKA-Q05",
+      "domain": "WIKA",
+      "expert_verdict": "TP",
+      "detected": true,
+      "finding": {
+        "description": "The syncFromSap method does not use a dedicated sync service and does not extend Base.",
+        "check_name": "SAST | [WIKA-Q05] External data without sync service",
+        "severity": "major",
+        "confidence": "high",
+        "categories": [
+          "Integration"
+        ],
+        "fingerprint": "abc567",
+        "location": {
+          "path": "app/Http/Controllers/PurchaseOrderController.php",
+          "lines": {
+            "begin": 95
+          }
+        },
+        "references": [],
+        "recommendation": "Implement a dedicated sync service that extends App\\Sync\\Service\\Base for syncing data from SAP.",
+        "tests": [
+          "Verify that the sync functionality works with the new service."
+        ],
+        "notes": "Rule ID: WIKA-Q05, WIKA-Q06"
+      }
+    },
+    {
+      "rule_id": "WIKA-Q06",
+      "domain": "WIKA",
+      "expert_verdict": "FN",
+      "detected": false,
+      "finding": null
+    },
+    {
+      "rule_id": "WIKA-Q07",
+      "domain": "WIKA",
+      "expert_verdict": "TP",
+      "detected": false,
+      "finding": null
+    },
+    {
+      "rule_id": "WIKA-Q08",
+      "domain": "WIKA",
+      "expert_verdict": "TP",
+      "detected": true,
+      "finding": {
+        "description": "The store method logs sensitive data (password, pin) without masking.",
+        "check_name": "SAST | [WIKA-Q08] Logging sensitive data without masking",
+        "severity": "major",
+        "confidence": "high",
+        "categories": [
+          "Security"
+        ],
+        "fingerprint": "ghi789",
+        "location": {
+          "path": "app/Http/Controllers/PurchaseOrderController.php",
+          "lines": {
+            "begin": 27
+          }
+        },
+        "references": [],
+        "recommendation": "Remove sensitive data from logs or mask it before logging.",
+        "tests": [
+          "Check logs to ensure sensitive data is not recorded."
+        ],
+        "notes": "Rule ID: WIKA-Q08"
+      }
+    },
+    {
+      "rule_id": "WIKA-Q09",
+      "domain": "WIKA",
+      "expert_verdict": "FN",
+      "detected": false,
+      "finding": null
+    },
+    {
+      "rule_id": "WIKA-Q10",
+      "domain": "WIKA",
+      "expert_verdict": "FN",
+      "detected": false,
+      "finding": null
+    },
+    {
+      "rule_id": "WIKA-Q11",
+      "domain": "WIKA",
+      "expert_verdict": "FN",
+      "detected": false,
+      "finding": null
+    },
+    {
+      "rule_id": "WIKA-Q12",
+      "domain": "WIKA",
+      "expert_verdict": "FN",
+      "detected": false,
+      "finding": null
+    },
+    {
+      "rule_id": "WIKA-Q13",
+      "domain": "WIKA",
+      "expert_verdict": "FN",
+      "detected": false,
+      "finding": null
+    },
+    {
+      "rule_id": "WIKA-Q14",
+      "domain": "WIKA",
+      "expert_verdict": "FN",
+      "detected": false,
+      "finding": null
+    },
+    {
+      "rule_id": "WIKA-Q15",
+      "domain": "WIKA",
+      "expert_verdict": "FN",
+      "detected": false,
+      "finding": null
+    }
+  ],
+  "fp_findings": [
+    {
+      "description": "The store method does not validate the incoming request data, which can lead to invalid data being saved to the database.",
+      "check_name": "SAST | [WIKA-Q02] Missing validation in store method",
+      "severity": "major",
+      "confidence": "high",
+      "categories": [
+        "Security",
+        "Correctness"
+      ],
+      "fingerprint": "a1b2c3d4e5f6g7h8i9j0",
+      "location": {
+        "path": "app/Http/Controllers/VendorController.php",
+        "lines": {
+          "begin": 18
+        }
+      },
+      "references": [],
+      "recommendation": "Add validation to the store method using $request->validate([...]) to ensure data integrity.",
+      "tests": [
+        "Test that invalid data returns a validation error.",
+        "Test that valid data is saved correctly."
+      ],
+      "notes": "Refer to rule WIKA-Q02 for validation requirements."
+    },
+    {
+      "description": "The search method uses a raw SQL query, which violates the convention of using Eloquent ORM for database access.",
+      "check_name": "SAST | [CTDL-01] Raw SQL query in search method",
+      "severity": "major",
+      "confidence": "high",
+      "categories": [
+        "Security",
+        "Correctness"
+      ],
+      "fingerprint": "b1c2d3e4f5g6h7i8j9k0",
+      "location": {
+        "path": "app/Http/Controllers/VendorController.php",
+        "lines": {
+          "begin": 30
+        }
+      },
+      "references": [],
+      "recommendation": "Use Eloquent ORM to perform the search instead of a raw SQL query.",
+      "tests": [
+        "Test that the search returns correct results using Eloquent.",
+        "Test that the search handles special characters safely."
+      ],
+      "notes": "Refer to rule CTDL-01 for database access conventions."
+    },
+    {
+      "description": "The export method does not check for user permissions before exporting vendor data, which can lead to unauthorized access.",
+      "check_name": "SAST | [CTDL-11] Missing permission check in export method",
+      "severity": "major",
+      "confidence": "high",
+      "categories": [
+        "Security",
+        "Correctness"
+      ],
+      "fingerprint": "c1d2e3f4g5h6i7j8k9l0",
+      "location": {
+        "path": "app/Http/Controllers/VendorController.php",
+        "lines": {
+          "begin": 43
+        }
+      },
+      "references": [],
+      "recommendation": "Implement a permission check using checkAccessPermission() at the start of the export method.",
+      "tests": [
+        "Test that unauthorized users cannot access the export functionality.",
+        "Test that authorized users can successfully export data."
+      ],
+      "notes": "Refer to rule CTDL-11 for authorization requirements."
+    },
+    {
+      "description": "The Vendor model is missing the ActivityLogged trait, which is required for tracking changes to the model instance.",
+      "check_name": "SAST | [CTDL-08] Missing ActivityLogged trait",
+      "severity": "major",
+      "confidence": "high",
+      "categories": [
+        "Maintainability",
+        "Convention"
+      ],
+      "fingerprint": "g1h2i3j4k5l6m7n8o9p0",
+      "location": {
+        "path": "app/Models/Vendor.php",
+        "lines": {
+          "begin": 11
+        }
+      },
+      "references": [],
+      "recommendation": "Implement the ActivityLogged trait in the Vendor model.",
+      "tests": [
+        "Test that changes to the model are logged correctly."
+      ],
+      "notes": "Refer to rule CTDL-08 for audit requirements."
+    },
+    {
+      "description": "The detail method does not follow the Citadel page lifecycle.",
+      "check_name": "SAST | [CTDL-06] Does not follow Citadel Page lifecycle",
+      "severity": "major",
+      "confidence": "high",
+      "categories": [
+        "Correctness"
+      ],
+      "fingerprint": "vwx234",
+      "location": {
+        "path": "app/Http/Controllers/PurchaseOrderController.php",
+        "lines": {
+          "begin": 80
+        }
+      },
+      "references": [],
+      "recommendation": "Follow the Citadel page lifecycle: ComponentsPage::make()->view()->business()->schema()->render() in the detail method.",
+      "tests": [
+        "Verify that the page lifecycle is correctly implemented."
+      ],
+      "notes": "Rule ID: CTDL-06"
+    },
+    {
+      "description": "The callback method is vulnerable to open redirect attacks.",
+      "check_name": "SAST | [VAL-08] Open redirect vulnerability",
+      "severity": "critical",
+      "confidence": "high",
+      "categories": [
+        "Security"
+      ],
+      "fingerprint": "def890",
+      "location": {
+        "path": "app/Http/Controllers/PurchaseOrderController.php",
+        "lines": {
+          "begin": 105
+        }
+      },
+      "references": [],
+      "recommendation": "Validate the redirect URL to ensure it is safe before redirecting.",
+      "tests": [
+        "Test for open redirect by providing a malicious URL."
+      ],
+      "notes": "Rule ID: VAL-08"
+    }
+  ],
+  "findings": [
+    {
+      "description": "The store method does not validate the incoming request data, which can lead to invalid data being saved to the database.",
+      "check_name": "SAST | [WIKA-Q02] Missing validation in store method",
+      "severity": "major",
+      "confidence": "high",
+      "categories": [
+        "Security",
+        "Correctness"
+      ],
+      "fingerprint": "a1b2c3d4e5f6g7h8i9j0",
+      "location": {
+        "path": "app/Http/Controllers/VendorController.php",
+        "lines": {
+          "begin": 18
+        }
+      },
+      "references": [],
+      "recommendation": "Add validation to the store method using $request->validate([...]) to ensure data integrity.",
+      "tests": [
+        "Test that invalid data returns a validation error.",
+        "Test that valid data is saved correctly."
+      ],
+      "notes": "Refer to rule WIKA-Q02 for validation requirements."
+    },
+    {
+      "description": "The search method uses a raw SQL query, which violates the convention of using Eloquent ORM for database access.",
+      "check_name": "SAST | [CTDL-01] Raw SQL query in search method",
+      "severity": "major",
+      "confidence": "high",
+      "categories": [
+        "Security",
+        "Correctness"
+      ],
+      "fingerprint": "b1c2d3e4f5g6h7i8j9k0",
+      "location": {
+        "path": "app/Http/Controllers/VendorController.php",
+        "lines": {
+          "begin": 30
+        }
+      },
+      "references": [],
+      "recommendation": "Use Eloquent ORM to perform the search instead of a raw SQL query.",
+      "tests": [
+        "Test that the search returns correct results using Eloquent.",
+        "Test that the search handles special characters safely."
+      ],
+      "notes": "Refer to rule CTDL-01 for database access conventions."
+    },
+    {
+      "description": "The export method does not check for user permissions before exporting vendor data, which can lead to unauthorized access.",
+      "check_name": "SAST | [CTDL-11] Missing permission check in export method",
+      "severity": "major",
+      "confidence": "high",
+      "categories": [
+        "Security",
+        "Correctness"
+      ],
+      "fingerprint": "c1d2e3f4g5h6i7j8k9l0",
+      "location": {
+        "path": "app/Http/Controllers/VendorController.php",
+        "lines": {
+          "begin": 43
+        }
+      },
+      "references": [],
+      "recommendation": "Implement a permission check using checkAccessPermission() at the start of the export method.",
+      "tests": [
+        "Test that unauthorized users cannot access the export functionality.",
+        "Test that authorized users can successfully export data."
+      ],
+      "notes": "Refer to rule CTDL-11 for authorization requirements."
+    },
+    {
+      "description": "The Vendor model uses $fillable instead of $guarded, violating the convention for mass assignment protection.",
+      "check_name": "SAST | [CTDL-02] Model uses $fillable",
+      "severity": "major",
+      "confidence": "high",
+      "categories": [
+        "Security",
+        "Maintainability"
+      ],
+      "fingerprint": "d1e2f3g4h5i6j7k8l9m0",
+      "location": {
+        "path": "app/Models/Vendor.php",
+        "lines": {
+          "begin": 8
+        }
+      },
+      "references": [],
+      "recommendation": "Change the model to use $guarded = ['id']; instead of $fillable.",
+      "tests": [
+        "Test that mass assignment works correctly with the new guarded setting."
+      ],
+      "notes": "Refer to rule CTDL-02 for mass assignment conventions."
+    },
+    {
+      "description": "The Vendor model is missing the explicit $table property with the escm_ prefix, violating the convention for model definitions.",
+      "check_name": "SAST | [CTDL-10] Missing explicit $table property",
+      "severity": "minor",
+      "confidence": "medium",
+      "categories": [
+        "Maintainability",
+        "Convention"
+      ],
+      "fingerprint": "e1f2g3h4i5j6k7l8m9n0",
+      "location": {
+        "path": "app/Models/Vendor.php",
+        "lines": {
+          "begin": 9
+        }
+      },
+      "references": [],
+      "recommendation": "Add the property protected $table = 'escm_vendors'; to the Vendor model.",
+      "tests": [
+        "Test that the model correctly references the database table."
+      ],
+      "notes": "Refer to rule CTDL-10 for model conventions."
+    },
+    {
+      "description": "The Vendor model is missing the HasCreator trait, which is required for tracking the creator of the model instance.",
+      "check_name": "SAST | [CTDL-07] Missing HasCreator trait",
+      "severity": "major",
+      "confidence": "high",
+      "categories": [
+        "Maintainability",
+        "Convention"
+      ],
+      "fingerprint": "f1g2h3i4j5k6l7m8n9o0",
+      "location": {
+        "path": "app/Models/Vendor.php",
+        "lines": {
+          "begin": 10
+        }
+      },
+      "references": [],
+      "recommendation": "Implement the HasCreator trait in the Vendor model.",
+      "tests": [
+        "Test that the created_by field is populated correctly."
+      ],
+      "notes": "Refer to rule CTDL-07 for audit requirements."
+    },
+    {
+      "description": "The Vendor model is missing the ActivityLogged trait, which is required for tracking changes to the model instance.",
+      "check_name": "SAST | [CTDL-08] Missing ActivityLogged trait",
+      "severity": "major",
+      "confidence": "high",
+      "categories": [
+        "Maintainability",
+        "Convention"
+      ],
+      "fingerprint": "g1h2i3j4k5l6m7n8o9p0",
+      "location": {
+        "path": "app/Models/Vendor.php",
+        "lines": {
+          "begin": 11
+        }
+      },
+      "references": [],
+      "recommendation": "Implement the ActivityLogged trait in the Vendor model.",
+      "tests": [
+        "Test that changes to the model are logged correctly."
+      ],
+      "notes": "Refer to rule CTDL-08 for audit requirements."
+    },
+    {
+      "description": "The search view uses {!! !!} for outputting vendor names, which can lead to XSS vulnerabilities if not properly sanitized.",
+      "check_name": "SAST | [CTDL-03] XSS vulnerability in search view",
+      "severity": "major",
+      "confidence": "high",
+      "categories": [
+        "Security",
+        "Correctness"
+      ],
+      "fingerprint": "h1i2j3k4l5m6n7o8p9q0",
+      "location": {
+        "path": "resources/views/vendor/search.blade.php",
+        "lines": {
+          "begin": 10
+        }
+      },
+      "references": [],
+      "recommendation": "Change {!! $vendor->name !!} to {{ $vendor->name }} to ensure proper escaping.",
+      "tests": [
+        "Test that the output is properly escaped and does not allow XSS."
+      ],
+      "notes": "Refer to rule CTDL-03 for XSS prevention."
+    },
+    {
+      "description": "The index method does not call checkAccessPermission() and lacks multi-tenant isolation with ESCM::scopeProject(auth()->user()).",
+      "check_name": "SAST | [CTDL-11] Missing checkAccessPermission()",
+      "severity": "major",
+      "confidence": "high",
+      "categories": [
+        "Security",
+        "Correctness"
+      ],
+      "fingerprint": "abc123",
+      "location": {
+        "path": "app/Http/Controllers/PurchaseOrderController.php",
+        "lines": {
+          "begin": 12
+        }
+      },
+      "references": [],
+      "recommendation": "Add checkAccessPermission() at the start of the index method and use ESCM::scopeProject(auth()->user()) for data retrieval.",
+      "tests": [
+        "Test that unauthorized access is blocked.",
+        "Verify that only relevant purchase orders are returned based on user permissions."
+      ],
+      "notes": "Rule ID: CTDL-11, WIKA-Q07"
+    },
+    {
+      "description": "The store method does not validate the request data before processing.",
+      "check_name": "SAST | [CTDL-05] Missing validation in store()",
+      "severity": "major",
+      "confidence": "high",
+      "categories": [
+        "Correctness",
+        "Security"
+      ],
+      "fingerprint": "def456",
+      "location": {
+        "path": "app/Http/Controllers/PurchaseOrderController.php",
+        "lines": {
+          "begin": 20
+        }
+      },
+      "references": [],
+      "recommendation": "Add $request->validate([...]) to ensure data integrity and security.",
+      "tests": [
+        "Test that invalid data returns a validation error.",
+        "Verify that valid data creates a purchase order."
+      ],
+      "notes": "Rule ID: CTDL-05, WIKA-Q02"
+    },
+    {
+      "description": "The store method logs sensitive data (password, pin) without masking.",
+      "check_name": "SAST | [WIKA-Q08] Logging sensitive data without masking",
+      "severity": "major",
+      "confidence": "high",
+      "categories": [
+        "Security"
+      ],
+      "fingerprint": "ghi789",
+      "location": {
+        "path": "app/Http/Controllers/PurchaseOrderController.php",
+        "lines": {
+          "begin": 27
+        }
+      },
+      "references": [],
+      "recommendation": "Remove sensitive data from logs or mask it before logging.",
+      "tests": [
+        "Check logs to ensure sensitive data is not recorded."
+      ],
+      "notes": "Rule ID: WIKA-Q08"
+    },
+    {
+      "description": "The update method does not validate the request data before processing.",
+      "check_name": "SAST | [CTDL-05] Missing validation in update()",
+      "severity": "major",
+      "confidence": "high",
+      "categories": [
+        "Correctness",
+        "Security"
+      ],
+      "fingerprint": "jkl012",
+      "location": {
+        "path": "app/Http/Controllers/PurchaseOrderController.php",
+        "lines": {
+          "begin": 39
+        }
+      },
+      "references": [],
+      "recommendation": "Add $request->validate([...]) to ensure data integrity and security.",
+      "tests": [
+        "Test that invalid data returns a validation error.",
+        "Verify that valid data updates the purchase order."
+      ],
+      "notes": "Rule ID: CTDL-05"
+    },
+    {
+      "description": "The search method uses raw SQL queries, which can lead to SQL injection vulnerabilities.",
+      "check_name": "SAST | [CTDL-01] Raw SQL query — SQL injection vulnerability",
+      "severity": "critical",
+      "confidence": "high",
+      "categories": [
+        "Security"
+      ],
+      "fingerprint": "mno345",
+      "location": {
+        "path": "app/Http/Controllers/PurchaseOrderController.php",
+        "lines": {
+          "begin": 51
+        }
+      },
+      "references": [],
+      "recommendation": "Use Eloquent ORM methods to safely query the database.",
+      "tests": [
+        "Test for SQL injection by attempting to manipulate the search query."
+      ],
+      "notes": "Rule ID: CTDL-01"
+    },
+    {
+      "description": "The search method contains another raw SQL query that is vulnerable to SQL injection.",
+      "check_name": "SAST | [CTDL-01] Raw SQL query — SQL injection vulnerability",
+      "severity": "critical",
+      "confidence": "high",
+      "categories": [
+        "Security"
+      ],
+      "fingerprint": "pqr678",
+      "location": {
+        "path": "app/Http/Controllers/PurchaseOrderController.php",
+        "lines": {
+          "begin": 56
+        }
+      },
+      "references": [],
+      "recommendation": "Use Eloquent ORM methods to safely query the database.",
+      "tests": [
+        "Test for SQL injection by attempting to manipulate the search query."
+      ],
+      "notes": "Rule ID: CTDL-01"
+    },
+    {
+      "description": "The update_status method combines multiple non-CRUD actions in a single method.",
+      "check_name": "SAST | [CTDL-12] Non-CRUD actions in generic method",
+      "severity": "major",
+      "confidence": "high",
+      "categories": [
+        "Correctness"
+      ],
+      "fingerprint": "stu901",
+      "location": {
+        "path": "app/Http/Controllers/PurchaseOrderController.php",
+        "lines": {
+          "begin": 66
+        }
+      },
+      "references": [],
+      "recommendation": "Separate non-CRUD actions into distinct methods.",
+      "tests": [
+        "Verify that each action (approve, release, propose) has its own method."
+      ],
+      "notes": "Rule ID: CTDL-12"
+    },
+    {
+      "description": "The detail method does not follow the Citadel page lifecycle.",
+      "check_name": "SAST | [CTDL-06] Does not follow Citadel Page lifecycle",
+      "severity": "major",
+      "confidence": "high",
+      "categories": [
+        "Correctness"
+      ],
+      "fingerprint": "vwx234",
+      "location": {
+        "path": "app/Http/Controllers/PurchaseOrderController.php",
+        "lines": {
+          "begin": 80
+        }
+      },
+      "references": [],
+      "recommendation": "Follow the Citadel page lifecycle: ComponentsPage::make()->view()->business()->schema()->render() in the detail method.",
+      "tests": [
+        "Verify that the page lifecycle is correctly implemented."
+      ],
+      "notes": "Rule ID: CTDL-06"
+    },
+    {
+      "description": "The exportAll method does not check for permissions before exporting data.",
+      "check_name": "SAST | [CTDL-11] Missing permission check for export",
+      "severity": "major",
+      "confidence": "high",
+      "categories": [
+        "Security"
+      ],
+      "fingerprint": "yz1234",
+      "location": {
+        "path": "app/Http/Controllers/PurchaseOrderController.php",
+        "lines": {
+          "begin": 90
+        }
+      },
+      "references": [],
+      "recommendation": "Add permission checks before allowing data export.",
+      "tests": [
+        "Test that unauthorized users cannot access the export functionality."
+      ],
+      "notes": "Rule ID: CTDL-11"
+    },
+    {
+      "description": "The syncFromSap method does not use a dedicated sync service and does not extend Base.",
+      "check_name": "SAST | [WIKA-Q05] External data without sync service",
+      "severity": "major",
+      "confidence": "high",
+      "categories": [
+        "Integration"
+      ],
+      "fingerprint": "abc567",
+      "location": {
+        "path": "app/Http/Controllers/PurchaseOrderController.php",
+        "lines": {
+          "begin": 95
+        }
+      },
+      "references": [],
+      "recommendation": "Implement a dedicated sync service that extends App\\Sync\\Service\\Base for syncing data from SAP.",
+      "tests": [
+        "Verify that the sync functionality works with the new service."
+      ],
+      "notes": "Rule ID: WIKA-Q05, WIKA-Q06"
+    },
+    {
+      "description": "The callback method is vulnerable to open redirect attacks.",
+      "check_name": "SAST | [VAL-08] Open redirect vulnerability",
+      "severity": "critical",
+      "confidence": "high",
+      "categories": [
+        "Security"
+      ],
+      "fingerprint": "def890",
+      "location": {
+        "path": "app/Http/Controllers/PurchaseOrderController.php",
+        "lines": {
+          "begin": 105
+        }
+      },
+      "references": [],
+      "recommendation": "Validate the redirect URL to ensure it is safe before redirecting.",
+      "tests": [
+        "Test for open redirect by providing a malicious URL."
+      ],
+      "notes": "Rule ID: VAL-08"
+    }
+  ],
+  "cost": {
+    "calls": 2,
+    "prompt_tokens": 9951,
+    "completion_tokens": 4000,
+    "total_tokens": 13951,
+    "api": "chat"
+  },
+  "git_commit": null
+}

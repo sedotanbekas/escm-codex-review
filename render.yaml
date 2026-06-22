@@ -1,0 +1,28 @@
+# Render Blueprint — Codex Review GUI.
+# Dipakai bila root repo = .codex-review (mis. repo privat terpisah).
+# Bila deploy dari SUBDIREKTORI repo besar: di dashboard Render set
+# "Root Directory" = .codex-review, lalu pakai build/start command yang sama.
+#
+# WAJIB di-set manual di dashboard (Environment) karena rahasia:
+#   OPENAI_API_KEY   — kunci OpenAI
+#   ACCESS_CODE      — passcode "by invitation" untuk scan live
+services:
+  - type: web
+    name: codex-review-gui
+    runtime: node
+    plan: free
+    buildCommand: npm install && cd gui && npm install && npm run build
+    startCommand: node server/server.mjs
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ACCESS_CODE
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+      - key: MAX_LIVE_PER_HOUR
+        value: "20"
+      - key: CODEX_PRICE_PROMPT_PER_1M
+        value: "0.15"
+      - key: CODEX_PRICE_COMPLETION_PER_1M
+        value: "0.60"

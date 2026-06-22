@@ -1,0 +1,99 @@
+diff --git a/app/Http/Controllers/VendorController.php b/app/Http/Controllers/VendorController.php
+index abc1234..def5678 100644
+--- a/app/Http/Controllers/VendorController.php
++++ b/app/Http/Controllers/VendorController.php
+@@ -1,8 +1,10 @@
+ <?php
+ 
+ namespace App\Http\Controllers;
+ 
+ use Illuminate\Http\Request;
++use Illuminate\Support\Facades\DB;
++use App\Models\Vendor;
+ 
+ class VendorController extends Controller
+ {
+@@ -15,6 +17,45 @@ class VendorController extends Controller
+         return view('vendor.index', compact('vendors'));
+     }
+ 
++    public function store(Request $request)
++    {
++        // BUG: No validation on store
++        $vendor = new Vendor();
++        $vendor->name = $request->name;
++        $vendor->email = $request->email;
++        $vendor->phone = $request->phone;
++        $vendor->save();
++
++        return redirect()->route('vendor.index');
++    }
++
++    public function search(Request $request)
++    {
++        // BUG: Raw SQL query - violates CTDL-01
++        $keyword = $request->input('q');
++        $results = DB::select("SELECT * FROM escm_vendors WHERE name LIKE '%" . $keyword . "%'");
++
++        return view('vendor.search', compact('results'));
++    }
++
++    public function export(Request $request)
++    {
++        // BUG: No permission check - violates CTDL-11
++        $vendors = Vendor::all();
++        $csv = "Name,Email,Phone\n";
++        foreach ($vendors as $v) {
++            $csv .= "{$v->name},{$v->email},{$v->phone}\n";
++        }
++
++        return response($csv)
++            ->header('Content-Type', 'text/csv')
++            ->header('Content-Disposition', 'attachment; filename="vendors.csv"');
++    }
++
+     public function show($id)
+     {
+         $vendor = Vendor::findOrFail($id);
+diff --git a/app/Models/Vendor.php b/app/Models/Vendor.php
+index 1111111..2222222 100644
+--- a/app/Models/Vendor.php
++++ b/app/Models/Vendor.php
+@@ -7,8 +7,13 @@ use Illuminate\Database\Eloquent\Model;
+ 
+ class Vendor extends Model
+ {
+-    protected $guarded = ['id'];
+-    protected $table = 'escm_vendors';
++    // BUG: Uses $fillable instead of $guarded - violates CTDL-02
++    protected $fillable = ['name', 'email', 'phone', 'address', 'npwp'];
++
++    // BUG: Missing $table - violates CTDL-10 (no explicit escm_ prefix)
++
++    // BUG: Missing HasCreator trait - violates CTDL-07
++    // BUG: Missing ActivityLogged trait - violates CTDL-08
+ 
+     public function contracts()
+     {
+diff --git a/resources/views/vendor/search.blade.php b/resources/views/vendor/search.blade.php
+index 3333333..4444444 100644
+--- /dev/null
++++ b/resources/views/vendor/search.blade.php
+@@ -0,0 +1,20 @@
++@extends('layouts.app')
++
++@section('content')
++<div class="container">
++    <h2>Search Results</h2>
++    <table class="table">
++        @foreach ($results as $vendor)
++        <tr>
++            {{-- BUG: Uses {!! !!} without sanitization - violates CTDL-03 --}}
++            <td>{!! $vendor->name !!}</td>
++            <td>{{ $vendor->email }}</td>
++            <td>{{ $vendor->phone }}</td>
++        </tr>
++        @endforeach
++    </table>
++</div>
++@endsection

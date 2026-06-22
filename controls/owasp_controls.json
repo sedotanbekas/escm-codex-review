@@ -1,0 +1,412 @@
+{
+    "controls": [
+        {
+            "id": "CTDL-01",
+            "domain": "Database & ORM",
+            "title": "Wajib Eloquent ORM, dilarang raw query",
+            "risk": "High",
+            "methods": "Code review, Static analysis",
+            "evidence": "Semua akses DB harus via Eloquent. DB::raw()/DB::select() dilarang kecuali aggregasi kompleks. Ref: OWASP ASVS V5, CWE-89"
+        },
+        {
+            "id": "CTDL-02",
+            "domain": "Mass Assignment",
+            "title": "Mass assignment protection via $guarded",
+            "risk": "High",
+            "methods": "Code review, Static analysis",
+            "evidence": "Semua model HARUS $guarded=[\"id\"]. Tidak $fillable. Ref: CWE-915"
+        },
+        {
+            "id": "CTDL-03",
+            "domain": "XSS Prevention",
+            "title": "Blade escaping, dilarang {!! !!} tanpa sanitasi",
+            "risk": "High",
+            "methods": "Code review, Static analysis",
+            "evidence": "Output Blade HARUS {{ }}. {!! !!} hanya untuk HTML dari Citadel renderSchema(). Ref: CWE-79"
+        },
+        {
+            "id": "CTDL-04",
+            "domain": "Authentication",
+            "title": "Middleware auth pada protected routes",
+            "risk": "High",
+            "methods": "Code review, Config review",
+            "evidence": "Route admin: cek_login+internal_placement. Route API: basic_auth/jwt.verify. Ref: OWASP ASVS V4, CWE-862"
+        },
+        {
+            "id": "CTDL-05",
+            "domain": "Validation",
+            "title": "Inline validation wajib di controller",
+            "risk": "Medium",
+            "methods": "Code review",
+            "evidence": "Setiap store()/update() HARUS $request->validate([...]). Project tidak pakai Form Request class"
+        },
+        {
+            "id": "CTDL-06",
+            "domain": "Citadel Framework",
+            "title": "Citadel Page lifecycle pattern wajib",
+            "risk": "Medium",
+            "methods": "Code review",
+            "evidence": "Controller HARUS ikuti: ComponentsPage::make()->view()->business()->schema()->render()"
+        },
+        {
+            "id": "CTDL-07",
+            "domain": "Audit Trail",
+            "title": "HasCreator trait wajib pada model bisnis",
+            "risk": "High",
+            "methods": "Code review, Static analysis",
+            "evidence": "Model entitas bisnis HARUS trait HasCreator untuk tracking created_by/updated_by. Ref: SOX Compliance"
+        },
+        {
+            "id": "CTDL-08",
+            "domain": "Audit Trail",
+            "title": "ActivityLogged trait wajib pada model bisnis",
+            "risk": "Medium",
+            "methods": "Code review, Static analysis",
+            "evidence": "Model entitas bisnis HARUS trait ActivityLogged (Spatie) untuk pencatatan perubahan"
+        },
+        {
+            "id": "CTDL-09",
+            "domain": "Enum Convention",
+            "title": "Enum status dengan label() dan color()",
+            "risk": "Medium",
+            "methods": "Code review",
+            "evidence": "Field status HARUS PHP 8.1 Enum dengan label():string dan color():string. Implement CitadelEnum"
+        },
+        {
+            "id": "CTDL-10",
+            "domain": "Database Convention",
+            "title": "Custom table name dengan prefix escm_",
+            "risk": "Low",
+            "methods": "Code review",
+            "evidence": "Semua model HARUS $table property eksplisit dengan prefix escm_. Tidak boleh auto naming"
+        },
+        {
+            "id": "CTDL-11",
+            "domain": "Authorization",
+            "title": "Permission check via checkAccessPermission()",
+            "risk": "High",
+            "methods": "Code review, Static analysis",
+            "evidence": "Setiap controller method bisnis HARUS checkAccessPermission($permission) di awal. Format: feature:action. Ref: OWASP ASVS V4"
+        },
+        {
+            "id": "CTDL-12",
+            "domain": "Architecture",
+            "title": "Aksi non-CRUD sebagai method tersendiri",
+            "risk": "Medium",
+            "methods": "Code review",
+            "evidence": "Operasi bisnis (propose/release/sync/approve/esign) HARUS method tersendiri, bukan generic update"
+        },
+        {
+            "id": "CTDL-13",
+            "domain": "Citadel Framework",
+            "title": "Schema component harus implement Backbone",
+            "risk": "High",
+            "methods": "Code review",
+            "evidence": "Komponen dalam schema([...]) HARUS implement Backbone interface. Pelanggaran = error BACKBONE[001]"
+        },
+        {
+            "id": "CTDL-14",
+            "domain": "Citadel Framework",
+            "title": "Makeable pattern untuk factory instantiation",
+            "risk": "Low",
+            "methods": "Code review",
+            "evidence": "Citadel component HARUS via ::make($name, $title). Dilarang new ComponentClass() langsung"
+        },
+        {
+            "id": "CTDL-15",
+            "domain": "Document Numbering",
+            "title": "HasNumbering trait untuk auto-numbering",
+            "risk": "Medium",
+            "methods": "Code review",
+            "evidence": "Model procurement (Tender/PO/PR/Contract) HARUS trait HasNumbering + interface UseNumbering"
+        },
+        {
+            "id": "WIKA-Q01",
+            "domain": "Architecture",
+            "title": "Tidak ada Observer class, semua di boot method",
+            "risk": "Low",
+            "methods": "Code review",
+            "evidence": "Project TIDAK pakai Observer class. Event handling via boot()/bootTraitName() di trait"
+        },
+        {
+            "id": "WIKA-Q02",
+            "domain": "Validation",
+            "title": "Tidak ada Form Request class, validasi inline",
+            "risk": "Medium",
+            "methods": "Code review",
+            "evidence": "TIDAK pakai Form Request class. Semua validasi inline $request->validate() di controller"
+        },
+        {
+            "id": "WIKA-Q03",
+            "domain": "Mass Assignment",
+            "title": "$guarded bukan $fillable",
+            "risk": "Medium",
+            "methods": "Code review",
+            "evidence": "Standar: $guarded=[\"id\"] bukan $fillable. Semua field selain id bisa mass-assign"
+        },
+        {
+            "id": "WIKA-Q04",
+            "domain": "API Response",
+            "title": "Response pattern: apiRes() helper untuk JSON",
+            "risk": "Low",
+            "methods": "Code review",
+            "evidence": "Response JSON HARUS apiRes('success'/'error', ...). Form sukses: Citadel Swal::make('success')"
+        },
+        {
+            "id": "WIKA-Q05",
+            "domain": "Integration",
+            "title": "Sync mechanism mandatory untuk data eksternal",
+            "risk": "High",
+            "methods": "Code review",
+            "evidence": "Data dari SAP/HCMS/VMS/Pengadaan.com HARUS punya sync service dedicated di app/Sync/Service/"
+        },
+        {
+            "id": "WIKA-Q06",
+            "domain": "Integration",
+            "title": "Sync service harus extend Base",
+            "risk": "Medium",
+            "methods": "Code review",
+            "evidence": "Sync service HARUS extend App\\Sync\\Service\\Base. Implement: fetching(), handleResponseForCache(), saving()"
+        },
+        {
+            "id": "WIKA-Q07",
+            "domain": "Authorization",
+            "title": "Scope-based data access multi-tenant",
+            "risk": "High",
+            "methods": "Code review, Static analysis",
+            "evidence": "Akses data procurement HARUS ESCM::scopeProject(auth()->user()). Ref: CWE-639 IDOR"
+        },
+        {
+            "id": "WIKA-Q08",
+            "domain": "Logging Security",
+            "title": "Password/PIN masking di semua log",
+            "risk": "High",
+            "methods": "Code review, Static analysis",
+            "evidence": "Middleware logging HARUS masking: password, password_confirm, pass, pin. Ref: OWASP LOG-02, CWE-532"
+        },
+        {
+            "id": "WIKA-Q09",
+            "domain": "Database Convention",
+            "title": "SoftDeletes hanya untuk entitas tertentu",
+            "risk": "Low",
+            "methods": "Code review",
+            "evidence": "SoftDeletes HANYA pada User/Vendor/VendorQuotation. Mayoritas model pakai status flag"
+        },
+        {
+            "id": "WIKA-Q10",
+            "domain": "Database Convention",
+            "title": "Relationship key menggunakan business key",
+            "risk": "Medium",
+            "methods": "Code review",
+            "evidence": "Beberapa relationship pakai business key (nomor dokumen) bukan surrogate key. Konsistensi SAP"
+        },
+        {
+            "id": "WIKA-Q11",
+            "domain": "Workflow",
+            "title": "Approval workflow via morphMany pattern",
+            "risk": "High",
+            "methods": "Code review",
+            "evidence": "Model approval HARUS implement ApprovableContract + trait ReleaseStrategyModel. Polymorphic morphMany"
+        },
+        {
+            "id": "WIKA-Q12",
+            "domain": "Architecture",
+            "title": "Procurement module interface wajib",
+            "risk": "Medium",
+            "methods": "Code review",
+            "evidence": "Entitas procurement HARUS implement ProcurementModule dengan getProcurementNumber() dan historyModelName()"
+        },
+        {
+            "id": "WIKA-Q13",
+            "domain": "Routing",
+            "title": "Explicit route definition, bukan Route::resource()",
+            "risk": "Low",
+            "methods": "Code review",
+            "evidence": "TIDAK pakai Route::resource(). Semua route eksplisit per method untuk kontrol granular"
+        },
+        {
+            "id": "WIKA-Q14",
+            "domain": "Authentication",
+            "title": "Multi-layer authentication",
+            "risk": "High",
+            "methods": "Code review, Config review",
+            "evidence": "3 layer: Session (cek_login) + BasicAuth+IP (basic_auth) + JWT (jwt.verify). Ref: Defense in Depth"
+        },
+        {
+            "id": "WIKA-Q15",
+            "domain": "Security",
+            "title": "CSRF protection tanpa exception",
+            "risk": "High",
+            "methods": "Code review, Config review",
+            "evidence": "CSRF aktif untuk semua POST/PUT/DELETE. VerifyCsrfToken $except HARUS kosong. Ref: CWE-352"
+        },
+        {
+            "id": "AUTH-01",
+            "domain": "Authentication",
+            "title": "Hash kata sandi kuat",
+            "risk": "High",
+            "methods": "Code review, Config review",
+            "evidence": "Analisis kode; audit konfigurasi hashing (argon2/bcrypt/scrypt)"
+        },
+        {
+            "id": "AUTH-08",
+            "domain": "Authentication",
+            "title": "Tidak ada kredensial hardcoded",
+            "risk": "High",
+            "methods": "Code review, Tool scan",
+            "evidence": "Gitleaks/semgrep; temuan dievaluasi, bukti lokasi"
+        },
+        {
+            "id": "AUTH-10",
+            "domain": "Authentication",
+            "title": "JWT aman",
+            "risk": "Medium",
+            "methods": "Code review, Config review",
+            "evidence": "Periksa expiry, signing alg, claim sensitif"
+        },
+        {
+            "id": "SESS-02",
+            "domain": "Session",
+            "title": "Cookie flag aman",
+            "risk": "High",
+            "methods": "Test, Config review",
+            "evidence": "HttpOnly, Secure, SameSite"
+        },
+        {
+            "id": "SESS-06",
+            "domain": "Session",
+            "title": "Proteksi CSRF",
+            "risk": "High",
+            "methods": "Test, Code review",
+            "evidence": "Anti-CSRF token; same-site; double submit"
+        },
+        {
+            "id": "VAL-02",
+            "domain": "Validation & Encoding",
+            "title": "Parameterized queries",
+            "risk": "High",
+            "methods": "Code review, Test",
+            "evidence": "Gunakan parameter/ORM; tanpa string-concat SQL"
+        },
+        {
+            "id": "VAL-03",
+            "domain": "Validation & Encoding",
+            "title": "Escaping output",
+            "risk": "High",
+            "methods": "Code review, Test",
+            "evidence": "HTML/JSON/template encoded sesuai konteks"
+        },
+        {
+            "id": "VAL-04",
+            "domain": "Validation & Encoding",
+            "title": "CSP diterapkan",
+            "risk": "Medium",
+            "methods": "Config review",
+            "evidence": "CSP policy minimal 'self'; nonces untuk inline"
+        },
+        {
+            "id": "VAL-06",
+            "domain": "Validation & Encoding",
+            "title": "Security headers lain",
+            "risk": "Medium",
+            "methods": "Config review",
+            "evidence": "XFO, X-CTO, Referrer-Policy"
+        },
+        {
+            "id": "VAL-08",
+            "domain": "Validation & Encoding",
+            "title": "Open redirect",
+            "risk": "Medium",
+            "methods": "Test",
+            "evidence": "Validasi target; whitelist"
+        },
+        {
+            "id": "CRYPTO-01",
+            "domain": "Crypto & Secrets",
+            "title": "TLS modern",
+            "risk": "High",
+            "methods": "Config review",
+            "evidence": "TLS1.2+/ciphers; redirect 80→443"
+        },
+        {
+            "id": "CRYPTO-02",
+            "domain": "Crypto & Secrets",
+            "title": "HSTS aktif",
+            "risk": "Medium",
+            "methods": "Config review",
+            "evidence": "max-age≥6 bulan; includeSubDomains opsional"
+        },
+        {
+            "id": "CRYPTO-06",
+            "domain": "Crypto & Secrets",
+            "title": "Randomness kuat",
+            "risk": "High",
+            "methods": "Code review",
+            "evidence": "CSPRNG untuk token/ID; bukan math/rand"
+        },
+        {
+            "id": "CRYPTO-07",
+            "domain": "Crypto & Secrets",
+            "title": "No custom crypto",
+            "risk": "High",
+            "methods": "Code review",
+            "evidence": "Hanya lib tervalidasi"
+        },
+        {
+            "id": "API-02",
+            "domain": "API Security",
+            "title": "Rate limit & throttling",
+            "risk": "High",
+            "methods": "Test",
+            "evidence": "Limiter per user/IP/token/endpoint"
+        },
+        {
+            "id": "API-05",
+            "domain": "API Security",
+            "title": "CORS untuk API",
+            "risk": "Medium",
+            "methods": "Config review",
+            "evidence": "Origin/header/method allowlist"
+        },
+        {
+            "id": "API-06",
+            "domain": "API Security",
+            "title": "Pagination & limits",
+            "risk": "Medium",
+            "methods": "Code review, Test",
+            "evidence": "Limit/offset maksimum; cegah mass assignment"
+        },
+        {
+            "id": "LOG-02",
+            "domain": "Logging & Monitoring",
+            "title": "No sensitive logging",
+            "risk": "High",
+            "methods": "Code review",
+            "evidence": "Tidak log password/token/secret/PII"
+        },
+        {
+            "id": "CONF-08",
+            "domain": "Configuration",
+            "title": "Infra as Code aman",
+            "risk": "Medium",
+            "methods": "Code review",
+            "evidence": "Hadolint, policy-as-code, best practices Dockerfile"
+        },
+        {
+            "id": "AVA-01",
+            "domain": "Availability",
+            "title": "Rate limiting global",
+            "risk": "High",
+            "methods": "Test",
+            "evidence": "Burst control per IP/user/global"
+        },
+        {
+            "id": "AVA-02",
+            "domain": "Availability",
+            "title": "Circuit breaker & timeouts",
+            "risk": "Medium",
+            "methods": "Code review",
+            "evidence": "Timeout dan retry jitter pada client/DB"
+        }
+    ]
+}

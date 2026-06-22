@@ -1,0 +1,485 @@
+diff --git a/app/Http/Controllers/PurchaseOrderController.php b/app/Http/Controllers/PurchaseOrderController.php
+index aaa1111..bbb2222 100644
+--- a/app/Http/Controllers/PurchaseOrderController.php
++++ b/app/Http/Controllers/PurchaseOrderController.php
+@@ -1,10 +1,12 @@
+ <?php
+ 
+ namespace App\Http\Controllers;
+ 
+ use Illuminate\Http\Request;
++use Illuminate\Support\Facades\DB;
++use App\Models\PurchaseOrder;
++use App\Models\Vendor;
+ 
+ class PurchaseOrderController extends Controller
+ {
+-    // existing index method...
++    /**
++     * STRESS-TEST: This controller intentionally violates many rules.
++     */
++
++    // ❌ CTDL-11 / WIKA-Q07: NO checkAccessPermission() + NO scopeProject()
++    public function index()
++    {
++        // ❌ WIKA-Q07: Missing ESCM::scopeProject(auth()->user())
++        $orders = PurchaseOrder::all();
++        return view('po.index', compact('orders'));
++    }
++
++    // ❌ CTDL-05 / WIKA-Q02: store() tanpa $request->validate()
++    // ❌ CTDL-11: No checkAccessPermission()
++    public function store(Request $request)
++    {
++        $po = new PurchaseOrder();
++        $po->vendor_id = $request->vendor_id;
++        $po->amount = $request->amount;
++        $po->description = $request->description;
++        // ❌ WIKA-Q08 / LOG-02: Logging password/sensitive data tanpa masking
++        \Log::info('PO created by user', [
++            'password' => $request->password,
++            'pin' => $request->pin,
++            'data' => $request->all(),
++        ]);
++        $po->save();
++
++        // ❌ WIKA-Q04: Tidak pakai apiRes() helper
++        return response()->json(['status' => 'ok', 'data' => $po]);
++    }
++
++    // ❌ CTDL-05: update() tanpa validasi
++    // ❌ CTDL-11: No checkAccessPermission()
++    public function update(Request $request, $id)
++    {
++        $po = PurchaseOrder::findOrFail($id);
++        $po->update($request->all());
++        return response()->json(['status' => 'updated']);
++    }
++
++    // ❌ CTDL-01: Raw SQL query — SQL injection vulnerability
++    // ❌ VAL-02: String concat in SQL (parameterized queries violation)
++    public function search(Request $request)
++    {
++        $keyword = $request->input('q');
++        $results = DB::select("SELECT * FROM escm_purchase_orders WHERE description LIKE '%" . $keyword . "%'");
++
++        // ❌ CTDL-01: Another raw query
++        $stats = DB::raw("SELECT COUNT(*) as total FROM escm_purchase_orders WHERE amount > 1000000");
++
++        return view('po.search', compact('results', 'stats'));
++    }
++
++    // ❌ CTDL-12: Non-CRUD bisnis action di dalam generic method
++    // ❌ CTDL-11: No permission check
++    // ❌ WIKA-Q11: Approval tanpa ApprovableContract / ReleaseStrategyModel
++    public function update_status(Request $request, $id)
++    {
++        $po = PurchaseOrder::findOrFail($id);
++        // Approve, release, propose — seharusnya method terpisah
++        if ($request->action === 'approve') {
++            $po->status = 'approved';
++        } elseif ($request->action === 'release') {
++            $po->status = 'released';
++        } elseif ($request->action === 'propose') {
++            $po->status = 'proposed';
++        }
++        $po->save();
++        return redirect()->back();
++    }
++
++    // ❌ CTDL-06: Tidak ikuti Citadel Page lifecycle
++    // Seharusnya: ComponentsPage::make()->view()->business()->schema()->render()
++    public function detail($id)
++    {
++        $po = PurchaseOrder::findOrFail($id);
++        return view('po.detail', compact('po'));
++    }
++
++    // ❌ CTDL-11: No permission check for export
++    // ❌ API-06: No pagination/limit — exports semua data tanpa batas
++    public function exportAll()
++    {
++        $orders = PurchaseOrder::all();
++        return response()->json($orders);
++    }
++
++    // ❌ WIKA-Q05 / WIKA-Q06: External data tanpa sync service / tidak extend Base
++    public function syncFromSap()
++    {
++        $sapData = file_get_contents('https://sap-api.wika.co.id/purchase-orders');
++        $data = json_decode($sapData, true);
++        foreach ($data as $item) {
++            PurchaseOrder::updateOrCreate(
++                ['sap_number' => $item['number']],
++                $item
++            );
++        }
++        return response()->json(['synced' => count($data)]);
++    }
++
++    // ❌ VAL-08: Open redirect vulnerability
++    public function callback(Request $request)
++    {
++        $redirectUrl = $request->input('redirect_to');
++        return redirect($redirectUrl);
++    }
++
++    // ❌ AUTH-08: Hardcoded credential
++    // ❌ CRYPTO-06: Weak randomness
++    // ❌ CRYPTO-07: Custom crypto
++    public function generateToken()
++    {
++        $secret = 'sk-wika-super-secret-key-12345';
++        $token = md5(rand() . time() . $secret);
++        return response()->json(['token' => $token]);
++    }
+ }
+diff --git a/app/Models/PurchaseOrder.php b/app/Models/PurchaseOrder.php
+index ccc3333..ddd4444 100644
+--- a/app/Models/PurchaseOrder.php
++++ b/app/Models/PurchaseOrder.php
+@@ -1,15 +1,30 @@
+ <?php
+ 
+ namespace App\Models;
+ 
+-use Illuminate\Database\Eloquent\Model;
++use Illuminate\Database\Eloquent\SoftDeletes;
++use Illuminate\Database\Eloquent\Model;
+ 
+ class PurchaseOrder extends Model
+ {
+-    protected $guarded = ['id'];
+-    protected $table = 'escm_purchase_orders';
++    // ❌ CTDL-02 / WIKA-Q03: Pakai $fillable bukan $guarded
++    protected $fillable = ['vendor_id', 'amount', 'description', 'status', 'sap_number'];
++
++    // ❌ CTDL-10: Missing $table dengan prefix escm_
++    // (auto-naming akan jadi "purchase_orders" bukan "escm_purchase_orders")
++
++    // ❌ CTDL-07: Missing HasCreator trait
++    // ❌ CTDL-08: Missing ActivityLogged trait
++    // ❌ CTDL-15 / WIKA-Q12: Missing HasNumbering + UseNumbering + ProcurementModule
++
++    // ❌ WIKA-Q09: SoftDeletes pada model yang bukan User/Vendor/VendorQuotation
++    use SoftDeletes;
++
++    // ❌ WIKA-Q01: Observer class instead of boot method
++    // (Lihat PurchaseOrderObserver.php di bawah)
+ 
+-    use \App\Traits\HasCreator;
+-    use \App\Traits\ActivityLogged;
++    // ❌ CTDL-09: Status field pakai string biasa bukan PHP 8.1 Enum
++    public function getStatusLabelAttribute()
++    {
++        return ucfirst($this->status); // Seharusnya Enum::label()
++    }
+ 
+     public function vendor()
+     {
+@@ -17,4 +32,10 @@
+     {
+         return $this->belongsTo(Vendor::class);
+     }
++
++    // ❌ WIKA-Q10: Relationship key yang inkonsisten
++    public function sapDocument()
++    {
++        return $this->belongsTo(SapDocument::class, 'sap_number', 'document_number');
++    }
+ }
+diff --git a/app/Observers/PurchaseOrderObserver.php b/app/Observers/PurchaseOrderObserver.php
+index 0000000..eee5555 100644
+--- /dev/null
++++ b/app/Observers/PurchaseOrderObserver.php
+@@ -0,0 +1,22 @@
++<?php
++
++namespace App\Observers;
++
++use App\Models\PurchaseOrder;
++
++// ❌ WIKA-Q01: Observer class — seharusnya pakai boot() di trait
++class PurchaseOrderObserver
++{
++    public function creating(PurchaseOrder $po)
++    {
++        // ❌ CRYPTO-06: Weak random for business ID
++        $po->po_number = 'PO-' . rand(10000, 99999);
++    }
++
++    public function updated(PurchaseOrder $po)
++    {
++        // ❌ LOG-02: Logging sensitive data
++        \Log::info('PO updated', [
++            'password_confirm' => request()->input('password_confirm'),
++        ]);
++    }
++}
+diff --git a/app/Sync/Service/SapPurchaseOrderSync.php b/app/Sync/Service/SapPurchaseOrderSync.php
+index 0000000..fff6666 100644
+--- /dev/null
++++ b/app/Sync/Service/SapPurchaseOrderSync.php
+@@ -0,0 +1,27 @@
++<?php
++
++namespace App\Sync\Service;
++
++use App\Models\PurchaseOrder;
++
++// ❌ WIKA-Q06: Sync service TIDAK extend Base
++class SapPurchaseOrderSync
++{
++    // ❌ WIKA-Q06: Missing fetching(), handleResponseForCache(), saving()
++    public function run()
++    {
++        // ❌ AVA-02: No timeout/circuit breaker on external call
++        $response = file_get_contents('https://sap.wika.co.id/api/po');
++        $data = json_decode($response, true);
++
++        foreach ($data as $item) {
++            // ❌ CTDL-01: Raw query inside sync
++            \DB::statement("INSERT INTO purchase_orders (sap_number, amount) VALUES ('{$item['number']}', {$item['amount']})");
++        }
++
++        // ❌ AUTH-08: Hardcoded API key
++        $apiKey = 'Bearer sap-prod-key-abc123xyz';
++
++        return count($data);
++    }
++}
+diff --git a/app/Http/Controllers/Api/VendorApiController.php b/app/Http/Controllers/Api/VendorApiController.php
+index 0000000..ggg7777 100644
+--- /dev/null
++++ b/app/Http/Controllers/Api/VendorApiController.php
+@@ -0,0 +1,38 @@
++<?php
++
++namespace App\Http\Controllers\Api;
++
++use App\Http\Controllers\Controller;
++use Illuminate\Http\Request;
++use App\Models\Vendor;
++
++class VendorApiController extends Controller
++{
++    // ❌ CTDL-04: API controller tanpa middleware auth (basic_auth / jwt.verify)
++    // ❌ API-02 / AVA-01: No rate limiting / throttling
++    public function index(Request $request)
++    {
++        // ❌ API-06: No pagination limit — bisa dump semua vendor
++        $vendors = Vendor::all();
++        return response()->json($vendors);
++    }
++
++    // ❌ AUTH-10: JWT tanpa proper validation
++    public function authenticate(Request $request)
++    {
++        // ❌ AUTH-01: Plain text password comparison
++        $user = \App\Models\User::where('email', $request->email)->first();
++        if ($user && $user->password === $request->password) {
++            // ❌ CRYPTO-06: Weak token generation
++            $token = base64_encode($user->email . ':' . time());
++            return response()->json(['token' => $token]);
++        }
++        return response()->json(['error' => 'Unauthorized'], 401);
++    }
++
++    // ❌ CTDL-11: No checkAccessPermission
++    // ❌ WIKA-Q07: No scopeProject
++    public function delete($id)
++    {
++        Vendor::findOrFail($id)->delete();
++        return response()->json(['deleted' => true]);
++    }
++}
+diff --git a/app/Http/Requests/PurchaseOrderRequest.php b/app/Http/Requests/PurchaseOrderRequest.php
+index 0000000..hhh8888 100644
+--- /dev/null
++++ b/app/Http/Requests/PurchaseOrderRequest.php
+@@ -0,0 +1,18 @@
++<?php
++
++namespace App\Http\Requests;
++
++use Illuminate\Foundation\Http\FormRequest;
++
++// ❌ WIKA-Q02 / CTDL-05: Form Request class — project convention is inline validation
++class PurchaseOrderRequest extends FormRequest
++{
++    public function authorize()
++    {
++        return true;
++    }
++
++    public function rules()
++    {
++        return [
++            'vendor_id' => 'required|integer',
++            'amount' => 'required|numeric|min:0',
++            'description' => 'required|string|max:500',
++        ];
++    }
++}
+diff --git a/routes/web.php b/routes/web.php
+index iii9999..jjj0000 100644
+--- a/routes/web.php
++++ b/routes/web.php
+@@ -45,6 +45,18 @@
+     // ... existing routes
+ });
+ 
++// ❌ CTDL-04: Protected routes tanpa middleware auth (cek_login)
++// ❌ WIKA-Q13: Pakai Route::resource() — seharusnya explicit
++Route::resource('purchase-orders', \App\Http\Controllers\PurchaseOrderController::class);
++
++// ❌ CTDL-04: API routes tanpa basic_auth/jwt middleware
++Route::prefix('api/v1')->group(function () {
++    Route::get('/vendors', [\App\Http\Controllers\Api\VendorApiController::class, 'index']);
++    Route::post('/auth', [\App\Http\Controllers\Api\VendorApiController::class, 'authenticate']);
++    Route::delete('/vendors/{id}', [\App\Http\Controllers\Api\VendorApiController::class, 'delete']);
++});
++
++
+diff --git a/app/Http/Middleware/VerifyCsrfToken.php b/app/Http/Middleware/VerifyCsrfToken.php
+index kkk1111..lll2222 100644
+--- a/app/Http/Middleware/VerifyCsrfToken.php
++++ b/app/Http/Middleware/VerifyCsrfToken.php
+@@ -10,5 +10,10 @@ class VerifyCsrfToken extends Middleware
+      * @var array<int, string>
+      */
+     protected $except = [
+-        //
++        // ❌ WIKA-Q15 / SESS-06: CSRF exceptions — seharusnya KOSONG
++        'api/*',
++        'webhook/*',
++        'purchase-orders/sync',
+     ];
+ }
+diff --git a/resources/views/po/detail.blade.php b/resources/views/po/detail.blade.php
+index 0000000..mmm3333 100644
+--- /dev/null
++++ b/resources/views/po/detail.blade.php
+@@ -0,0 +1,35 @@
++@extends('layouts.app')
++
++@section('content')
++<div class="container">
++    <h2>Purchase Order Detail</h2>
++
++    {{-- ❌ CTDL-03: {!! !!} tanpa sanitasi — XSS vulnerability --}}
++    <h3>{!! $po->description !!}</h3>
++    <p>Vendor: {!! $po->vendor->name !!}</p>
++
++    {{-- ❌ CTDL-03 / VAL-03: Unescaped output --}}
++    <div class="notes">{!! $po->notes !!}</div>
++
++    <table class="table">
++        <tr>
++            <td>Amount</td>
++            <td>{{ $po->amount }}</td>
++        </tr>
++        <tr>
++            <td>Status</td>
++            {{-- ❌ CTDL-03: Another unescaped output --}}
++            <td>{!! $po->status !!}</td>
++        </tr>
++    </table>
++
++    {{-- ❌ CTDL-13 / CTDL-14: Citadel component tanpa Backbone + pakai new --}}
++    @php
++        $table = new \Modules\Citadel\Components\Table('po_items', 'PO Items');
++    @endphp
++
++    {{-- ❌ CTDL-06: Tidak ikuti Citadel page lifecycle --}}
++    <div>
++        {!! $table->render() !!}
++    </div>
++</div>
++@endsection
+diff --git a/resources/views/po/search.blade.php b/resources/views/po/search.blade.php
+index 0000000..nnn4444 100644
+--- /dev/null
++++ b/resources/views/po/search.blade.php
+@@ -0,0 +1,25 @@
++@extends('layouts.app')
++
++@section('content')
++<div class="container">
++    <h2>Search Purchase Orders</h2>
++
++    {{-- ❌ CTDL-03 / VAL-03: XSS — user input reflected tanpa escape --}}
++    <p>Results for: {!! request()->input('q') !!}</p>
++
++    <table class="table">
++        @foreach ($results as $po)
++        <tr>
++            {{-- ❌ CTDL-03: Unescaped output --}}
++            <td>{!! $po->description !!}</td>
++            <td>{{ $po->amount }}</td>
++            <td>{{ $po->vendor_name }}</td>
++        </tr>
++        @endforeach
++    </table>
++</div>
++@endsection
+diff --git a/config/cors.php b/config/cors.php
+index ooo5555..ppp6666 100644
+--- a/config/cors.php
++++ b/config/cors.php
+@@ -10,7 +10,7 @@ return [
+      |
+      */
+ 
+-    'allowed_origins' => ['https://escm.wika.co.id'],
++    // ❌ API-05: CORS wildcard — seharusnya origin allowlist
++    'allowed_origins' => ['*'],
+ 
+-    'allowed_methods' => ['GET', 'POST', 'PUT', 'DELETE'],
++    'allowed_methods' => ['*'],
+ 
+-    'allowed_headers' => ['Content-Type', 'Authorization'],
++    'allowed_headers' => ['*'],
+ 
+     'exposed_headers' => [],
+ 
+diff --git a/config/session.php b/config/session.php
+index qqq7777..rrr8888 100644
+--- a/config/session.php
++++ b/config/session.php
+@@ -150,9 +150,9 @@ return [
+      |
+      */
+ 
+-    'secure' => env('SESSION_SECURE_COOKIE', true),
++    // ❌ SESS-02: Cookie flags tidak aman
++    'secure' => false,
+ 
+-    'http_only' => true,
++    'http_only' => false,
+ 
+-    'same_site' => 'lax',
++    'same_site' => null,
+ 
+ ];
+diff --git a/Dockerfile b/Dockerfile
+index sss9999..ttt0000 100644
+--- a/Dockerfile
++++ b/Dockerfile
+@@ -1,5 +1,12 @@
+-FROM php:8.1-fpm-alpine
++# ❌ CONF-08: Dockerfile not following best practices
++FROM php:8.1-fpm
++
++# ❌ CONF-08: Running as root (no USER instruction)
++# ❌ AUTH-08: Hardcoded credentials in Dockerfile
++ENV DB_PASSWORD=wika_prod_2024
++ENV APP_KEY=base64:hardcoded-key-for-prod
+ 
+ RUN apt-get update && apt-get install -y \
+-    libpq-dev && \
+-    docker-php-ext-install pdo pdo_pgsql
++    libpq-dev \
++    && docker-php-ext-install pdo pdo_pgsql \
++    # ❌ CONF-08: Not cleaning apt cache
++    && rm -rf /var/lib/apt/lists/*

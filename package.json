@@ -1,0 +1,17 @@
+{
+    "name": "codex-review-bot",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "description": "Codex AI Review engine + GUI backend (terpisah dari aplikasi Laravel/React WISE/ESCM)",
+    "scripts": {
+        "server": "node server/server.mjs",
+        "pin-report": "node server/pin_report.mjs",
+        "test": "node --test",
+        "cli:diff": "node scripts/run_codex.mjs --mode diff --prompt prompts/codex_diff_review.md --diff ../mr_diff.patch",
+        "cli:full": "node scripts/run_codex.mjs --mode full --prompt prompts/codex_full_scan.md"
+    },
+    "dependencies": {
+        "express": "^4.21.2"
+    }
+}
