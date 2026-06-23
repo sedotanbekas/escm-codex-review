@@ -1,7 +1,7 @@
 // App.tsx — orkestrasi GUI laporan "Codex Review Summary" (gaya GitLab).
 // Alur: pilih dataset → "Jalankan" (tampilkan laporan rekaman, aman) atau
 // "Scan ulang (live)" (panggil AI). Riwayat run bisa dimuat ulang.
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type {
     HealthResponse,
     EvalResponse,
@@ -35,14 +35,35 @@ export default function App() {
     const [loadingKind, setLoadingKind] = useState<"live" | "load" | null>(
         null,
     );
+    // Fase keluar bar scan live: bar menyusut ke tengah & memudar SEBELUM hasil
+    // muncul (lihat runLive). Notifikasi "sudah dimuat" untuk klik "Jalankan"
+    // berulang saat rekaman sudah tampil.
+    const [scanExiting, setScanExiting] = useState(false);
+    const [notice, setNotice] = useState<{ msg: string; key: number } | null>(
+        null,
+    );
+    const noticeTimer = useRef<number | null>(null);
 
     useEffect(() => {
         getHealth().then(setHealth).catch(() => setHealth(null));
         getHistory().then(setHistory).catch(() => setHistory([]));
     }, []);
 
+    // Tampilkan notifikasi singkat di bawah tombol "Jalankan" (auto-hilang ~3s).
+    function flashNotice(msg: string) {
+        if (noticeTimer.current) window.clearTimeout(noticeTimer.current);
+        setNotice({ msg, key: Date.now() });
+        noticeTimer.current = window.setTimeout(() => setNotice(null), 3000);
+    }
+
     // "Jalankan" — tampilkan laporan rekaman (statis, anti-gagal).
     async function showRecorded() {
+        // Bila laporan rekaman SUDAH tampil, jangan reload (hindari "kedut"
+        // render ulang) — cukup beri notifikasi bahwa data sudah dimuat.
+        if (current?.source === "recorded" && status === "success") {
+            flashNotice("Data sudah dimuat");
+            return;
+        }
         setStatus("loading");
         setLoadingKind("load");
         setError(null);
@@ -72,13 +93,23 @@ export default function App() {
         setStatus("loading");
         setLoadingKind("live");
         setError(null);
+        setScanExiting(false);
         try {
             const res = await postEvaluate();
+            // Animasi penutup: bar menyusut ke tengah & memudar dulu, lalu —
+            // tepat saat bar lenyap — hasil dirender dengan animasinya sendiri.
+            const reduce = window.matchMedia?.(
+                "(prefers-reduced-motion: reduce)",
+            ).matches;
+            setScanExiting(true);
+            await new Promise((r) => setTimeout(r, reduce ? 0 : 560));
             setCurrent(res);
             setActiveId(res.runId);
             setStatus("success");
+            setScanExiting(false);
             getHistory().then(setHistory).catch(() => {});
         } catch (e) {
+            setScanExiting(false);
             if (e instanceof ApiHttpError && e.status === 401) {
                 if (!isRetry) {
                     const code = window.prompt(
@@ -131,11 +162,12 @@ export default function App() {
                 running={status === "loading"}
                 onRun={showRecorded}
                 onRescan={() => runLive()}
+                notice={notice}
             />
 
             {status === "loading" &&
                 (loadingKind === "live" ? (
-                    <ScanProgress />
+                    <ScanProgress exiting={scanExiting} />
                 ) : (
                     <div className="banner banner--load">Memuat laporan…</div>
                 ))}

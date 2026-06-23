@@ -7,11 +7,21 @@ interface Props {
     running: boolean;
     onRun: () => void; // tampilkan laporan rekaman (anti-gagal)
     onRescan: () => void; // scan ulang live (memanggil AI)
+    // Notifikasi singkat yang muncul TURUN dari bawah tombol "Jalankan"
+    // (mis. saat rekaman sudah tampil & "Jalankan" diklik lagi). `key`
+    // berubah tiap pemicu agar animasinya selalu mengulang.
+    notice?: { msg: string; key: number } | null;
 }
 
 const DATASETS = [{ id: "thesis", label: "2 patch skripsi (EXP-01 + EXP-02)" }];
 
-export function ReportControls({ health, running, onRun, onRescan }: Props) {
+export function ReportControls({
+    health,
+    running,
+    onRun,
+    onRescan,
+    notice,
+}: Props) {
     const keyOk = health?.apiKeyConfigured ?? false;
     return (
         <div className="controls">
@@ -26,13 +36,25 @@ export function ReportControls({ health, running, onRun, onRescan }: Props) {
                         </option>
                     ))}
                 </select>
-                <button
-                    className="btn btn--primary"
-                    onClick={onRun}
-                    disabled={running}
-                >
-                    Jalankan
-                </button>
+                <span className="ctl-runwrap">
+                    <button
+                        className="btn btn--primary"
+                        onClick={onRun}
+                        disabled={running}
+                    >
+                        Jalankan
+                    </button>
+                    {notice && (
+                        <span
+                            key={notice.key}
+                            className="runnotice"
+                            role="status"
+                            aria-live="polite"
+                        >
+                            {notice.msg}
+                        </span>
+                    )}
+                </span>
                 <button
                     className="btn btn--ghost"
                     onClick={onRescan}

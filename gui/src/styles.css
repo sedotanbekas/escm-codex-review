@@ -167,6 +167,55 @@ body {
     border-color: var(--blue);
     box-shadow: 0 0 0 3px rgba(63, 114, 175, 0.25);
 }
+
+/* Notifikasi yang TURUN dari bawah tombol "Jalankan" (auto-hilang ~3 dtk):
+   muncul dari atas, diam sebentar, lalu naik balik & memudar. */
+.ctl-runwrap {
+    position: relative;
+    display: inline-flex;
+}
+.runnotice {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    z-index: 30;
+    white-space: nowrap;
+    background: var(--blue-deep);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 7px 11px;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(17, 45, 78, 0.18);
+    pointer-events: none;
+    animation: noticeCycle 3s ease both;
+}
+.runnotice::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 16px;
+    border: 5px solid transparent;
+    border-bottom-color: var(--blue-deep);
+}
+@keyframes noticeCycle {
+    0% {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    8% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    88% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+}
 .btn {
     border: 1px solid transparent;
     border-radius: var(--radius);
@@ -947,20 +996,25 @@ body {
 }
 
 /* --- Scan progress (live) ------------------------------------------------- */
+/* Wadah transparan: bar FULL-BLEED di atas, kartu status (teks) di bawah. */
 .scan {
-    background: var(--tint);
-    border: 1px solid var(--soft);
-    border-radius: var(--radius);
-    padding: 12px 14px;
     margin-bottom: 16px;
-    box-shadow: var(--shadow);
-    animation: fadeUp 0.3s ease both;
 }
+/* Mencegah scrollbar horizontal akibat bar selebar 100vw. */
+body {
+    overflow-x: hidden;
+}
+/* Bar membentang penuh kiri-kanan layar (menembus kontainer), "tumbuh" dari
+   tengah saat muncul; menyusut balik ke tengah saat fase keluar. */
 .scan__bar {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
     height: 6px;
     background: var(--soft);
-    border-radius: 999px;
     overflow: hidden;
+    transform-origin: center;
+    animation: scanGrow 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 .scan__fill {
     height: 100%;
@@ -968,6 +1022,53 @@ body {
     border-radius: 999px;
     background: linear-gradient(90deg, transparent, var(--blue), transparent);
     animation: scanSlide 1.15s ease-in-out infinite;
+}
+/* Kartu status (teks tahap + timer) — tetap selebar kontainer halaman. */
+.scan__card {
+    background: var(--tint);
+    border: 1px solid var(--soft);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    margin-top: 12px;
+    box-shadow: var(--shadow);
+    animation: fadeUp 0.35s ease both;
+}
+/* Fase keluar: bar menyusut ke tengah & memudar; kartu memudar turun. */
+.scan--out .scan__bar {
+    animation: scanShrink 0.5s ease both;
+}
+.scan--out .scan__card {
+    animation: fadeOutDown 0.45s ease both;
+}
+@keyframes scanGrow {
+    from {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    to {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+@keyframes scanShrink {
+    from {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+    to {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+}
+@keyframes fadeOutDown {
+    from {
+        opacity: 1;
+        transform: none;
+    }
+    to {
+        opacity: 0;
+        transform: translateY(8px);
+    }
 }
 @keyframes scanSlide {
     0% {
@@ -982,7 +1083,6 @@ body {
     justify-content: space-between;
     align-items: center;
     gap: 12px;
-    margin-top: 9px;
 }
 .scan__stagewrap {
     position: relative;
@@ -1067,5 +1167,12 @@ body {
             var(--tint) 8px,
             var(--tint) 16px
         );
+    }
+    /* Tanpa animasi, notifikasi harus tetap terlihat statis (bukan berakhir
+       di state transparan keyframe). */
+    .runnotice {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
     }
 }

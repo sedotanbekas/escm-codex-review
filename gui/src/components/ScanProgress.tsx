@@ -12,11 +12,13 @@ const STAGES = [
     "Menghitung Precision / Recall / F1…",
 ];
 
-export function ScanProgress() {
+// `exiting`: saat true, bar menyusut ke tengah & memudar (fase keluar) sebelum
+// hasil ditampilkan oleh App.
+export function ScanProgress({ exiting = false }: { exiting?: boolean }) {
     const [secs, setSecs] = useState(0);
     const [stage, setStage] = useState(0);
     // Teks lama yang sedang "keluar" (naik + memudar) saat tahap berganti.
-    const [exiting, setExiting] = useState<{ idx: number; key: number } | null>(
+    const [leaving, setLeaving] = useState<{ idx: number; key: number } | null>(
         null,
     );
     const prevRef = useRef(0);
@@ -41,38 +43,47 @@ export function ScanProgress() {
     // Saat tahap berganti, tahap sebelumnya menjadi elemen yang keluar.
     useEffect(() => {
         if (prevRef.current !== stage) {
-            setExiting({ idx: prevRef.current, key: Date.now() });
+            setLeaving({ idx: prevRef.current, key: Date.now() });
             prevRef.current = stage;
         }
     }, [stage]);
 
     // Bersihkan elemen keluar setelah animasinya selesai.
     useEffect(() => {
-        if (!exiting) return;
-        const t = setTimeout(() => setExiting(null), 650);
+        if (!leaving) return;
+        const t = setTimeout(() => setLeaving(null), 650);
         return () => clearTimeout(t);
-    }, [exiting]);
+    }, [leaving]);
 
     return (
-        <div className="scan" role="status" aria-live="polite">
+        <div
+            className={`scan${exiting ? " scan--out" : ""}`}
+            role="status"
+            aria-live="polite"
+        >
             <div className="scan__bar">
                 <div className="scan__fill" />
             </div>
-            <div className="scan__row">
-                <div className="scan__stagewrap">
-                    {exiting && (
+            <div className="scan__card">
+                <div className="scan__row">
+                    <div className="scan__stagewrap">
+                        {leaving && (
+                            <span
+                                key={leaving.key}
+                                className="scan__stage scan__stage--out"
+                            >
+                                {STAGES[leaving.idx]}
+                            </span>
+                        )}
                         <span
-                            key={exiting.key}
-                            className="scan__stage scan__stage--out"
+                            key={stage}
+                            className="scan__stage scan__stage--in"
                         >
-                            {STAGES[exiting.idx]}
+                            {STAGES[stage]}
                         </span>
-                    )}
-                    <span key={stage} className="scan__stage scan__stage--in">
-                        {STAGES[stage]}
-                    </span>
+                    </div>
+                    <span className="scan__timer">{secs} dtk</span>
                 </div>
-                <span className="scan__timer">{secs} dtk</span>
             </div>
         </div>
     );
