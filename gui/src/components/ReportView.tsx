@@ -1,7 +1,7 @@
 // ReportView.tsx — render "Codex Review Summary" bergaya GitLab dari satu run.
 // Komposisi (produk murni, tanpa metrik evaluasi): Executive · Severity · Usage
 // & cost · Top findings · Component overview (CTDL vs WIKA) · Rulebook compliance.
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import type {
     EvalResponse,
@@ -13,6 +13,14 @@ import { getRulebook } from "../api";
 import { useCountUp, prefersReducedMotion } from "../lib/useCountUp";
 import { RulebookModal } from "./RulebookModal";
 import { InfoHint } from "./InfoHint";
+import Prism from "prismjs";
+import "prismjs/components/prism-markup";
+import "prismjs/components/prism-clike";
+import "prismjs/components/prism-markup-templating";
+import "prismjs/components/prism-php";
+import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-diff";
+import "prismjs/plugins/diff-highlight/prism-diff-highlight";
 
 const SEV_LABEL: Record<Severity, string> = {
     blocker: "BLOCKER",
@@ -135,18 +143,29 @@ function UsageCost({ usage }: { usage: ReportData["usage"] }) {
 }
 
 function TopFindings({ items }: { items: ReportData["topFindings"] }) {
+    const [open, setOpen] = useState<number | null>(null);
+    const wrapRef = useRef<HTMLDivElement>(null);
+
+    // Highlight snippet (Prism diff + PHP) saat baris dibuka.
+    useEffect(() => {
+        if (open !== null && wrapRef.current) {
+            Prism.highlightAllUnder(wrapRef.current);
+        }
+    }, [open]);
+
     return (
         <section className="sec" id="nav-temuan" data-navlabel="Temuan utama">
-            <SectionTitle sub="Pelanggaran yang ditemukan AI, beserta saran perbaikannya.">
+            <SectionTitle sub="Pelanggaran yang ditemukan AI, beserta saran perbaikannya. Klik baris untuk melihat kode yang dimaksud.">
                 Temuan utama
             </SectionTitle>
             {items.length === 0 ? (
                 <p className="sec__p">Tidak ada temuan.</p>
             ) : (
-                <div className="tf-wrap">
+                <div className="tf-wrap" ref={wrapRef}>
                     <table className="tf">
                         <thead>
                             <tr>
+                                <th aria-label="lihat kode" />
                                 <th>Keparahan</th>
                                 <th>Aturan</th>
                                 <th>Sumber</th>
@@ -155,23 +174,75 @@ function TopFindings({ items }: { items: ReportData["topFindings"] }) {
                             </tr>
                         </thead>
                         <tbody>
-                            {items.map((f, i) => (
-                                <tr key={i}>
-                                    <td>
-                                        <RiskBadge risk={f.severity} sm />
-                                    </td>
-                                    <td>
-                                        <RulePill id={f.ruleId} />
-                                    </td>
-                                    <td className="tf__src">
-                                        {f.source ?? "—"}
-                                    </td>
-                                    <td>{f.descr}</td>
-                                    <td className="tf__rem">
-                                        {f.recommendation}
-                                    </td>
-                                </tr>
-                            ))}
+                            {items.map((f, i) => {
+                                const hasCode = Boolean(f.snippet);
+                                const isOpen = open === i;
+                                return (
+                                    <Fragment key={i}>
+                                        <tr
+                                            className={`tf__row${hasCode ? " tf__row--click" : ""}${isOpen ? " is-open" : ""}`}
+                                            onClick={
+                                                hasCode
+                                                    ? () =>
+                                                          setOpen(
+                                                              isOpen ? null : i,
+                                                          )
+                                                    : undefined
+                                            }
+                                        >
+                                            <td className="tf__exp" aria-hidden>
+                                                {hasCode
+                                                    ? isOpen
+                                                        ? "▾"
+                                                        : "▸"
+                                                    : ""}
+                                            </td>
+                                            <td>
+                                                <RiskBadge
+                                                    risk={f.severity}
+                                                    sm
+                                                />
+                                            </td>
+                                            <td>
+                                                <RulePill id={f.ruleId} />
+                                            </td>
+                                            <td className="tf__src">
+                                                {f.source ?? "—"}
+                                            </td>
+                                            <td>{f.descr}</td>
+                                            <td className="tf__rem">
+                                                {f.recommendation}
+                                            </td>
+                                        </tr>
+                                        {hasCode && isOpen && (
+                                            <tr className="tf__coderow">
+                                                <td colSpan={6}>
+                                                    <div className="tf-code">
+                                                        <div className="tf-code__head">
+                                                            <span className="tf-code__path">
+                                                                {f.path}
+                                                                {f.line
+                                                                    ? `:${f.line}`
+                                                                    : ""}
+                                                            </span>
+                                                            {f.source && (
+                                                                <span className="tf-code__exp">
+                                                                    {f.source}
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                        <pre className="tf-code__pre">
+                                                            <code className="language-diff-php">
+                                                                {f.snippet}
+                                                            </code>
+                                                        </pre>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        )}
+                                    </Fragment>
+                                );
+                            })}
                         </tbody>
                     </table>
                 </div>

@@ -100,6 +100,32 @@ const SEED_PATCHES = [
     { exp: "EXP-02", path: path.join(ROOT, "tests", "stress_test_rulebook.patch") },
 ];
 
+// Cache peta { exp: { path: <blok diff berkas> } } dari patch seeded, untuk
+// snippet kode di Top findings. Dibangun sekali (isi patch statis).
+let _seededDiffsCache = null;
+function getSeededDiffs() {
+    if (_seededDiffsCache) return _seededDiffsCache;
+    const out = {};
+    for (const ds of SEED_PATCHES) {
+        try {
+            if (!fs.existsSync(ds.path)) continue;
+            const text = fs.readFileSync(ds.path, "utf8");
+            const map = {};
+            const blocks = text
+                .split(/(?=^diff --git )/m)
+                .filter((s) => s.trim());
+            for (const b of blocks) {
+                const m = b.match(/^diff --git a\/(.+?) b\/(.+)$/m);
+                const p = m ? m[2].trim() : null;
+                if (p) map[p] = b.replace(/\s+$/, "");
+            }
+            out[ds.exp] = map;
+        } catch (_) {}
+    }
+    _seededDiffsCache = out;
+    return out;
+}
+
 // Muat katalog kontrol sekali saat start (untuk severity floor & coverage).
 const controlCatalog = loadControlRiskCatalog(
     path.join(ROOT, "controls", "controls.csv"),
@@ -129,6 +155,7 @@ function runToResponse(run, source = "history") {
         model: run.model || MODEL,
         controlTotal: controlCatalog.riskById.size,
         pricing: pricingFromEnv(),
+        seededDiffs: getSeededDiffs(),
     });
     return {
         ok: true,

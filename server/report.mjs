@@ -115,6 +115,7 @@ export function buildReport({
     controlTotal = 0,
     pricing = null,
     topN = 10,
+    seededDiffs = null, // { [exp]: { [path]: <blok diff berkas> } }
 } = {}) {
     // 1) Severity breakdown + overall risk
     const counts = emptyCounts();
@@ -134,6 +135,20 @@ export function buildReport({
             String(b.location?.path || ""),
         );
     });
+    // Snippet kode: blok diff berkas yang ditunjuk temuan, diambil dari patch
+    // seeded (seededDiffs). Inilah kode yang BENAR-BENAR direview AI, sehingga
+    // penguji bisa melihat & menilai validitasnya langsung.
+    const snippetFor = (exp, fpath) => {
+        if (!seededDiffs || !exp) return null;
+        const fileMap = seededDiffs[exp];
+        if (!fileMap) return null;
+        const p = String(fpath || "").replace(/^\/+/, "");
+        if (fileMap[p]) return fileMap[p];
+        for (const key of Object.keys(fileMap)) {
+            if (key.endsWith(p) || p.endsWith(key)) return fileMap[key];
+        }
+        return null;
+    };
     const topFindings = sorted.slice(0, topN).map((f) => {
         const full = cleanCheck(f.check_name); // tanpa prefix "SAST |"
         return {
@@ -148,6 +163,8 @@ export function buildReport({
             // deskripsi tanpa prefix "[CTDL-01]" (rule id sudah jadi kolom sendiri)
             descr: full.replace(/^\[[A-Za-z]+-[A-Za-z0-9]+\]\s*/, ""),
             recommendation: f.recommendation || "",
+            // blok diff berkas terkait (null bila tak ditemukan)
+            snippet: snippetFor(f.dataset, f.location?.path),
         };
     });
 

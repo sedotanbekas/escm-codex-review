@@ -123,6 +123,7 @@ export interface ReportTopFinding {
     check: string;
     descr: string;
     recommendation: string;
+    snippet?: string | null; // blok diff berkas terkait (kode yang dirujuk AI)
 }
 
 // Satu baris rulebook tervalidasi Lead Dev IT WIKA (dari /api/rulebook).

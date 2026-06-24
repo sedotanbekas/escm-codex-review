@@ -1527,6 +1527,75 @@ body {
     line-height: 1.5;
 }
 
+/* --- Snippet kode di Top findings (baris bisa di-expand) ------------------ */
+.tf__row--click {
+    cursor: pointer;
+}
+.tf__row--click:hover {
+    background: var(--tint);
+}
+.tf__exp {
+    width: 20px;
+    text-align: center;
+    color: var(--blue);
+    font-size: 0.7rem;
+    user-select: none;
+}
+.tf__coderow > td {
+    padding: 0 0 10px;
+    background: transparent;
+    border-top: 0;
+}
+.tf-code {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #1d1f27;
+    margin-top: 2px;
+}
+.tf-code__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: #16181f;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 7px 12px;
+}
+.tf-code__path {
+    font-family: "Fira Code", var(--mono), monospace;
+    font-size: 0.74rem;
+    color: #aeb6c2;
+    word-break: break-all;
+}
+.tf-code__exp {
+    flex: none;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--blue);
+    padding: 2px 8px;
+    border-radius: 999px;
+}
+.tf-code__pre {
+    margin: 0 !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    padding: 12px 14px !important;
+    overflow-x: auto;
+    font-size: 0.78rem;
+    line-height: 1.55;
+    tab-size: 4;
+}
+.tf-code__pre,
+.tf-code__pre code {
+    font-family: "Fira Code", var(--mono), monospace !important;
+    text-shadow: none !important;
+}
+.tf-code__pre code {
+    background: transparent !important;
+}
+
 /* --- Navigasi per-bagian (desktop dots / mobile FAB) + Back to top -------- */
 [data-navlabel] {
     scroll-margin-top: 16px;
