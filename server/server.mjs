@@ -275,6 +275,112 @@ app.post("/api/evaluate", async (req, res) => {
     }
 });
 
+// Versi STREAMING dari evaluate: mengalirkan progres NYATA (NDJSON, satu objek
+// per baris) saat tiap potongan kode selesai diproses, lalu hasil akhir. Dipakai
+// GUI untuk loading bar yang jujur. Logika inti identik dengan /api/evaluate.
+app.post("/api/evaluate/stream", async (req, res) => {
+    // Gerbang & limit dicek SEBELUM streaming (masih boleh balas JSON error).
+    if (!accessOk(req, res)) return;
+    if (!rateLimitOk()) {
+        return res.status(429).json({
+            error: `Batas ${MAX_LIVE_PER_HOUR} scan live per jam tercapai. Coba lagi nanti.`,
+        });
+    }
+    const apiKey = getSecret("OPENAI_API_KEY");
+    if (!apiKey) {
+        return res.status(503).json({
+            error: "OPENAI_API_KEY belum diset. Isi .env.",
+        });
+    }
+
+    res.setHeader("Content-Type", "application/x-ndjson; charset=utf-8");
+    res.setHeader("Cache-Control", "no-cache, no-transform");
+    res.setHeader("X-Accel-Buffering", "no");
+    res.flushHeaders?.();
+    const send = (obj) => res.write(JSON.stringify(obj) + "\n");
+
+    try {
+        const prompt = fs.readFileSync(PROMPT_DIFF_PATH, "utf8");
+        const { rules } = getGroundTruth();
+
+        const cost = { calls: 0, prompt_tokens: 0, completion_tokens: 0, total_tokens: 0, api: null };
+        const recordUsage = (kind, _i, u) => {
+            if (!u) return;
+            cost.api = cost.api || kind;
+            cost.calls += 1;
+            cost.prompt_tokens += Number(u.prompt_tokens || 0);
+            cost.completion_tokens += Number(u.completion_tokens || 0);
+            cost.total_tokens += Number(u.total_tokens || 0);
+        };
+
+        const present = SEED_PATCHES.filter((ds) => fs.existsSync(ds.path));
+        const D = present.length || 1;
+        send({ type: "progress", pct: 0.02, label: "Menyiapkan contoh kode…" });
+
+        const allFindings = [];
+        const datasets = [];
+        for (let di = 0; di < present.length; di++) {
+            const ds = present[di];
+            const patchText = fs.readFileSync(ds.path, "utf8");
+            datasets.push({ exp: ds.exp, sha256: sha256(patchText) });
+            const result = await reviewSource({
+                source: patchText,
+                inputType: "diff",
+                prompt,
+                controlCatalog,
+                openAiConfig: {
+                    apiKey, model: MODEL, maxOutputTokens: MAX_OUTPUT_TOKENS,
+                    disableResponses: DISABLE_RESPONSES, recordUsage,
+                },
+                maxChunkChars: MAX_CHARS_PER_CHUNK,
+                concurrency: CONCURRENCY,
+                // Progres NYATA: tiap chunk selesai → kabari GUI. Dua dataset
+                // dibagi rata (0–90%), 90–100% untuk pencocokan & penilaian.
+                onProgress: (chunkDone, chunkTotal) => {
+                    const within = chunkTotal > 0 ? chunkDone / chunkTotal : 0;
+                    const pct = ((di + within) / D) * 0.9;
+                    send({
+                        type: "progress",
+                        pct,
+                        label: chunkTotal
+                            ? `Memeriksa ${ds.exp} (${chunkDone}/${chunkTotal} potongan)…`
+                            : `Memeriksa ${ds.exp}…`,
+                    });
+                },
+                log: () => {},
+            });
+            for (const issue of result.issues) issue.dataset = ds.exp;
+            allFindings.push(...result.issues);
+        }
+
+        send({ type: "progress", pct: 0.93, label: "Mencocokkan temuan & menilai…" });
+        const { perRule, metrics, fpFindings } = evaluate(allFindings, rules);
+        const { id } = recordRun(HISTORY_DIR, {
+            model: MODEL,
+            datasets,
+            metrics_live: metrics,
+            per_rule: perRule,
+            fp_findings: fpFindings,
+            findings: allFindings,
+            cost,
+            git_commit: process.env.CI_COMMIT_SHA || null,
+        });
+        const saved = getRun(HISTORY_DIR, id);
+        send({ type: "progress", pct: 1, label: "Selesai" });
+        send({ type: "result", ...runToResponse(saved, "live") });
+        res.end();
+    } catch (err) {
+        console.error("[server] /api/evaluate/stream error:", err);
+        try {
+            send({
+                type: "error",
+                error: "Gagal menjalankan evaluasi. Cek log server.",
+            });
+        } catch (_) {}
+        res.end();
+    }
+});
+
 // Riwayat run.
 app.get("/api/history", (req, res) => {
     res.json({ runs: listRuns(HISTORY_DIR) });

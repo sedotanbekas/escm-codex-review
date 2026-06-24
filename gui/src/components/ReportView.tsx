@@ -67,7 +67,7 @@ function RulePill({ id }: { id: string }) {
 
 function Executive({ exec }: { exec: ReportData["executive"] }) {
     return (
-        <section className="sec">
+        <section className="sec" id="nav-ringkasan" data-navlabel="Ringkasan">
             <SectionTitle sub="Penilaian keseluruhan & saran singkat dari AI.">
                 Ringkasan
             </SectionTitle>
@@ -90,7 +90,7 @@ function SeverityBreakdown({ sev }: { sev: ReportData["severity"] }) {
         ["info", sev.info],
     ];
     return (
-        <section className="sec">
+        <section className="sec" id="nav-keparahan" data-navlabel="Keparahan">
             <SectionTitle sub="Jumlah temuan di tiap tingkat, dari paling ringan (info) ke paling serius (blocker).">
                 Tingkat keparahan temuan
             </SectionTitle>
@@ -109,7 +109,7 @@ function SeverityBreakdown({ sev }: { sev: ReportData["severity"] }) {
 function UsageCost({ usage }: { usage: ReportData["usage"] }) {
     const ec = usage.estimatedCost;
     return (
-        <section className="sec">
+        <section className="sec" id="nav-biaya" data-navlabel="Pemakaian & biaya">
             <SectionTitle sub="Seberapa banyak teks yang diproses AI & perkiraan biayanya. Mode “hasil tersimpan” = 0.">
                 Pemakaian &amp; biaya AI
             </SectionTitle>
@@ -136,7 +136,7 @@ function UsageCost({ usage }: { usage: ReportData["usage"] }) {
 
 function TopFindings({ items }: { items: ReportData["topFindings"] }) {
     return (
-        <section className="sec">
+        <section className="sec" id="nav-temuan" data-navlabel="Temuan utama">
             <SectionTitle sub="Pelanggaran yang ditemukan AI, beserta saran perbaikannya.">
                 Temuan utama
             </SectionTitle>
@@ -221,7 +221,7 @@ function ComponentOverview({ dom }: { dom: ReportData["componentByDomain"] }) {
     const total = dom.CTDL + dom.WIKA;
     const pct = (n: number) => (total ? Math.round((n / total) * 100) : 0);
     return (
-        <section className="sec">
+        <section className="sec" id="nav-asal" data-navlabel="Asal temuan">
             <SectionTitle sub="Temuan dikelompokkan menurut jenis aturan yang dilanggar.">
                 Asal temuan: aturan umum vs khas WIKA{" "}
                 <InfoHint text="Aturan umum (CTDL) berlaku di banyak proyek. Aturan khas WIKA hanya diketahui tim internal WIKA — paling sulit dikenali AI." />
@@ -252,7 +252,7 @@ function Rulebook({
     onOpen: () => void;
 }) {
     return (
-        <section className="sec">
+        <section className="sec" id="nav-kepatuhan" data-navlabel="Kepatuhan aturan">
             <SectionTitle sub="Berapa banyak aturan tim yang tersentuh oleh temuan ini.">
                 Kepatuhan terhadap aturan{" "}
                 <InfoHint text="“Aturan tim” = daftar konvensi internal WISE/ESCM yang harus dipatuhi developer. Angka ini menunjukkan berapa aturan yang dilanggar pada contoh ini." />

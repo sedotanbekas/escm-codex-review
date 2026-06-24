@@ -3,7 +3,7 @@
 // (penguji). Tombol "Daftar istilah" membuka glosarium.
 export function IntroPanel({ onOpenGlossary }: { onOpenGlossary: () => void }) {
     return (
-        <section className="intro">
+        <section className="intro" id="nav-intro" data-navlabel="Apa ini?">
             <div className="intro__head">
                 <h2 className="intro__title">Apa ini?</h2>
                 <button

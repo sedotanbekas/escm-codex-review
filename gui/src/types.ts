@@ -60,6 +60,12 @@ export interface SeededDataset {
     content: string;
 }
 
+// Progres scan live (dari stream NDJSON /api/evaluate/stream).
+export interface ScanProgress {
+    pct: number; // 0..1, kemajuan nyata
+    label: string; // mis. "Memeriksa EXP-01 (3/8 potongan)…"
+}
+
 // State mesin UI — eksplisit agar tampilan tak pernah menggantung.
 export type RequestStatus = "idle" | "loading" | "success" | "error";
 

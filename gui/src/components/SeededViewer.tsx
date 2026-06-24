@@ -52,7 +52,11 @@ export function SeededViewer({ datasets, mode, exiting = false }: Props) {
 
     if (mode === "collapsible") {
         return (
-            <details className="seeded seeded--collapse">
+            <details
+                className="seeded seeded--collapse"
+                id="nav-contoh"
+                data-navlabel="Contoh kode"
+            >
                 <summary className="seeded__summary">
                     <span className="seeded__chev" aria-hidden>
                         ▸
@@ -66,7 +70,11 @@ export function SeededViewer({ datasets, mode, exiting = false }: Props) {
     }
 
     return (
-        <div className={`seeded seeded--hero${exiting ? " seeded--out" : ""}`}>
+        <div
+            className={`seeded seeded--hero${exiting ? " seeded--out" : ""}`}
+            id="nav-contoh"
+            data-navlabel="Contoh kode"
+        >
             <div className="seeded__herohead">
                 <h2 className="seeded__title">
                     Contoh kode yang sengaja dibuat bermasalah

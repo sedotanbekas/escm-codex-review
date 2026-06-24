@@ -113,6 +113,20 @@ body {
     color: var(--blue);
     margin: 0 1px;
 }
+.page__brandbtn {
+    appearance: none;
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+.page__brandbtn:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
 .page__brand em {
     font-style: normal;
     font-weight: 400;
@@ -1023,6 +1037,36 @@ body {
     background: linear-gradient(90deg, transparent, var(--blue), transparent);
     animation: scanSlide 1.15s ease-in-out infinite;
 }
+/* Isian DETERMINATE: lebar = progres NYATA, bergerak mulus + kilau "hidup". */
+.scan__progress {
+    position: relative;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--blue-deep), var(--blue));
+    transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    overflow: hidden;
+}
+.scan__progress::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.45),
+        transparent
+    );
+    transform: translateX(-100%);
+    animation: scanSheen 1.3s ease-in-out infinite;
+}
+@keyframes scanSheen {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
 /* Kartu status (teks tahap + timer) — tetap selebar kontainer halaman. */
 .scan__card {
     background: var(--tint);
@@ -1481,6 +1525,185 @@ body {
     font-size: 0.86rem;
     color: var(--ink);
     line-height: 1.5;
+}
+
+/* --- Navigasi per-bagian (desktop dots / mobile FAB) + Back to top -------- */
+[data-navlabel] {
+    scroll-margin-top: 16px;
+}
+.snav {
+    position: fixed;
+    top: 50%;
+    right: 14px;
+    transform: translateY(-50%);
+    z-index: 40;
+    animation: fadeIn 0.4s ease both;
+}
+.snav__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+}
+.snav__item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    padding: 5px 4px;
+    font: inherit;
+    color: var(--ink-2);
+}
+.snav__label {
+    opacity: 0;
+    transform: translateX(8px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    background: var(--ink);
+    color: #fff;
+    font-size: 0.74rem;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 999px;
+    box-shadow: 0 6px 16px rgba(17, 45, 78, 0.18);
+    white-space: nowrap;
+    pointer-events: none;
+}
+.snav:hover .snav__label,
+.snav__item.is-active .snav__label {
+    opacity: 1;
+    transform: none;
+}
+.snav__dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--soft);
+    flex: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+.snav__item:hover .snav__dot {
+    background: var(--blue);
+}
+.snav__item.is-active .snav__dot {
+    background: var(--blue);
+    transform: scale(1.4);
+}
+
+.snav-fab {
+    display: none;
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 45;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: var(--blue);
+    color: #fff;
+    font-size: 1.15rem;
+    box-shadow: 0 8px 22px rgba(17, 45, 78, 0.28);
+    cursor: pointer;
+}
+.snav-sheet {
+    position: fixed;
+    inset: 0;
+    z-index: 48;
+    background: rgba(17, 45, 78, 0.35);
+    display: flex;
+    align-items: flex-end;
+    animation: fadeIn 0.2s ease both;
+}
+.snav-sheet__box {
+    width: 100%;
+    background: #fff;
+    border-radius: 16px 16px 0 0;
+    padding: 8px 12px 20px;
+    box-shadow: 0 -10px 30px rgba(17, 45, 78, 0.2);
+    animation: sheetUp 0.25s ease both;
+}
+@keyframes sheetUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: none;
+    }
+}
+.snav-sheet__head {
+    font-weight: 700;
+    color: var(--ink);
+    padding: 8px 8px 10px;
+    font-size: 0.92rem;
+}
+.snav-sheet ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 3px;
+}
+.snav-sheet__item {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 10px;
+    font: inherit;
+    font-size: 0.92rem;
+    color: var(--ink);
+}
+.snav-sheet__item.is-active {
+    background: var(--tint);
+    color: var(--blue-deep);
+    font-weight: 700;
+}
+.backtop {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 45;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--soft);
+    background: #fff;
+    color: var(--blue-deep);
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 8px 22px rgba(17, 45, 78, 0.18);
+    animation: fadeUp 0.25s ease both;
+}
+.backtop:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+}
+@media (max-width: 879px) {
+    .snav {
+        display: none;
+    }
+    .snav-fab {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .backtop {
+        bottom: 72px;
+    }
+}
+@media (min-width: 880px) {
+    .snav-fab,
+    .snav-sheet {
+        display: none;
+    }
 }
 
 /* --- Responsive ----------------------------------------------------------- */

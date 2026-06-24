@@ -8,11 +8,12 @@ import type {
     HistorySummary,
     RequestStatus,
     SeededDataset,
+    ScanProgress as ScanProgressData,
 } from "./types";
 import {
     getHealth,
     getRecordedReport,
-    postEvaluate,
+    postEvaluateStream,
     getHistory,
     getHistoryRun,
     getDataset,
@@ -27,6 +28,7 @@ import { ScanProgress } from "./components/ScanProgress";
 import { SeededViewer } from "./components/SeededViewer";
 import { IntroPanel } from "./components/IntroPanel";
 import { GlossaryModal } from "./components/GlossaryModal";
+import { SectionNav, BackToTop } from "./components/SectionNav";
 
 export default function App() {
     const [health, setHealth] = useState<HealthResponse | null>(null);
@@ -53,12 +55,32 @@ export default function App() {
     const [datasetSel, setDatasetSel] = useState<string | null>(null);
     const [seeded, setSeeded] = useState<SeededDataset[] | null>(null);
     const [seededExiting, setSeededExiting] = useState(false);
+    const [scanProgress, setScanProgress] = useState<ScanProgressData | null>(
+        null,
+    );
     const [glossaryOpen, setGlossaryOpen] = useState(false);
 
     useEffect(() => {
         getHealth().then(setHealth).catch(() => setHealth(null));
         getHistory().then(setHistory).catch(() => setHistory([]));
     }, []);
+
+    // Konfirmasi sebelum refresh/keluar saat: scan live SEDANG berjalan, ATAU
+    // hasil live sedang ditampilkan. (Teks dialog mengikuti bawaan browser —
+    // tidak bisa dikustom.)
+    useEffect(() => {
+        const guard =
+            (status === "loading" && loadingKind === "live") ||
+            current?.source === "live";
+        if (!guard) return;
+        const onBeforeUnload = (e: BeforeUnloadEvent) => {
+            e.preventDefault();
+            e.returnValue = "";
+        };
+        window.addEventListener("beforeunload", onBeforeUnload);
+        return () =>
+            window.removeEventListener("beforeunload", onBeforeUnload);
+    }, [status, loadingKind, current]);
 
     // Pilih dataset → muat isi patch seeded (sekali) untuk panel kode.
     function selectDataset(id: string) {
@@ -126,8 +148,9 @@ export default function App() {
         setLoadingKind("live");
         setError(null);
         setScanExiting(false);
+        setScanProgress(null);
         try {
-            const res = await postEvaluate();
+            const res = await postEvaluateStream((p) => setScanProgress(p));
             // Animasi penutup: bar menyusut ke tengah & memudar dulu, lalu —
             // tepat saat bar lenyap — hasil dirender dengan animasinya sendiri.
             const reduce = window.matchMedia?.(
@@ -184,7 +207,14 @@ export default function App() {
         <div className="page">
             <div className="page__bar">
                 <div className="page__brand">
-                    codex<span>//</span>review
+                    <button
+                        type="button"
+                        className="page__brandbtn"
+                        onClick={() => window.location.reload()}
+                        title="Klik untuk memuat ulang halaman"
+                    >
+                        codex<span>//</span>review
+                    </button>
                     <em>— demo asisten AI pemeriksa kode (WISE/ESCM)</em>
                 </div>
             </div>
@@ -203,7 +233,11 @@ export default function App() {
 
             {status === "loading" &&
                 (loadingKind === "live" ? (
-                    <ScanProgress exiting={scanExiting} />
+                    <ScanProgress
+                        exiting={scanExiting}
+                        progress={scanProgress?.pct}
+                        label={scanProgress?.label}
+                    />
                 ) : (
                     <div className="banner banner--load">Memuat laporan…</div>
                 ))}
@@ -254,11 +288,16 @@ export default function App() {
                 ))
             )}
 
-            <RunHistory
-                runs={history}
-                activeId={activeId}
-                onSelect={loadRun}
-            />
+            <div
+                id="nav-riwayat"
+                data-navlabel={history.length ? "Riwayat" : undefined}
+            >
+                <RunHistory
+                    runs={history}
+                    activeId={activeId}
+                    onSelect={loadRun}
+                />
+            </div>
 
             <footer className="foot">
                 Bot ini <b>hanya memberi saran</b> (tidak mengubah/menghapus
@@ -269,6 +308,11 @@ export default function App() {
             {glossaryOpen && (
                 <GlossaryModal onClose={() => setGlossaryOpen(false)} />
             )}
+
+            <SectionNav
+                refreshKey={`${datasetSel ?? ""}|${current?.runId ?? ""}|${status}|${seeded ? seeded.length : 0}`}
+            />
+            <BackToTop />
         </div>
     );
 }

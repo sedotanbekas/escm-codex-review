@@ -6,6 +6,7 @@ import type {
     HistorySummary,
     RulebookEntry,
     SeededDataset,
+    ScanProgress,
     ApiError,
 } from "./types";
 
@@ -72,6 +73,63 @@ export async function postEvaluate(): Promise<EvalResponse> {
         );
     }
     return parseJsonSafe<EvalResponse>(res);
+}
+
+// Evaluasi live STREAMING: melapor progres NYATA via onProgress (dibaca dari
+// NDJSON), lalu mengembalikan hasil akhir. Mengirim passcode bila ada.
+export async function postEvaluateStream(
+    onProgress: (p: ScanProgress) => void,
+): Promise<EvalResponse> {
+    const res = await fetch(`${BASE}/api/evaluate/stream`, {
+        method: "POST",
+        headers: accessHeaders(),
+    });
+    if (!res.ok || !res.body) {
+        const err = await parseJsonSafe<ApiError>(res).catch(() => null);
+        throw new ApiHttpError(
+            res.status,
+            err?.error || `Evaluasi gagal (HTTP ${res.status}).`,
+        );
+    }
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buf = "";
+    let final: EvalResponse | null = null;
+
+    const handleLine = (line: string) => {
+        const t = line.trim();
+        if (!t) return;
+        let msg: { type?: string; pct?: number; label?: string; error?: string };
+        try {
+            msg = JSON.parse(t);
+        } catch {
+            return;
+        }
+        if (msg.type === "progress") {
+            onProgress({
+                pct: Number(msg.pct) || 0,
+                label: String(msg.label || ""),
+            });
+        } else if (msg.type === "result") {
+            final = msg as unknown as EvalResponse;
+        } else if (msg.type === "error") {
+            throw new Error(msg.error || "Evaluasi gagal.");
+        }
+    };
+
+    for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buf += decoder.decode(value, { stream: true });
+        let nl: number;
+        while ((nl = buf.indexOf("\n")) >= 0) {
+            handleLine(buf.slice(0, nl));
+            buf = buf.slice(nl + 1);
+        }
+    }
+    handleLine(buf); // baris terakhir tanpa newline penutup
+    if (!final) throw new Error("Stream selesai tanpa hasil.");
+    return final;
 }
 
 export async function getHistory(): Promise<HistorySummary[]> {

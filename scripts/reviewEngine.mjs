@@ -903,6 +903,7 @@ export async function runReviewTasks({
     controlCatalog,
     concurrency,
     openAiConfig,
+    onProgress = () => {},
     log = () => {},
 }) {
     const aggregated = [];
@@ -911,8 +912,12 @@ export async function runReviewTasks({
     let hallucinatedCount = 0;
 
     let next = 0;
+    let done = 0;
     const total = tasks.length;
     const workers = Math.max(1, Math.min(concurrency, total || 1));
+    // Lapor total chunk di awal (untuk progress bar GUI). CLI memakai default
+    // no-op sehingga perilakunya tidak berubah.
+    onProgress(0, total);
 
     async function worker() {
         while (true) {
@@ -1011,6 +1016,8 @@ export async function runReviewTasks({
             } catch (err) {
                 log(`[codex] chunk ${i + 1} failed: ${err.message}`);
             }
+            done++;
+            onProgress(done, total);
         }
     }
 
@@ -1053,6 +1060,7 @@ export async function reviewSource({
     maxChunkChars = 120000,
     concurrency = 4,
     diffExtsRaw = "",
+    onProgress = () => {},
     log = () => {},
 }) {
     // 1) Normalisasi input menjadi teks diff.
@@ -1082,6 +1090,7 @@ export async function reviewSource({
         controlCatalog,
         concurrency,
         openAiConfig,
+        onProgress,
         log,
     });
 
