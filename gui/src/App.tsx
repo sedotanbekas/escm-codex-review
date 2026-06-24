@@ -25,6 +25,8 @@ import { ReportView } from "./components/ReportView";
 import { RunHistory } from "./components/RunHistory";
 import { ScanProgress } from "./components/ScanProgress";
 import { SeededViewer } from "./components/SeededViewer";
+import { IntroPanel } from "./components/IntroPanel";
+import { GlossaryModal } from "./components/GlossaryModal";
 
 export default function App() {
     const [health, setHealth] = useState<HealthResponse | null>(null);
@@ -51,6 +53,7 @@ export default function App() {
     const [datasetSel, setDatasetSel] = useState<string | null>(null);
     const [seeded, setSeeded] = useState<SeededDataset[] | null>(null);
     const [seededExiting, setSeededExiting] = useState(false);
+    const [glossaryOpen, setGlossaryOpen] = useState(false);
 
     useEffect(() => {
         getHealth().then(setHealth).catch(() => setHealth(null));
@@ -182,9 +185,11 @@ export default function App() {
             <div className="page__bar">
                 <div className="page__brand">
                     codex<span>//</span>review
-                    <em>— reproduksi laporan WISE/ESCM</em>
+                    <em>— demo asisten AI pemeriksa kode (WISE/ESCM)</em>
                 </div>
             </div>
+
+            <IntroPanel onOpenGlossary={() => setGlossaryOpen(true)} />
 
             <ReportControls
                 health={health}
@@ -237,12 +242,13 @@ export default function App() {
                 ) : (
                     <div className="empty">
                         <p className="empty__lead">
-                            Pilih <b>dataset seeded</b> di atas untuk memulai.
+                            Pilih <b>contoh kode</b> di atas untuk memulai.
                         </p>
                         <p className="empty__sub">
-                            Setelah memilih, kamu akan melihat 30 pelanggaran
-                            yang ditanam — lalu tekan <b>Jalankan</b> (rekaman)
-                            atau <b>Scan ulang (live)</b>.
+                            Setelah memilih, kamu akan melihat contoh kode yang
+                            sengaja dibuat bermasalah — lalu tekan{" "}
+                            <b>“Lihat hasil contoh”</b> atau{" "}
+                            <b>“Periksa ulang dengan AI”</b>.
                         </p>
                     </div>
                 ))
@@ -255,9 +261,14 @@ export default function App() {
             />
 
             <footer className="foot">
-                advisory-only · precision-first · GUI independen — mesin sama
-                dengan pipeline CI
+                Bot ini <b>hanya memberi saran</b> (tidak mengubah/menghapus
+                kode) · demo independen, memakai mesin yang sama dengan sistem
+                tim.
             </footer>
+
+            {glossaryOpen && (
+                <GlossaryModal onClose={() => setGlossaryOpen(false)} />
+            )}
         </div>
     );
 }

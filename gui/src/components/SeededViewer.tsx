@@ -57,8 +57,8 @@ export function SeededViewer({ datasets, mode, exiting = false }: Props) {
                     <span className="seeded__chev" aria-hidden>
                         ▸
                     </span>
-                    Lihat dataset seeded ({datasets.length} patch ·{" "}
-                    {SEEDED_TOTAL} seeded violations)
+                    Lihat contoh kode bermasalah ({datasets.length} berkas ·{" "}
+                    {SEEDED_TOTAL} kesalahan)
                 </summary>
                 {body}
             </details>
@@ -68,11 +68,14 @@ export function SeededViewer({ datasets, mode, exiting = false }: Props) {
     return (
         <div className={`seeded seeded--hero${exiting ? " seeded--out" : ""}`}>
             <div className="seeded__herohead">
-                <h2 className="seeded__title">Dataset seeded violations</h2>
+                <h2 className="seeded__title">
+                    Contoh kode yang sengaja dibuat bermasalah
+                </h2>
                 <p className="seeded__sub">
-                    {datasets.length} patch · {SEEDED_TOTAL} pelanggaran sengaja
-                    ditanam sebagai <b>ground truth</b>. Tekan <b>Jalankan</b>{" "}
-                    atau <b>Scan ulang (live)</b> untuk mereview.
+                    {datasets.length} berkas · {SEEDED_TOTAL} kesalahan sengaja
+                    ditanam sebagai <b>“kunci jawaban”</b> untuk menguji
+                    ketelitian AI. Tekan <b>“Lihat hasil contoh”</b> atau{" "}
+                    <b>“Periksa ulang dengan AI”</b>.
                 </p>
             </div>
             {body}

@@ -12,6 +12,7 @@ import type {
 import { getRulebook } from "../api";
 import { useCountUp, prefersReducedMotion } from "../lib/useCountUp";
 import { RulebookModal } from "./RulebookModal";
+import { InfoHint } from "./InfoHint";
 
 const SEV_LABEL: Record<Severity, string> = {
     blocker: "BLOCKER",
@@ -19,6 +20,15 @@ const SEV_LABEL: Record<Severity, string> = {
     major: "MAJOR",
     minor: "MINOR",
     info: "INFO",
+};
+
+// Nama tingkat keparahan dalam bahasa awam (untuk daftar breakdown).
+const SEV_ID: Record<Severity, string> = {
+    blocker: "Sangat serius (blocker)",
+    critical: "Kritis",
+    major: "Berat",
+    minor: "Ringan",
+    info: "Info",
 };
 
 function RiskBadge({ risk, sm }: { risk: Severity; sm?: boolean }) {
@@ -29,8 +39,19 @@ function RiskBadge({ risk, sm }: { risk: Severity; sm?: boolean }) {
     );
 }
 
-function SectionTitle({ children }: { children: ReactNode }) {
-    return <h2 className="sec__h">{children}</h2>;
+function SectionTitle({
+    children,
+    sub,
+}: {
+    children: ReactNode;
+    sub?: ReactNode;
+}) {
+    return (
+        <div className="sec__head">
+            <h2 className="sec__h">{children}</h2>
+            {sub && <p className="sec__sub">{sub}</p>}
+        </div>
+    );
 }
 
 // Pill rule id berwarna sesuai domain (CTDL biru, WIKA ungu).
@@ -47,9 +68,13 @@ function RulePill({ id }: { id: string }) {
 function Executive({ exec }: { exec: ReportData["executive"] }) {
     return (
         <section className="sec">
-            <SectionTitle>Executive summary</SectionTitle>
+            <SectionTitle sub="Penilaian keseluruhan & saran singkat dari AI.">
+                Ringkasan
+            </SectionTitle>
             <p className="sec__p">
-                Overall risk: <RiskBadge risk={exec.overallRisk} />
+                Tingkat risiko keseluruhan:{" "}
+                <RiskBadge risk={exec.overallRisk} />{" "}
+                <InfoHint text="Seberapa serius temuan paling berat — dari Info (ringan) sampai Blocker (sangat serius/menghambat)." />
             </p>
             <p className="sec__p">{exec.guidance}</p>
         </section>
@@ -66,12 +91,14 @@ function SeverityBreakdown({ sev }: { sev: ReportData["severity"] }) {
     ];
     return (
         <section className="sec">
-            <SectionTitle>Severity breakdown</SectionTitle>
+            <SectionTitle sub="Jumlah temuan di tiap tingkat, dari paling ringan (info) ke paling serius (blocker).">
+                Tingkat keparahan temuan
+            </SectionTitle>
             <ul className="sevlist">
                 {rows.map(([k, v]) => (
                     <li key={k}>
                         <span className={`dot dot--${k}`} />
-                        {k}: <b>{v}</b>
+                        {SEV_ID[k]}: <b>{v}</b>
                     </li>
                 ))}
             </ul>
@@ -83,21 +110,25 @@ function UsageCost({ usage }: { usage: ReportData["usage"] }) {
     const ec = usage.estimatedCost;
     return (
         <section className="sec">
-            <SectionTitle>Usage and cost</SectionTitle>
+            <SectionTitle sub="Seberapa banyak teks yang diproses AI & perkiraan biayanya. Mode “hasil tersimpan” = 0.">
+                Pemakaian &amp; biaya AI
+            </SectionTitle>
             <p className="sec__p">
-                Model: {usage.model}
+                Model AI: {usage.model}
                 {usage.api ? ` (${usage.api})` : ""}
             </p>
-            <p className="sec__p">Calls: {usage.calls}</p>
+            <p className="sec__p">Jumlah panggilan ke AI: {usage.calls}</p>
             <p className="sec__p">
-                Tokens: prompt={usage.prompt_tokens}, completion=
+                Token{" "}
+                <InfoHint text="Satuan potongan teks yang diproses AI — dasar perhitungan biaya." />
+                : masuk={usage.prompt_tokens}, keluar=
                 {usage.completion_tokens}, total={usage.total_tokens}
             </p>
             <p className="sec__p">
-                Estimated cost:{" "}
+                Perkiraan biaya:{" "}
                 {ec
-                    ? `${ec.currency} ${ec.amount.toFixed(4)} (in=${ec.inPer1M}/1M, out=${ec.outPer1M}/1M)`
-                    : "harga belum diset (CODEX_PRICE_*_PER_1M)"}
+                    ? `${ec.currency} ${ec.amount.toFixed(4)}`
+                    : "belum dihitung (harga belum diisi)"}
             </p>
         </section>
     );
@@ -106,7 +137,9 @@ function UsageCost({ usage }: { usage: ReportData["usage"] }) {
 function TopFindings({ items }: { items: ReportData["topFindings"] }) {
     return (
         <section className="sec">
-            <SectionTitle>Top findings</SectionTitle>
+            <SectionTitle sub="Pelanggaran yang ditemukan AI, beserta saran perbaikannya.">
+                Temuan utama
+            </SectionTitle>
             {items.length === 0 ? (
                 <p className="sec__p">Tidak ada temuan.</p>
             ) : (
@@ -114,11 +147,11 @@ function TopFindings({ items }: { items: ReportData["topFindings"] }) {
                     <table className="tf">
                         <thead>
                             <tr>
-                                <th>Sev</th>
+                                <th>Keparahan</th>
                                 <th>Aturan</th>
                                 <th>Sumber</th>
-                                <th>Check</th>
-                                <th>Remediation</th>
+                                <th>Masalah</th>
+                                <th>Saran perbaikan</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -189,16 +222,19 @@ function ComponentOverview({ dom }: { dom: ReportData["componentByDomain"] }) {
     const pct = (n: number) => (total ? Math.round((n / total) * 100) : 0);
     return (
         <section className="sec">
-            <SectionTitle>Component overview</SectionTitle>
+            <SectionTitle sub="Temuan dikelompokkan menurut jenis aturan yang dilanggar.">
+                Asal temuan: aturan umum vs khas WIKA{" "}
+                <InfoHint text="Aturan umum (CTDL) berlaku di banyak proyek. Aturan khas WIKA hanya diketahui tim internal WIKA — paling sulit dikenali AI." />
+            </SectionTitle>
             <div className="dombars">
                 <DomBar
-                    label="CTDL — teknis/universal"
+                    label="Aturan umum (CTDL)"
                     n={dom.CTDL}
                     pct={pct(dom.CTDL)}
                     fam="ctdl"
                 />
                 <DomBar
-                    label="WIKA — khas organisasi (tacit)"
+                    label="Aturan khas WIKA"
                     n={dom.WIKA}
                     pct={pct(dom.WIKA)}
                     fam="wika"
@@ -217,9 +253,12 @@ function Rulebook({
 }) {
     return (
         <section className="sec">
-            <SectionTitle>Rulebook compliance summary</SectionTitle>
+            <SectionTitle sub="Berapa banyak aturan tim yang tersentuh oleh temuan ini.">
+                Kepatuhan terhadap aturan{" "}
+                <InfoHint text="“Aturan tim” = daftar konvensi internal WISE/ESCM yang harus dipatuhi developer. Angka ini menunjukkan berapa aturan yang dilanggar pada contoh ini." />
+            </SectionTitle>
             <p className="sec__p">
-                Rules triggered:{" "}
+                Aturan yang terpicu:{" "}
                 <b>
                     {rb.triggered}/{rb.total}
                 </b>
@@ -227,12 +266,12 @@ function Rulebook({
             </p>
             {rb.sampleIds.length > 0 && (
                 <p className="sec__p sec__ids">
-                    Triggered rule IDs: {rb.sampleIds.join(", ")}
+                    Kode aturan terpicu: {rb.sampleIds.join(", ")}
                     {rb.moreCount > 0 ? ` (+${rb.moreCount} lagi)` : ""}
                 </p>
             )}
             <button className="btn btn--ghost btn--sm" onClick={onOpen}>
-                📋 Lihat rulebook lengkap (konvensi WISE/ESCM)
+                📋 Lihat semua aturan tim (konvensi WISE/ESCM)
             </button>
         </section>
     );
@@ -276,14 +315,18 @@ export function ReportView({ data }: { data: EvalResponse }) {
             </header>
 
             <h1 className="mr__title">Codex Review Summary</h1>
+            <p className="mr__caption">
+                Laporan otomatis dari AI — meniru komentar yang muncul di sistem
+                kode tim (GitLab).
+            </p>
 
             <div className="mr__meta">
                 <div>
-                    Project:{" "}
+                    Proyek:{" "}
                     <span className="mono">najib221doank/escm-web-laravel</span>
                 </div>
                 <div>
-                    Dataset: <span className="mono">{dataset || "—"}</span>
+                    Contoh: <span className="mono">{dataset || "—"}</span>
                 </div>
                 <div>
                     Model: <span className="mono">{r.usage.model}</span>

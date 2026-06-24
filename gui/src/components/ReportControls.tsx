@@ -17,7 +17,9 @@ interface Props {
     onSelectDataset?: (id: string) => void;
 }
 
-const DATASETS = [{ id: "thesis", label: "2 patch skripsi (EXP-01 + EXP-02)" }];
+const DATASETS = [
+    { id: "thesis", label: "2 contoh kode bermasalah (dari skripsi)" },
+];
 
 export function ReportControls({
     health,
@@ -35,7 +37,7 @@ export function ReportControls({
         <div className="controls">
             <div className="controls__left">
                 <label className="controls__lbl" htmlFor="ds">
-                    Dataset seeded
+                    Contoh kode
                 </label>
                 {picked ? (
                     <span className="ds-chip" title={chosen?.label}>
@@ -54,7 +56,7 @@ export function ReportControls({
                         }
                     >
                         <option value="" disabled>
-                            — Pilih dataset seeded —
+                            — Pilih contoh kode —
                         </option>
                         {DATASETS.map((d) => (
                             <option key={d.id} value={d.id}>
@@ -70,11 +72,11 @@ export function ReportControls({
                         disabled={running || !picked}
                         title={
                             picked
-                                ? "Tampilkan laporan rekaman (anti-gagal, tanpa token)"
-                                : "Pilih dataset seeded dulu"
+                                ? "Tampilkan hasil contoh yang sudah tersimpan (cepat, tanpa biaya)"
+                                : "Pilih contoh kode dulu"
                         }
                     >
-                        Jalankan
+                        Lihat hasil contoh
                     </button>
                     {notice && (
                         <span
@@ -93,13 +95,13 @@ export function ReportControls({
                     disabled={running || !keyOk || !picked}
                     title={
                         !picked
-                            ? "Pilih dataset seeded dulu"
+                            ? "Pilih contoh kode dulu"
                             : keyOk
-                              ? "Memanggil AI sungguhan (memakai token & internet)"
-                              : "Isi OPENAI_API_KEY di .codex-review/.env untuk mengaktifkan"
+                              ? "Memanggil AI sungguhan saat ini juga (butuh beberapa detik & sedikit biaya)"
+                              : "Isi OPENAI_API_KEY di .env untuk mengaktifkan"
                     }
                 >
-                    {running ? "Memindai…" : "↻ Scan ulang (live)"}
+                    {running ? "AI sedang memeriksa…" : "↻ Periksa ulang dengan AI"}
                 </button>
             </div>
             <span
