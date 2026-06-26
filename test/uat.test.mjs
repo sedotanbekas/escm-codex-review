@@ -10,6 +10,7 @@ function goodBody() {
 test("payload valid lolos", () => { assert.deepEqual(validateUatPayload(goodBody()), { ok: true }); });
 test("consent false ditolak", () => { assert.equal(validateUatPayload({ ...goodBody(), consent: false }).ok, false); });
 test("email invalid ditolak", () => { assert.equal(validateUatPayload({ ...goodBody(), email: "x" }).ok, false); });
+test("email typo domain umum ditolak", () => { assert.equal(validateUatPayload({ ...goodBody(), email: "rafifn.a18@gmail.comm" }).ok, false); });
 test("answers bukan 10 ditolak", () => { assert.equal(validateUatPayload({ ...goodBody(), answers: [1, 2, 3] }).ok, false); });
 test("answers di luar 1..5 ditolak", () => { assert.equal(validateUatPayload({ ...goodBody(), answers: [4,2,4,2,5,2,4,1,4,9] }).ok, false); });
 test("forwardToAppsScript GET menempel query & parse JSON", async () => {

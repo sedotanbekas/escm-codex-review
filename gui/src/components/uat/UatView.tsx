@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { postUat } from "../../api";
 import type { UatStep } from "../../types";
@@ -12,6 +12,7 @@ import { UatProgress } from "./UatProgress";
 const STEPS = ["Persetujuan", "Tentang Anda", "Konfirmasi", "Penilaian"];
 
 export function UatView({ onExit }: { onExit: () => void }) {
+    const overlayRef = useRef<HTMLDivElement | null>(null);
     const [step, setStep] = useState<UatStep>("welcome");
     const [agreed, setAgreed] = useState(false);
     const [demo, setDemo] = useState<DemoValue>({ email: "", peran: "", pengalaman: "", freqTools: "" });
@@ -19,12 +20,17 @@ export function UatView({ onExit }: { onExit: () => void }) {
     const [answers, setAnswers] = useState<(number | null)[]>(Array(10).fill(null));
     const [sending, setSending] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [duplicateEmail, setDuplicateEmail] = useState<string | null>(null);
 
     useEffect(() => {
         function onKey(e: KeyboardEvent) { if (e.key === "Escape") onExit(); }
         window.addEventListener("keydown", onKey);
         return () => window.removeEventListener("keydown", onKey);
     }, [onExit]);
+
+    useEffect(() => {
+        overlayRef.current?.scrollTo({ top: 0 });
+    }, [step]);
 
     const stepIndex: Record<UatStep, number> = { welcome: -1, consent: 0, about: 1, confirm: 2, rate: 3, done: 3 };
     const allFilled = answers.every((a) => a !== null);
@@ -35,7 +41,7 @@ export function UatView({ onExit }: { onExit: () => void }) {
             const res = await postUat({ consent: true, email: demo.email.trim(), peran: demo.peran,
                 pengalaman: demo.pengalaman, freqTools: demo.freqTools, answers: answers as number[], komentar: "" });
             if (res.ok) setStep("done");
-            else if (res.duplicate) { setError("Email ini sudah pernah mengisi."); setStep("about"); }
+            else if (res.duplicate) { setDuplicateEmail(demo.email.trim()); setError("Email ini sudah pernah mengisi."); setStep("about"); }
             else setError(res.error || "Gagal mengirim. Coba lagi.");
         } catch {
             setError("Tidak dapat menghubungi server. Periksa koneksi dan coba lagi.");
@@ -45,20 +51,26 @@ export function UatView({ onExit }: { onExit: () => void }) {
     }
 
     return (
-        <motion.div className="uat" initial={{ clipPath: "inset(100% 0 0 0)" }} animate={{ clipPath: "inset(0% 0 0 0)" }}
-            exit={{ clipPath: "inset(100% 0 0 0)" }} transition={{ duration: 0.7, ease: "easeOut" }}>
+        <motion.div ref={overlayRef} className="uat" initial={{ opacity: 0, y: "100%" }} animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: "100%" }} transition={{ duration: 0.7, ease: "easeOut" }}>
             <button className="uat__exit" onClick={onExit} aria-label="Kembali">✕ Kembali</button>
             {step !== "welcome" && step !== "done" && <UatProgress steps={STEPS} current={stepIndex[step]} />}
             <div className="uat__stage">
                 <AnimatePresence mode="wait">
                     <motion.div key={step} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.25 }} className="uat__panel">
+                        exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.25 }} className={`uat__panel uat__panel--${step}`}>
                         {step === "welcome" && <UatWelcome onStart={() => setStep("consent")} />}
                         {step === "consent" && <UatConsent agreed={agreed} onAgreeChange={setAgreed} onNext={() => setStep("about")} />}
                         {step === "about" && (
                             <>
                                 {error && <p className="uat__error">{error}</p>}
-                                <UatDemographics value={demo} onChange={setDemo} onNext={() => { setError(null); setStep("confirm"); }} />
+                                <UatDemographics
+                                    value={demo}
+                                    onChange={setDemo}
+                                    onNext={() => { setError(null); setStep("confirm"); }}
+                                    duplicateEmail={duplicateEmail}
+                                    onEmailChange={() => { setDuplicateEmail(null); setError(null); }}
+                                />
                             </>
                         )}
                         {step === "confirm" && (

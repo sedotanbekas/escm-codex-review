@@ -1,13 +1,31 @@
 // uat.mjs — validasi payload UAT + forwarder ke Google Apps Script.
 // Backend hanya MENERUSKAN; data final ada di Google Sheet.
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/;
+const COMMON_DOMAIN_TYPOS = new Map([
+    ["gmail.comm", "gmail.com"],
+    ["gmai.com", "gmail.com"],
+    ["gmial.com", "gmail.com"],
+    ["yahoo.comm", "yahoo.com"],
+    ["outlook.comm", "outlook.com"],
+]);
+
+export function validateEmailAddress(email) {
+    if (typeof email !== "string") return { ok: false, error: "Email tidak valid." };
+    const trimmed = email.trim().toLowerCase();
+    if (!EMAIL_RE.test(trimmed)) return { ok: false, error: "Email tidak valid." };
+    const [, domain = ""] = trimmed.split("@");
+    const suggestion = COMMON_DOMAIN_TYPOS.get(domain);
+    if (suggestion) {
+        return { ok: false, error: `Domain email tampak salah. Mungkin maksud Anda ${suggestion}.` };
+    }
+    return { ok: true };
+}
 
 export function validateUatPayload(body) {
     if (!body || typeof body !== "object") return { ok: false, error: "Body kosong." };
     if (body.consent !== true) return { ok: false, error: "Persetujuan wajib." };
-    if (typeof body.email !== "string" || !EMAIL_RE.test(body.email.trim())) {
-        return { ok: false, error: "Email tidak valid." };
-    }
+    const emailVerdict = validateEmailAddress(body.email);
+    if (!emailVerdict.ok) return emailVerdict;
     for (const f of ["peran", "pengalaman", "freqTools"]) {
         if (typeof body[f] !== "string" || !body[f].trim()) {
             return { ok: false, error: `Field ${f} wajib.` };
