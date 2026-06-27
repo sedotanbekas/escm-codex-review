@@ -1020,15 +1020,40 @@ body {
 }
 /* Bar membentang penuh kiri-kanan layar (menembus kontainer), "tumbuh" dari
    tengah saat muncul; menyusut balik ke tengah saat fase keluar. */
+/* Kapsul "gendut" tertahan di tengah; muncul dengan gaya elastis. */
 .scan__bar {
     position: relative;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    height: 6px;
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+    height: 14px;
     background: var(--soft);
+    border-radius: 999px;
     overflow: hidden;
     transform-origin: center;
-    animation: scanGrow 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    box-shadow: inset 0 1px 2px rgba(17, 45, 78, 0.12);
+    animation: scanElastic 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes scanElastic {
+    0% {
+        transform: scaleX(0);
+        opacity: 0;
+    }
+    60% {
+        transform: scaleX(1.04);
+        opacity: 1;
+    }
+    100% {
+        transform: scaleX(1);
+    }
+}
+@keyframes barberPole {
+    from {
+        background-position: 0 0, 0 0;
+    }
+    to {
+        background-position: 40px 0, 0 0;
+    }
 }
 .scan__fill {
     height: 100%;
@@ -1042,22 +1067,35 @@ body {
     position: relative;
     height: 100%;
     width: 0;
-    background: linear-gradient(90deg, var(--blue-deep), var(--blue));
+    border-radius: 999px;
+    /* base biru + garis diagonal (barber-pole) yang bergerak */
+    background:
+        repeating-linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.18) 0 10px,
+            rgba(255, 255, 255, 0) 10px 20px
+        ),
+        linear-gradient(90deg, var(--blue-deep), var(--blue));
+    background-size:
+        40px 100%,
+        100% 100%;
     transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
     overflow: hidden;
+    animation: barberPole 0.7s linear infinite;
 }
+/* sapuan gradient miring (sheen) yang mengalir di atas isian */
 .scan__progress::after {
     content: "";
     position: absolute;
     inset: 0;
     background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.45),
-        transparent
+        120deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.55) 50%,
+        transparent 70%
     );
     transform: translateX(-100%);
-    animation: scanSheen 1.3s ease-in-out infinite;
+    animation: scanSheen 1.5s ease-in-out infinite;
 }
 @keyframes scanSheen {
     0% {
@@ -2023,11 +2061,171 @@ body {
 .uatw__sub { color: #d8e5f7; max-width: 42ch; margin: 0 auto 34px; font-size: clamp(1rem, 1.45vw, 1.28rem); line-height: 1.55; }
 .uatw__start { font-size: 1.08rem; padding: 15px 32px; }
 
-.uatprog { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; justify-content: center; }
-.uatprog__step { display: flex; align-items: center; gap: 6px; font-size: 0.72rem; color: rgba(234,241,251,0.55); }
-.uatprog__dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(234,241,251,0.25); }
-.uatprog__step.is-done { color: #e6c878; }
-.uatprog__step.is-done .uatprog__dot { background: #e6c878; }
+/* Indikator langkah: lingkaran bernomor + garis penghubung + centang. */
+.uatprog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 26px;
+    flex-wrap: wrap;
+}
+.uatprog__step {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: none;
+    border: 0;
+    padding: 4px 6px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: rgba(234, 241, 251, 0.55);
+    cursor: default;
+}
+.uatprog__step:not(:disabled) {
+    cursor: pointer;
+}
+.uatprog__num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(234, 241, 251, 0.1);
+    border: 1.5px solid rgba(234, 241, 251, 0.25);
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+.uatprog__step.is-active {
+    color: #fff;
+}
+.uatprog__step.is-active .uatprog__num {
+    background: linear-gradient(135deg, #e6c878, #d8b45a);
+    border-color: #e6c878;
+    color: #0d2340;
+    box-shadow: 0 0 0 4px rgba(216, 180, 90, 0.18);
+}
+.uatprog__step.is-done {
+    color: #e6c878;
+}
+.uatprog__step.is-done .uatprog__num {
+    background: rgba(216, 180, 90, 0.18);
+    border-color: #e6c878;
+    color: #e6c878;
+}
+.uatprog__step:not(:disabled):hover .uatprog__num {
+    border-color: #e6c878;
+}
+.uatprog__line {
+    width: 28px;
+    height: 2px;
+    border-radius: 2px;
+    background: rgba(234, 241, 251, 0.2);
+    transition: background 0.2s ease;
+}
+.uatprog__line.is-done {
+    background: #e6c878;
+}
+.uatprog__label {
+    white-space: nowrap;
+}
+@media (max-width: 560px) {
+    .uatprog__label {
+        display: none;
+    }
+    .uatprog__line {
+        width: 16px;
+    }
+}
+
+/* Tombol back + baris aksi kartu UAT. */
+.uatcard__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+}
+.uat-btn--back {
+    background: transparent;
+    color: #d3e0f2;
+    border: 1px solid rgba(234, 241, 251, 0.28);
+}
+.uat-btn--back:hover {
+    border-color: #e6c878;
+    color: #fff;
+}
+
+/* Dropdown custom (UatSelect) — tema navy + emas, panel fade. */
+.uatsel {
+    position: relative;
+}
+.uatsel__btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(234, 241, 251, 0.2);
+    border-radius: 8px;
+    padding: 11px 13px;
+    color: #eaf1fb;
+    font: inherit;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-align: left;
+}
+.uatsel__btn.is-placeholder {
+    color: rgba(234, 241, 251, 0.5);
+}
+.uatsel__btn:hover {
+    border-color: rgba(234, 241, 251, 0.4);
+}
+.uatsel.is-open .uatsel__btn {
+    border-color: #d8b45a;
+    box-shadow: 0 0 0 3px rgba(216, 180, 90, 0.18);
+}
+.uatsel__chev {
+    transition: transform 0.18s ease;
+    color: #b9cbe6;
+}
+.uatsel.is-open .uatsel__chev {
+    transform: rotate(180deg);
+}
+.uatsel__panel {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 5px;
+    position: absolute;
+    z-index: 5;
+    left: 0;
+    right: 0;
+    background: #14233b;
+    border: 1px solid rgba(234, 241, 251, 0.18);
+    border-radius: 10px;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
+    max-height: 240px;
+    overflow-y: auto;
+}
+.uatsel__opt {
+    padding: 9px 11px;
+    border-radius: 7px;
+    font-size: 0.92rem;
+    color: #d3e0f2;
+    cursor: pointer;
+}
+.uatsel__opt:hover {
+    background: rgba(234, 241, 251, 0.08);
+    color: #fff;
+}
+.uatsel__opt.is-sel {
+    background: rgba(216, 180, 90, 0.16);
+    color: #f2e2b6;
+    font-weight: 600;
+}
 
 .uatcard { background: rgba(255,255,255,0.05); border: 1px solid rgba(234,241,251,0.14); border-radius: 12px; padding: 22px; }
 .uatcard__title { margin: 0 0 12px; color: #f2e2b6; }

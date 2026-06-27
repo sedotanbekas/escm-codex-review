@@ -10,6 +10,8 @@ import { UatThankYou } from "./UatThankYou";
 import { UatProgress } from "./UatProgress";
 
 const STEPS = ["Persetujuan", "Tentang Anda", "Konfirmasi", "Penilaian"];
+// Indeks indikator → step (untuk mundur via klik stepper).
+const STEP_BY_INDEX: UatStep[] = ["consent", "about", "confirm", "rate"];
 
 export function UatView({ onExit }: { onExit: () => void }) {
     const overlayRef = useRef<HTMLDivElement | null>(null);
@@ -53,14 +55,20 @@ export function UatView({ onExit }: { onExit: () => void }) {
     return (
         <motion.div ref={overlayRef} className="uat" initial={{ opacity: 0, y: "100%" }} animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: "100%" }} transition={{ duration: 0.7, ease: "easeOut" }}>
-            <button className="uat__exit" onClick={onExit} aria-label="Kembali">✕ Kembali</button>
-            {step !== "welcome" && step !== "done" && <UatProgress steps={STEPS} current={stepIndex[step]} />}
+            <button className="uat__exit" onClick={onExit} aria-label="Keluar">✕ Keluar</button>
+            {step !== "welcome" && step !== "done" && (
+                <UatProgress
+                    steps={STEPS}
+                    current={stepIndex[step]}
+                    onStepClick={(i) => setStep(STEP_BY_INDEX[i])}
+                />
+            )}
             <div className="uat__stage">
                 <AnimatePresence mode="wait">
                     <motion.div key={step} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.25 }} className={`uat__panel uat__panel--${step}`}>
                         {step === "welcome" && <UatWelcome onStart={() => setStep("consent")} />}
-                        {step === "consent" && <UatConsent agreed={agreed} onAgreeChange={setAgreed} onNext={() => setStep("about")} />}
+                        {step === "consent" && <UatConsent agreed={agreed} onAgreeChange={setAgreed} onNext={() => setStep("about")} onBack={() => setStep("welcome")} />}
                         {step === "about" && (
                             <>
                                 {error && <p className="uat__error">{error}</p>}
@@ -68,6 +76,7 @@ export function UatView({ onExit }: { onExit: () => void }) {
                                     value={demo}
                                     onChange={setDemo}
                                     onNext={() => { setError(null); setStep("confirm"); }}
+                                    onBack={() => { setError(null); setStep("consent"); }}
                                     duplicateEmail={duplicateEmail}
                                     onEmailChange={() => { setDuplicateEmail(null); setError(null); }}
                                 />
@@ -82,7 +91,10 @@ export function UatView({ onExit }: { onExit: () => void }) {
                                     <input type="checkbox" checked={confirmed} onChange={(e) => setConfirmed(e.target.checked)} />
                                     <span>Sudah saya coba.</span>
                                 </label>
-                                <button className="uat-btn uat-btn--go" disabled={!confirmed} onClick={() => setStep("rate")}>Lanjut →</button>
+                                <div className="uatcard__actions">
+                                    <button className="uat-btn uat-btn--back" onClick={() => setStep("about")}>← Sebelumnya</button>
+                                    <button className="uat-btn uat-btn--go" disabled={!confirmed} onClick={() => setStep("rate")}>Lanjut →</button>
+                                </div>
                             </div>
                         )}
                         {step === "rate" && (
@@ -90,9 +102,12 @@ export function UatView({ onExit }: { onExit: () => void }) {
                                 <h3 className="uatcard__title">Penilaian</h3>
                                 <SusScale answers={answers} onChange={(i, v) => setAnswers((p) => p.map((x, j) => (j === i ? v : x)))} />
                                 {error && <p className="uat__error">{error}</p>}
-                                <button className="uat-btn uat-btn--go" disabled={!allFilled || sending} onClick={submit}>
-                                    {sending ? "Mengirim…" : "Kirim Penilaian"}
-                                </button>
+                                <div className="uatcard__actions">
+                                    <button className="uat-btn uat-btn--back" onClick={() => setStep("confirm")}>← Sebelumnya</button>
+                                    <button className="uat-btn uat-btn--go" disabled={!allFilled || sending} onClick={submit}>
+                                        {sending ? "Mengirim…" : "Kirim Penilaian"}
+                                    </button>
+                                </div>
                             </div>
                         )}
                         {step === "done" && <UatThankYou onHome={onExit} />}
