@@ -1274,6 +1274,81 @@ body {
         border-color: var(--blue-deep);
     }
 }
+/* Dropdown custom laman utama (tema navy/biru terang). */
+.dd {
+    position: relative;
+    display: inline-block;
+}
+.dd__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    min-width: 250px;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fff;
+    color: var(--ink);
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+.dd__btn.is-placeholder {
+    color: var(--ink-2);
+}
+.dd__btn:hover {
+    border-color: var(--blue);
+}
+.dd.is-open .dd__btn {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(63, 114, 175, 0.25);
+}
+.dd__chev {
+    color: var(--blue);
+    font-size: 0.8rem;
+    transition: transform 0.18s ease;
+}
+.dd.is-open .dd__chev {
+    transform: rotate(180deg);
+}
+.dd__panel {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 5px;
+    position: absolute;
+    z-index: 25;
+    left: 0;
+    right: 0;
+    min-width: 250px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    max-height: 260px;
+    overflow-y: auto;
+}
+.dd__opt {
+    padding: 9px 11px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: var(--ink);
+    cursor: pointer;
+}
+.dd__opt:hover {
+    background: var(--tint);
+}
+.dd__opt.is-sel {
+    background: var(--tint);
+    color: var(--blue-deep);
+    font-weight: 600;
+}
+.dd--pulse .dd__btn {
+    animation: dsPulse 1.8s ease-in-out infinite;
+}
+
 .ds-chip {
     display: inline-flex;
     align-items: center;

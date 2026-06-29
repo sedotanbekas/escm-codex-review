@@ -1,6 +1,7 @@
 // ReportControls.tsx — bar kontrol: pilih dataset + Jalankan (tampilkan laporan
 // rekaman, aman) + Scan ulang (live, memakai token) + status backend.
 import type { HealthResponse } from "../types";
+import { Dropdown } from "./Dropdown";
 
 interface Props {
     health: HealthResponse | null;
@@ -47,23 +48,16 @@ export function ReportControls({
                         {chosen?.label ?? "Dataset terpilih"}
                     </span>
                 ) : (
-                    <select
-                        id="ds"
-                        className="select select--pulse"
-                        defaultValue=""
-                        onChange={(e) =>
-                            e.target.value && onSelectDataset?.(e.target.value)
-                        }
-                    >
-                        <option value="" disabled>
-                            — Pilih contoh kode —
-                        </option>
-                        {DATASETS.map((d) => (
-                            <option key={d.id} value={d.id}>
-                                {d.label}
-                            </option>
-                        ))}
-                    </select>
+                    <Dropdown
+                        value={selectedDataset ?? ""}
+                        onChange={(v) => v && onSelectDataset?.(v)}
+                        options={DATASETS.map((d) => ({
+                            value: d.id,
+                            label: d.label,
+                        }))}
+                        placeholder="— Pilih contoh kode —"
+                        pulse
+                    />
                 )}
                 <span className="ctl-runwrap">
                     <button
