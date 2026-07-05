@@ -75,6 +75,22 @@ export function RulebookModal({ entries, onClose }: Props) {
                                                         isOpen ? null : e.id,
                                                     )
                                                 }
+                                                // Bisa dibuka via keyboard (Enter/Spasi).
+                                                tabIndex={0}
+                                                aria-expanded={isOpen}
+                                                onKeyDown={(ev) => {
+                                                    if (
+                                                        ev.key === "Enter" ||
+                                                        ev.key === " "
+                                                    ) {
+                                                        ev.preventDefault();
+                                                        setOpenId(
+                                                            isOpen
+                                                                ? null
+                                                                : e.id,
+                                                        );
+                                                    }
+                                                }}
                                             >
                                                 <td>
                                                     <span
@@ -88,8 +104,11 @@ export function RulebookModal({ entries, onClose }: Props) {
                                                         <span>
                                                             {e.rule_singkat}
                                                         </span>
-                                                        <span className="rb__chev">
-                                                            {isOpen ? "▾" : "▸"}
+                                                        <span
+                                                            className="rb__chev"
+                                                            aria-hidden
+                                                        >
+                                                            ▸
                                                         </span>
                                                     </div>
                                                 </td>

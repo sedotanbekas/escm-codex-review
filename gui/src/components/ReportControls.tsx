@@ -58,7 +58,13 @@ export function ReportControls({
           role="button"
           tabIndex={0}
           onClick={onPickFiles}
-          onKeyDown={(e) => e.key === "Enter" && onPickFiles?.()}
+          onKeyDown={(e) => {
+            // Konvensi role="button": Enter DAN Spasi memicu aksi.
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              onPickFiles?.();
+            }
+          }}
           onDragOver={(e) => {
             e.preventDefault();
             if (!dragging) setDragging(true);
@@ -117,9 +123,10 @@ export function ReportControls({
                         setOpenFile(isOpen ? null : file.name)
                       }
                       title="Lihat isi kode"
+                      aria-expanded={isOpen}
                     >
                       <span className="uploadfile__chev" aria-hidden>
-                        {isOpen ? "▾" : "▸"}
+                        ▸
                       </span>
                       <span className="uploadfile__name">{file.name}</span>
                       <span className="uploadfile__meta">

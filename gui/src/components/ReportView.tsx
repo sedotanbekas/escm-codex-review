@@ -221,13 +221,38 @@ function TopFindings({
                                                           )
                                                     : undefined
                                             }
+                                            // Bisa dibuka via keyboard (Enter/Spasi), bukan hanya klik.
+                                            tabIndex={hasCode ? 0 : undefined}
+                                            aria-expanded={
+                                                hasCode ? isOpen : undefined
+                                            }
+                                            onKeyDown={
+                                                hasCode
+                                                    ? (e) => {
+                                                          if (
+                                                              e.key ===
+                                                                  "Enter" ||
+                                                              e.key === " "
+                                                          ) {
+                                                              e.preventDefault();
+                                                              setOpen(
+                                                                  isOpen
+                                                                      ? null
+                                                                      : i,
+                                                              );
+                                                          }
+                                                      }
+                                                    : undefined
+                                            }
                                         >
                                             <td className="tf__exp" aria-hidden>
-                                                {hasCode
-                                                    ? isOpen
-                                                        ? "▾"
-                                                        : "▸"
-                                                    : ""}
+                                                {hasCode ? (
+                                                    <span className="tf__chev">
+                                                        ▸
+                                                    </span>
+                                                ) : (
+                                                    ""
+                                                )}
                                             </td>
                                             <td>
                                                 <RiskBadge

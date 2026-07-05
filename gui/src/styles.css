@@ -260,6 +260,11 @@ body {
 .uploadfile__chev {
   color: var(--blue-deep);
   font-size: 0.85rem;
+  display: inline-block;
+  transition: transform 0.18s ease;
+}
+.uploadfile.is-open .uploadfile__chev {
+  transform: rotate(90deg);
 }
 .uploadfile__name {
   font-weight: 700;
@@ -429,6 +434,9 @@ body {
   margin-top: 12px;
 }
 .statuspill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   font-family: var(--mono);
   font-size: 0.72rem;
   padding: 5px 11px;
@@ -437,6 +445,27 @@ body {
   background: var(--tint);
   color: var(--ink-2);
   white-space: nowrap;
+}
+/* Titik status hidup: berdenyut halus saat backend sehat. */
+.statuspill::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+.statuspill.is-up::before {
+  animation: pillPulse 2.2s ease-in-out infinite;
+}
+@keyframes pillPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(31, 138, 76, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(31, 138, 76, 0);
+  }
 }
 .statuspill.is-up {
   color: #1f7a45;
@@ -1134,6 +1163,11 @@ body {
 .rb__chev {
   color: var(--muted);
   font-size: 0.8rem;
+  display: inline-block;
+  transition: transform 0.18s ease;
+}
+.rb__row.is-open .rb__chev {
+  transform: rotate(90deg);
 }
 .rb__detail td {
   background: #f5f8fc;
@@ -1797,6 +1831,17 @@ body {
 .hint:focus-within .hint__pop,
 .hint--open .hint__pop {
   display: block;
+  animation: hintIn 0.16s ease both;
+}
+@keyframes hintIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 /* Sub-judul penjelas tiap blok + caption laporan */
@@ -1867,6 +1912,14 @@ body {
   font-size: 0.7rem;
   user-select: none;
 }
+/* Chevron berputar halus (bukan ganti karakter) saat baris dibuka. */
+.tf__chev {
+  display: inline-block;
+  transition: transform 0.18s ease;
+}
+.tf__row.is-open .tf__chev {
+  transform: rotate(90deg);
+}
 .tf__coderow > td {
   padding: 0 0 10px;
   background: transparent;
@@ -1878,6 +1931,7 @@ body {
   overflow: hidden;
   background: #1d1f27;
   margin-top: 2px;
+  animation: fadeUp 0.22s ease both;
 }
 .tf-code__head {
   display: flex;
@@ -2099,6 +2153,13 @@ body {
 .sec__collapsebody {
   padding-top: 6px;
 }
+/* Isi collapsible masuk dengan fade halus, bukan muncul instan. */
+.sec--collapse[open] .sec__collapsebody {
+  animation: fadeUp 0.25s ease both;
+}
+.seeded--collapse[open] > .seeded__body {
+  animation: fadeIn 0.25s ease both;
+}
 
 /* --- Navigasi per-bagian (desktop dots / mobile FAB) + Back to top -------- */
 [data-navlabel] {
@@ -2187,6 +2248,12 @@ body {
   font-size: 1.15rem;
   box-shadow: 0 8px 22px rgba(17, 45, 78, 0.28);
   cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+.snav-fab:active {
+  transform: scale(0.94);
 }
 .snav-sheet {
   position: fixed;
@@ -2258,10 +2325,17 @@ body {
   cursor: pointer;
   box-shadow: 0 8px 22px rgba(17, 45, 78, 0.18);
   animation: fadeUp 0.25s ease both;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 .backtop:hover {
   border-color: var(--blue);
   color: var(--blue);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(17, 45, 78, 0.24);
 }
 @media (max-width: 879px) {
   .snav {
@@ -2343,6 +2417,16 @@ body {
   font-size: 0.98rem;
   color: #0d2340;
   background: linear-gradient(90deg, #3f72af, #d8b45a);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.uat-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(17, 45, 78, 0.25);
+}
+.uat-cta:active {
+  transform: translateY(0) scale(0.98);
 }
 .uat-cta::after {
   content: "";
@@ -2385,17 +2469,23 @@ body {
     ),
     linear-gradient(180deg, #0c1f3a, #112d4e);
 }
+/* fixed (bukan absolute): tetap terlihat saat halaman kuesioner di-scroll. */
 .uat__exit {
-  position: absolute;
+  position: fixed;
   top: 16px;
   right: 18px;
-  background: transparent;
+  z-index: 5;
+  background: rgba(12, 31, 58, 0.72);
+  backdrop-filter: blur(3px);
   border: 1px solid rgba(234, 241, 251, 0.3);
   color: #cfe0f5;
   border-radius: 8px;
   padding: 7px 12px;
   cursor: pointer;
   font-size: 0.8rem;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 .uat__exit:hover {
   border-color: #d8b45a;
@@ -2433,10 +2523,22 @@ body {
   font-weight: 700;
   font-size: 1rem;
   cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+.uat-btn:active:not(:disabled) {
+  transform: scale(0.98);
 }
 .uat-btn--go {
   background: linear-gradient(90deg, #e6c878, #d8b45a);
   color: #0d2340;
+}
+.uat-btn--go:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(216, 180, 90, 0.28);
 }
 .uat-btn--go:disabled {
   opacity: 0.4;
@@ -2758,10 +2860,17 @@ body {
 .susscale__counter {
   position: sticky;
   top: 0;
+  z-index: 2;
   text-align: right;
   font-size: 0.76rem;
   color: #e6c878;
   padding: 4px 0;
+  /* latar lembut agar tetap terbaca saat menimpa item ketika scroll */
+  background: linear-gradient(
+    180deg,
+    rgba(12, 31, 58, 0.92) 70%,
+    rgba(12, 31, 58, 0)
+  );
 }
 .susitem {
   border: 1px solid rgba(234, 241, 251, 0.14);
@@ -2795,6 +2904,19 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease,
+    background 0.15s ease,
+    transform 0.1s ease;
+}
+.sus-dot:hover {
+  border-color: rgba(230, 200, 120, 0.55);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.07);
+}
+.sus-dot:active {
+  transform: scale(0.95);
 }
 .sus-dot--on {
   border-color: #d8b45a;
@@ -2869,4 +2991,71 @@ body {
   .uat-cta::after {
     animation: none;
   }
+}
+
+/* =============================================================================
+   Polish global — aksesibilitas & detail halus (identitas visual tak berubah)
+   ============================================================================= */
+
+/* Focus ring KEYBOARD saja (:focus-visible) — tak terlihat saat pakai mouse.
+   Tema terang: ring biru. Overlay UAT (navy): ring emas agar kontras. */
+:where(button, [role="button"], summary, a, [tabindex="0"]):focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+.uat :where(button, [role="button"], [tabindex="0"]):focus-visible {
+  outline-color: #e6c878;
+}
+/* Baris tabel yang bisa dibuka: ring di dalam agar tak terpotong overflow. */
+.tf__row--click:focus-visible,
+.rb__row:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: -2px;
+}
+
+/* Teks terseleksi mengikuti tema. */
+::selection {
+  background: rgba(63, 114, 175, 0.25);
+}
+.uat ::selection {
+  background: rgba(216, 180, 90, 0.4);
+  color: #fff;
+}
+
+/* Scrollbar tipis: panel kode gelap (default Windows terlalu mencolok). */
+.uploadfile__code,
+.seeded__code,
+.seeded__pre,
+.tf-code__pre {
+  scrollbar-width: thin;
+  scrollbar-color: #3a4356 transparent;
+}
+.uploadfile__code::-webkit-scrollbar,
+.seeded__code::-webkit-scrollbar,
+.seeded__pre::-webkit-scrollbar,
+.tf-code__pre::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.uploadfile__code::-webkit-scrollbar-thumb,
+.seeded__code::-webkit-scrollbar-thumb,
+.seeded__pre::-webkit-scrollbar-thumb,
+.tf-code__pre::-webkit-scrollbar-thumb {
+  background: #3a4356;
+  border-radius: 8px;
+  border: 2px solid #1d1f27;
+}
+.uploadfile__code::-webkit-scrollbar-track,
+.seeded__code::-webkit-scrollbar-track,
+.seeded__pre::-webkit-scrollbar-track,
+.tf-code__pre::-webkit-scrollbar-track {
+  background: transparent;
+}
+/* Scrollbar tipis: panel terang (tabel temuan, modal, dropdown). */
+.tf-wrap,
+.modal__scroll,
+.dd__panel,
+.uatsel__panel {
+  scrollbar-width: thin;
+  scrollbar-color: var(--soft) transparent;
 }
