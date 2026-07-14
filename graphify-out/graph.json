@@ -1,55 +1,7 @@
 {
   "directed": false,
   "multigraph": false,
-  "graph": {
-    "hyperedges": [
-      {
-        "id": "graphify_build_pipeline",
-        "label": "Graphify Build Pipeline",
-        "nodes": [
-          "codex_skills_graphify_skill_graphify_pipeline",
-          "codex_skills_graphify_skill_structural_extraction",
-          "codex_skills_graphify_skill_semantic_extraction",
-          "codex_skills_graphify_skill_graph_outputs",
-          "codex_skills_graphify_references_update_incremental_update"
-        ],
-        "relation": "form",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": ".codex/skills/graphify/SKILL.md"
-      },
-      {
-        "id": "code_review_rulebook_family",
-        "label": "Code Review Rulebook Family",
-        "nodes": [
-          "readme_rulebook_30",
-          "prompts_codex_diff_review_rulebook_conventions",
-          "prompts_codex_full_scan_rulebook_30_rules",
-          "prompts_codex_security_only_security_rules",
-          "handover_advisory_precision"
-        ],
-        "relation": "form",
-        "confidence": "INFERRED",
-        "confidence_score": 0.95,
-        "source_file": "README.md"
-      },
-      {
-        "id": "uat_red_carpet_flow",
-        "label": "UAT Red Carpet Flow",
-        "nodes": [
-          "docs_superpowers_plans_2026_06_26_sus_inapp_uat_sus_inapp_uat_plan",
-          "docs_superpowers_plans_2026_06_26_sus_inapp_uat_backend_uat_endpoint",
-          "docs_superpowers_plans_2026_06_26_sus_inapp_uat_apps_script_proxy",
-          "docs_superpowers_plans_2026_06_26_sus_inapp_uat_email_uniqueness",
-          "docs_superpowers_plans_2026_06_26_sus_inapp_uat_red_carpet_overlay"
-        ],
-        "relation": "implement",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md"
-      }
-    ]
-  },
+  "graph": {},
   "nodes": [
     {
       "label": "oracle-setup.sh",
@@ -334,7 +286,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "gui_src_app_app",
-      "community": 2,
+      "community": 29,
       "norm_label": "app()"
     },
     {
@@ -344,7 +296,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "gui_src_api",
-      "community": 2,
+      "community": 29,
       "norm_label": "api.ts"
     },
     {
@@ -354,7 +306,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "gui_src_api_parsejsonsafe",
-      "community": 2,
+      "community": 29,
       "norm_label": "parsejsonsafe()"
     },
     {
@@ -364,7 +316,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "gui_src_api_gethealth",
-      "community": 2,
+      "community": 29,
       "norm_label": "gethealth()"
     },
     {
@@ -374,7 +326,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "gui_src_api_apihttperror",
-      "community": 2,
+      "community": 29,
       "norm_label": "apihttperror"
     },
     {
@@ -384,7 +336,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "gui_src_api_apihttperror_constructor",
-      "community": 2,
+      "community": 29,
       "norm_label": ".constructor()"
     },
     {
@@ -414,7 +366,7 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "gui_src_api_accessheaders",
-      "community": 2,
+      "community": 29,
       "norm_label": "accessheaders()"
     },
     {
@@ -424,7 +376,7 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "gui_src_api_postevaluate",
-      "community": 2,
+      "community": 29,
       "norm_label": "postevaluate()"
     },
     {
@@ -434,7 +386,7 @@
       "source_location": "L70",
       "_origin": "ast",
       "id": "gui_src_api_postevaluatestream",
-      "community": 2,
+      "community": 29,
       "norm_label": "postevaluatestream()"
     },
     {
@@ -444,7 +396,7 @@
       "source_location": "L130",
       "_origin": "ast",
       "id": "gui_src_api_gethistory",
-      "community": 2,
+      "community": 29,
       "norm_label": "gethistory()"
     },
     {
@@ -454,7 +406,7 @@
       "source_location": "L137",
       "_origin": "ast",
       "id": "gui_src_api_gethistoryrun",
-      "community": 2,
+      "community": 29,
       "norm_label": "gethistoryrun()"
     },
     {
@@ -464,7 +416,7 @@
       "source_location": "L142",
       "_origin": "ast",
       "id": "gui_src_api_getrulebook",
-      "community": 2,
+      "community": 29,
       "norm_label": "getrulebook()"
     },
     {
@@ -474,7 +426,7 @@
       "source_location": "L149",
       "_origin": "ast",
       "id": "gui_src_api_checkuatemail",
-      "community": 2,
+      "community": 29,
       "norm_label": "checkuatemail()"
     },
     {
@@ -604,37 +556,37 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "gui_src_components_reportcontrols",
-      "community": 2,
+      "community": 39,
       "norm_label": "reportcontrols.tsx"
     },
     {
       "label": "Props",
       "file_type": "code",
       "source_file": "gui/src/components/ReportControls.tsx",
-      "source_location": "L7",
+      "source_location": "L9",
       "_origin": "ast",
       "id": "gui_src_components_reportcontrols_props",
-      "community": 2,
+      "community": 39,
       "norm_label": "props"
     },
     {
       "label": "fileMeta()",
       "file_type": "code",
       "source_file": "gui/src/components/ReportControls.tsx",
-      "source_location": "L21",
+      "source_location": "L23",
       "_origin": "ast",
       "id": "gui_src_components_reportcontrols_filemeta",
-      "community": 2,
+      "community": 39,
       "norm_label": "filemeta()"
     },
     {
       "label": "ReportControls()",
       "file_type": "code",
       "source_file": "gui/src/components/ReportControls.tsx",
-      "source_location": "L28",
+      "source_location": "L30",
       "_origin": "ast",
       "id": "gui_src_components_reportcontrols_reportcontrols",
-      "community": 2,
+      "community": 39,
       "norm_label": "reportcontrols()"
     },
     {
@@ -824,7 +776,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "gui_src_components_runhistory",
-      "community": 2,
+      "community": 40,
       "norm_label": "runhistory.tsx"
     },
     {
@@ -834,7 +786,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "gui_src_components_runhistory_props",
-      "community": 2,
+      "community": 40,
       "norm_label": "props"
     },
     {
@@ -844,7 +796,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "gui_src_components_runhistory_pageitems",
-      "community": 2,
+      "community": 40,
       "norm_label": "pageitems()"
     },
     {
@@ -854,7 +806,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "gui_src_components_runhistory_runhistory",
-      "community": 2,
+      "community": 40,
       "norm_label": "runhistory()"
     },
     {
@@ -924,7 +876,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "gui_src_components_seededviewer",
-      "community": 1,
+      "community": 38,
       "norm_label": "seededviewer.tsx"
     },
     {
@@ -934,7 +886,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "gui_src_components_seededviewer_filetab",
-      "community": 1,
+      "community": 38,
       "norm_label": "filetab"
     },
     {
@@ -944,7 +896,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "gui_src_components_seededviewer_splitfiles",
-      "community": 1,
+      "community": 38,
       "norm_label": "splitfiles()"
     },
     {
@@ -954,7 +906,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "gui_src_components_seededviewer_basename",
-      "community": 1,
+      "community": 38,
       "norm_label": "basename()"
     },
     {
@@ -964,7 +916,7 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "gui_src_components_seededviewer_seededviewer",
-      "community": 1,
+      "community": 38,
       "norm_label": "seededviewer()"
     },
     {
@@ -974,7 +926,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "gui_src_components_uat_susitem",
-      "community": 11,
+      "community": 4,
       "norm_label": "susitem.tsx"
     },
     {
@@ -984,7 +936,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "gui_src_components_uat_susitem_props",
-      "community": 11,
+      "community": 4,
       "norm_label": "props"
     },
     {
@@ -994,7 +946,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "gui_src_components_uat_susitem_susitem",
-      "community": 11,
+      "community": 4,
       "norm_label": "susitem()"
     },
     {
@@ -1004,7 +956,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "gui_src_components_uat_susscale",
-      "community": 11,
+      "community": 4,
       "norm_label": "susscale.tsx"
     },
     {
@@ -1014,7 +966,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "gui_src_components_uat_susscale_props",
-      "community": 11,
+      "community": 4,
       "norm_label": "props"
     },
     {
@@ -1024,7 +976,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "gui_src_components_uat_susscale_susscale",
-      "community": 11,
+      "community": 4,
       "norm_label": "susscale()"
     },
     {
@@ -1304,7 +1256,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "gui_src_lib_sus",
-      "community": 11,
+      "community": 4,
       "norm_label": "sus.ts"
     },
     {
@@ -1314,7 +1266,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "gui_src_lib_sus_sus_items",
-      "community": 11,
+      "community": 4,
       "norm_label": "sus_items"
     },
     {
@@ -1324,7 +1276,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "gui_src_lib_sus_scale_labels",
-      "community": 11,
+      "community": 4,
       "norm_label": "scale_labels"
     },
     {
@@ -1424,7 +1376,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "gui_src_types",
-      "community": 1,
+      "community": 27,
       "norm_label": "types.ts"
     },
     {
@@ -1444,7 +1396,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "gui_src_types_confidence",
-      "community": 1,
+      "community": 27,
       "norm_label": "confidence"
     },
     {
@@ -1454,7 +1406,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "gui_src_types_issuelocation",
-      "community": 1,
+      "community": 27,
       "norm_label": "issuelocation"
     },
     {
@@ -1464,7 +1416,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "gui_src_types_issue",
-      "community": 1,
+      "community": 27,
       "norm_label": "issue"
     },
     {
@@ -1474,7 +1426,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "gui_src_types_severitycounts",
-      "community": 1,
+      "community": 27,
       "norm_label": "severitycounts"
     },
     {
@@ -1484,7 +1436,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "gui_src_types_coststats",
-      "community": 1,
+      "community": 27,
       "norm_label": "coststats"
     },
     {
@@ -1494,7 +1446,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "gui_src_types_healthresponse",
-      "community": 2,
+      "community": 39,
       "norm_label": "healthresponse"
     },
     {
@@ -1504,7 +1456,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "gui_src_types_apierror",
-      "community": 2,
+      "community": 29,
       "norm_label": "apierror"
     },
     {
@@ -1514,7 +1466,7 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "gui_src_types_seededdataset",
-      "community": 1,
+      "community": 38,
       "norm_label": "seededdataset"
     },
     {
@@ -1544,7 +1496,7 @@
       "source_location": "L72",
       "_origin": "ast",
       "id": "gui_src_types_domain",
-      "community": 1,
+      "community": 27,
       "norm_label": "domain"
     },
     {
@@ -1554,7 +1506,7 @@
       "source_location": "L73",
       "_origin": "ast",
       "id": "gui_src_types_verdict",
-      "community": 1,
+      "community": 27,
       "norm_label": "verdict"
     },
     {
@@ -1564,7 +1516,7 @@
       "source_location": "L75",
       "_origin": "ast",
       "id": "gui_src_types_officialmetrics",
-      "community": 1,
+      "community": 27,
       "norm_label": "officialmetrics"
     },
     {
@@ -1574,7 +1526,7 @@
       "source_location": "L85",
       "_origin": "ast",
       "id": "gui_src_types_livemetrics",
-      "community": 1,
+      "community": 27,
       "norm_label": "livemetrics"
     },
     {
@@ -1584,7 +1536,7 @@
       "source_location": "L87",
       "_origin": "ast",
       "id": "gui_src_types_perruleresult",
-      "community": 1,
+      "community": 27,
       "norm_label": "perruleresult"
     },
     {
@@ -1594,7 +1546,7 @@
       "source_location": "L96",
       "_origin": "ast",
       "id": "gui_src_types_reportexecutive",
-      "community": 1,
+      "community": 27,
       "norm_label": "reportexecutive"
     },
     {
@@ -1604,7 +1556,7 @@
       "source_location": "L100",
       "_origin": "ast",
       "id": "gui_src_types_reportestimatedcost",
-      "community": 1,
+      "community": 27,
       "norm_label": "reportestimatedcost"
     },
     {
@@ -1614,7 +1566,7 @@
       "source_location": "L106",
       "_origin": "ast",
       "id": "gui_src_types_reportusage",
-      "community": 1,
+      "community": 27,
       "norm_label": "reportusage"
     },
     {
@@ -1624,7 +1576,7 @@
       "source_location": "L116",
       "_origin": "ast",
       "id": "gui_src_types_snippetline",
-      "community": 1,
+      "community": 27,
       "norm_label": "snippetline"
     },
     {
@@ -1634,7 +1586,7 @@
       "source_location": "L122",
       "_origin": "ast",
       "id": "gui_src_types_reporttopfinding",
-      "community": 1,
+      "community": 27,
       "norm_label": "reporttopfinding"
     },
     {
@@ -1654,7 +1606,7 @@
       "source_location": "L149",
       "_origin": "ast",
       "id": "gui_src_types_reportrulebook",
-      "community": 1,
+      "community": 27,
       "norm_label": "reportrulebook"
     },
     {
@@ -1664,7 +1616,7 @@
       "source_location": "L156",
       "_origin": "ast",
       "id": "gui_src_types_reportmetrics",
-      "community": 1,
+      "community": 27,
       "norm_label": "reportmetrics"
     },
     {
@@ -1684,7 +1636,7 @@
       "source_location": "L171",
       "_origin": "ast",
       "id": "gui_src_types_reportsource",
-      "community": 1,
+      "community": 27,
       "norm_label": "reportsource"
     },
     {
@@ -1694,7 +1646,7 @@
       "source_location": "L173",
       "_origin": "ast",
       "id": "gui_src_types_evalresponse",
-      "community": 1,
+      "community": 2,
       "norm_label": "evalresponse"
     },
     {
@@ -1704,7 +1656,7 @@
       "source_location": "L187",
       "_origin": "ast",
       "id": "gui_src_types_historysummary",
-      "community": 2,
+      "community": 40,
       "norm_label": "historysummary"
     },
     {
@@ -1714,7 +1666,7 @@
       "source_location": "L196",
       "_origin": "ast",
       "id": "gui_src_types_uatpayload",
-      "community": 2,
+      "community": 29,
       "norm_label": "uatpayload"
     },
     {
@@ -1724,7 +1676,7 @@
       "source_location": "L200",
       "_origin": "ast",
       "id": "gui_src_types_emailcheck",
-      "community": 2,
+      "community": 29,
       "norm_label": "emailcheck"
     },
     {
@@ -3478,6 +3430,1496 @@
       "norm_label": "goodbody()"
     },
     {
+      "label": "SKILL.md",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill",
+      "community": 11,
+      "norm_label": "skill.md"
+    },
+    {
+      "label": "/graphify",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_graphify",
+      "community": 11,
+      "norm_label": "/graphify"
+    },
+    {
+      "label": "Usage",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_usage",
+      "community": 11,
+      "norm_label": "usage"
+    },
+    {
+      "label": "What graphify is for",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L45",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_what_graphify_is_for",
+      "community": 11,
+      "norm_label": "what graphify is for"
+    },
+    {
+      "label": "What You Must Do When Invoked",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L49",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_what_you_must_do_when_invoked",
+      "community": 11,
+      "norm_label": "what you must do when invoked"
+    },
+    {
+      "label": "Step 0 - GitHub repos and multi-path merge (only if a URL or several paths)",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L61",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_step_0_github_repos_and_multi_path_merge_only_if_a_url_or_several_paths",
+      "community": 11,
+      "norm_label": "step 0 - github repos and multi-path merge (only if a url or several paths)"
+    },
+    {
+      "label": "Step 1 - Ensure graphify is installed",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L65",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_step_1_ensure_graphify_is_installed",
+      "community": 11,
+      "norm_label": "step 1 - ensure graphify is installed"
+    },
+    {
+      "label": "Step 2 - Detect files",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L107",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_step_2_detect_files",
+      "community": 11,
+      "norm_label": "step 2 - detect files"
+    },
+    {
+      "label": "Step 2.5 - Video and audio (only if video files detected)",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L144",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_step_2_5_video_and_audio_only_if_video_files_detected",
+      "community": 11,
+      "norm_label": "step 2.5 - video and audio (only if video files detected)"
+    },
+    {
+      "label": "Step 3 - Extract entities and relationships",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L148",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_step_3_extract_entities_and_relationships",
+      "community": 11,
+      "norm_label": "step 3 - extract entities and relationships"
+    },
+    {
+      "label": "Part A - Structural extraction for code files",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L167",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_part_a_structural_extraction_for_code_files",
+      "community": 11,
+      "norm_label": "part a - structural extraction for code files"
+    },
+    {
+      "label": "Part B - Semantic extraction (parallel subagents)",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L193",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_part_b_semantic_extraction_parallel_subagents",
+      "community": 11,
+      "norm_label": "part b - semantic extraction (parallel subagents)"
+    },
+    {
+      "label": "Part C - Merge AST + semantic into final extraction",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L350",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_part_c_merge_ast_semantic_into_final_extraction",
+      "community": 11,
+      "norm_label": "part c - merge ast + semantic into final extraction"
+    },
+    {
+      "label": "Step 4 - Build graph, cluster, analyze, generate outputs",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L384",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_step_4_build_graph_cluster_analyze_generate_outputs",
+      "community": 11,
+      "norm_label": "step 4 - build graph, cluster, analyze, generate outputs"
+    },
+    {
+      "label": "Step 4.5 - Graph health check (read-only integrity gate)",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L447",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_step_4_5_graph_health_check_read_only_integrity_gate",
+      "community": 11,
+      "norm_label": "step 4.5 - graph health check (read-only integrity gate)"
+    },
+    {
+      "label": "Step 5 - Label communities",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L473",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_step_5_label_communities",
+      "community": 11,
+      "norm_label": "step 5 - label communities"
+    },
+    {
+      "label": "Step 6 - Generate Obsidian vault (opt-in) + HTML",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L514",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_step_6_generate_obsidian_vault_opt_in_html",
+      "community": 11,
+      "norm_label": "step 6 - generate obsidian vault (opt-in) + html"
+    },
+    {
+      "label": "Steps 6b-8 - Wiki, Neo4j, FalkorDB, SVG, GraphML, MCP, benchmark (only on their flags)",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L534",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_steps_6b_8_wiki_neo4j_falkordb_svg_graphml_mcp_benchmark_only_on_their_flags",
+      "community": 11,
+      "norm_label": "steps 6b-8 - wiki, neo4j, falkordb, svg, graphml, mcp, benchmark (only on their flags)"
+    },
+    {
+      "label": "Step 9 - Save manifest, update cost tracker, clean up, and report",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L540",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_step_9_save_manifest_update_cost_tracker_clean_up_and_report",
+      "community": 11,
+      "norm_label": "step 9 - save manifest, update cost tracker, clean up, and report"
+    },
+    {
+      "label": "Interpreter guard for subcommands",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L620",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_interpreter_guard_for_subcommands",
+      "community": 11,
+      "norm_label": "interpreter guard for subcommands"
+    },
+    {
+      "label": "For --update and --cluster-only",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L638",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_for_update_and_cluster_only",
+      "community": 11,
+      "norm_label": "for --update and --cluster-only"
+    },
+    {
+      "label": "For /graphify query",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L644",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_for_graphify_query",
+      "community": 11,
+      "norm_label": "for /graphify query"
+    },
+    {
+      "label": "For /graphify add and --watch",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L656",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_for_graphify_add_and_watch",
+      "community": 11,
+      "norm_label": "for /graphify add and --watch"
+    },
+    {
+      "label": "For the commit hook and native CLAUDE.md integration",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L662",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_for_the_commit_hook_and_native_claude_md_integration",
+      "community": 11,
+      "norm_label": "for the commit hook and native claude.md integration"
+    },
+    {
+      "label": "Honesty Rules",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L668",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_skill_honesty_rules",
+      "community": 11,
+      "norm_label": "honesty rules"
+    },
+    {
+      "label": "add-watch.md",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/add-watch.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_add_watch",
+      "community": 41,
+      "norm_label": "add-watch.md"
+    },
+    {
+      "label": "graphify reference: add a URL and watch a folder",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/add-watch.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_add_watch_graphify_reference_add_a_url_and_watch_a_folder",
+      "community": 41,
+      "norm_label": "graphify reference: add a url and watch a folder"
+    },
+    {
+      "label": "For /graphify add",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/add-watch.md",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_add_watch_for_graphify_add",
+      "community": 41,
+      "norm_label": "for /graphify add"
+    },
+    {
+      "label": "For --watch",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/add-watch.md",
+      "source_location": "L39",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_add_watch_for_watch",
+      "community": 41,
+      "norm_label": "for --watch"
+    },
+    {
+      "label": "exports.md",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/exports.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_exports",
+      "community": 33,
+      "norm_label": "exports.md"
+    },
+    {
+      "label": "graphify reference: extra exports and benchmark",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/exports.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_exports_graphify_reference_extra_exports_and_benchmark",
+      "community": 33,
+      "norm_label": "graphify reference: extra exports and benchmark"
+    },
+    {
+      "label": "Step 6b - Wiki (only if --wiki flag)",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/exports.md",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_exports_step_6b_wiki_only_if_wiki_flag",
+      "community": 33,
+      "norm_label": "step 6b - wiki (only if --wiki flag)"
+    },
+    {
+      "label": "Step 7 - Neo4j export (only if --neo4j or --neo4j-push flag)",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/exports.md",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_exports_step_7_neo4j_export_only_if_neo4j_or_neo4j_push_flag",
+      "community": 33,
+      "norm_label": "step 7 - neo4j export (only if --neo4j or --neo4j-push flag)"
+    },
+    {
+      "label": "Step 7a - FalkorDB export (only if --falkordb or --falkordb-push flag)",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/exports.md",
+      "source_location": "L31",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_exports_step_7a_falkordb_export_only_if_falkordb_or_falkordb_push_flag",
+      "community": 33,
+      "norm_label": "step 7a - falkordb export (only if --falkordb or --falkordb-push flag)"
+    },
+    {
+      "label": "Step 7b - SVG export (only if --svg flag)",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/exports.md",
+      "source_location": "L47",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_exports_step_7b_svg_export_only_if_svg_flag",
+      "community": 33,
+      "norm_label": "step 7b - svg export (only if --svg flag)"
+    },
+    {
+      "label": "Step 7c - GraphML export (only if --graphml flag)",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/exports.md",
+      "source_location": "L53",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_exports_step_7c_graphml_export_only_if_graphml_flag",
+      "community": 33,
+      "norm_label": "step 7c - graphml export (only if --graphml flag)"
+    },
+    {
+      "label": "Step 7d - MCP server (only if --mcp flag)",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/exports.md",
+      "source_location": "L59",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_exports_step_7d_mcp_server_only_if_mcp_flag",
+      "community": 33,
+      "norm_label": "step 7d - mcp server (only if --mcp flag)"
+    },
+    {
+      "label": "Step 8 - Token reduction benchmark (only if total_words > 5000)",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/exports.md",
+      "source_location": "L79",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_exports_step_8_token_reduction_benchmark_only_if_total_words_5000",
+      "community": 33,
+      "norm_label": "step 8 - token reduction benchmark (only if total_words > 5000)"
+    },
+    {
+      "label": "extraction-spec.md",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/extraction-spec.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_extraction_spec",
+      "community": 49,
+      "norm_label": "extraction-spec.md"
+    },
+    {
+      "label": "graphify reference: extraction subagent prompt (compact)",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/extraction-spec.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_extraction_spec_graphify_reference_extraction_subagent_prompt_compact",
+      "community": 49,
+      "norm_label": "graphify reference: extraction subagent prompt (compact)"
+    },
+    {
+      "label": "github-and-merge.md",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/github-and-merge.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_github_and_merge",
+      "community": 45,
+      "norm_label": "github-and-merge.md"
+    },
+    {
+      "label": "graphify reference: GitHub clone and cross-repo merge",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/github-and-merge.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_github_and_merge_graphify_reference_github_clone_and_cross_repo_merge",
+      "community": 45,
+      "norm_label": "graphify reference: github clone and cross-repo merge"
+    },
+    {
+      "label": "Step 0 - Clone GitHub repo(s) (only if a GitHub URL was given)",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/github-and-merge.md",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_github_and_merge_step_0_clone_github_repo_s_only_if_a_github_url_was_given",
+      "community": 45,
+      "norm_label": "step 0 - clone github repo(s) (only if a github url was given)"
+    },
+    {
+      "label": "hooks.md",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/hooks.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_hooks",
+      "community": 42,
+      "norm_label": "hooks.md"
+    },
+    {
+      "label": "graphify reference: commit hook and native CLAUDE.md integration",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/hooks.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_hooks_graphify_reference_commit_hook_and_native_claude_md_integration",
+      "community": 42,
+      "norm_label": "graphify reference: commit hook and native claude.md integration"
+    },
+    {
+      "label": "For git commit hook",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/hooks.md",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_hooks_for_git_commit_hook",
+      "community": 42,
+      "norm_label": "for git commit hook"
+    },
+    {
+      "label": "For native CLAUDE.md integration",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/hooks.md",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_hooks_for_native_claude_md_integration",
+      "community": 42,
+      "norm_label": "for native claude.md integration"
+    },
+    {
+      "label": "query.md",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/query.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_query",
+      "community": 37,
+      "norm_label": "query.md"
+    },
+    {
+      "label": "graphify reference: query, path, explain",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/query.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_query_graphify_reference_query_path_explain",
+      "community": 37,
+      "norm_label": "graphify reference: query, path, explain"
+    },
+    {
+      "label": "Step 0 \u2014 Constrained query expansion (REQUIRED before traversal)",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/query.md",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_query_step_0_constrained_query_expansion_required_before_traversal",
+      "community": 37,
+      "norm_label": "step 0 \u2014 constrained query expansion (required before traversal)"
+    },
+    {
+      "label": "Step 1 \u2014 Traversal",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/query.md",
+      "source_location": "L61",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_query_step_1_traversal",
+      "community": 37,
+      "norm_label": "step 1 \u2014 traversal"
+    },
+    {
+      "label": "For /graphify path",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/query.md",
+      "source_location": "L186",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_query_for_graphify_path",
+      "community": 37,
+      "norm_label": "for /graphify path"
+    },
+    {
+      "label": "For /graphify explain",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/query.md",
+      "source_location": "L254",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_query_for_graphify_explain",
+      "community": 37,
+      "norm_label": "for /graphify explain"
+    },
+    {
+      "label": "transcribe.md",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/transcribe.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_transcribe",
+      "community": 46,
+      "norm_label": "transcribe.md"
+    },
+    {
+      "label": "graphify reference: transcribe video and audio",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/transcribe.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_transcribe_graphify_reference_transcribe_video_and_audio",
+      "community": 46,
+      "norm_label": "graphify reference: transcribe video and audio"
+    },
+    {
+      "label": "Step 2.5 - Transcribe video / audio files (only if video files detected)",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/transcribe.md",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_transcribe_step_2_5_transcribe_video_audio_files_only_if_video_files_detected",
+      "community": 46,
+      "norm_label": "step 2.5 - transcribe video / audio files (only if video files detected)"
+    },
+    {
+      "label": "update.md",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/update.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_update",
+      "community": 43,
+      "norm_label": "update.md"
+    },
+    {
+      "label": "graphify reference: incremental update and cluster-only",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/update.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_update_graphify_reference_incremental_update_and_cluster_only",
+      "community": 43,
+      "norm_label": "graphify reference: incremental update and cluster-only"
+    },
+    {
+      "label": "For --update (incremental re-extraction)",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/update.md",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_update_for_update_incremental_re_extraction",
+      "community": 43,
+      "norm_label": "for --update (incremental re-extraction)"
+    },
+    {
+      "label": "For --cluster-only",
+      "file_type": "document",
+      "source_file": ".codex/skills/graphify/references/update.md",
+      "source_location": "L184",
+      "_origin": "ast",
+      "id": "codex_skills_graphify_references_update_for_cluster_only",
+      "community": 43,
+      "norm_label": "for --cluster-only"
+    },
+    {
+      "label": "AGENTS.md",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "agents",
+      "community": 47,
+      "norm_label": "agents.md"
+    },
+    {
+      "label": "graphify",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "agents_graphify",
+      "community": 47,
+      "norm_label": "graphify"
+    },
+    {
+      "label": "CLAUDE.md",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "claude",
+      "community": 48,
+      "norm_label": "claude.md"
+    },
+    {
+      "label": "graphify",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "claude_graphify",
+      "community": 48,
+      "norm_label": "graphify"
+    },
+    {
+      "label": "HANDOVER.md",
+      "file_type": "document",
+      "source_file": "HANDOVER.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "handover",
+      "community": 30,
+      "norm_label": "handover.md"
+    },
+    {
+      "label": "HANDOVER \u2014 Codex Review GUI (WISE/ESCM)",
+      "file_type": "document",
+      "source_file": "HANDOVER.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "handover_handover_codex_review_gui_wise_escm",
+      "community": 30,
+      "norm_label": "handover \u2014 codex review gui (wise/escm)"
+    },
+    {
+      "label": "0. Cara pakai dokumen ini",
+      "file_type": "document",
+      "source_file": "HANDOVER.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "handover_0_cara_pakai_dokumen_ini",
+      "community": 30,
+      "norm_label": "0. cara pakai dokumen ini"
+    },
+    {
+      "label": "1. Apa proyek ini",
+      "file_type": "document",
+      "source_file": "HANDOVER.md",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "handover_1_apa_proyek_ini",
+      "community": 30,
+      "norm_label": "1. apa proyek ini"
+    },
+    {
+      "label": "2. \u26a0\ufe0f DUA REPO \u2014 JANGAN TERTUKAR (paling sering bikin bingung)",
+      "file_type": "document",
+      "source_file": "HANDOVER.md",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "handover_2_dua_repo_jangan_tertukar_paling_sering_bikin_bingung",
+      "community": 30,
+      "norm_label": "2. \u26a0\ufe0f dua repo \u2014 jangan tertukar (paling sering bikin bingung)"
+    },
+    {
+      "label": "3. Menjalankan lokal (Node 20+)",
+      "file_type": "document",
+      "source_file": "HANDOVER.md",
+      "source_location": "L32",
+      "_origin": "ast",
+      "id": "handover_3_menjalankan_lokal_node_20",
+      "community": 30,
+      "norm_label": "3. menjalankan lokal (node 20+)"
+    },
+    {
+      "label": "4. Arsitektur",
+      "file_type": "document",
+      "source_file": "HANDOVER.md",
+      "source_location": "L43",
+      "_origin": "ast",
+      "id": "handover_4_arsitektur",
+      "community": 30,
+      "norm_label": "4. arsitektur"
+    },
+    {
+      "label": "5. Deployment (Oracle Cloud VM)",
+      "file_type": "document",
+      "source_file": "HANDOVER.md",
+      "source_location": "L58",
+      "_origin": "ast",
+      "id": "handover_5_deployment_oracle_cloud_vm",
+      "community": 30,
+      "norm_label": "5. deployment (oracle cloud vm)"
+    },
+    {
+      "label": "6. Fitur yang SUDAH ada (status: selesai & ter-build)",
+      "file_type": "document",
+      "source_file": "HANDOVER.md",
+      "source_location": "L72",
+      "_origin": "ast",
+      "id": "handover_6_fitur_yang_sudah_ada_status_selesai_ter_build",
+      "community": 30,
+      "norm_label": "6. fitur yang sudah ada (status: selesai & ter-build)"
+    },
+    {
+      "label": "7. Prinsip & batasan WAJIB dijaga",
+      "file_type": "document",
+      "source_file": "HANDOVER.md",
+      "source_location": "L83",
+      "_origin": "ast",
+      "id": "handover_7_prinsip_batasan_wajib_dijaga",
+      "community": 30,
+      "norm_label": "7. prinsip & batasan wajib dijaga"
+    },
+    {
+      "label": "8. Build / test",
+      "file_type": "document",
+      "source_file": "HANDOVER.md",
+      "source_location": "L90",
+      "_origin": "ast",
+      "id": "handover_8_build_test",
+      "community": 30,
+      "norm_label": "8. build / test"
+    },
+    {
+      "label": "9. Gotchas & catatan teknis",
+      "file_type": "document",
+      "source_file": "HANDOVER.md",
+      "source_location": "L99",
+      "_origin": "ast",
+      "id": "handover_9_gotchas_catatan_teknis",
+      "community": 30,
+      "norm_label": "9. gotchas & catatan teknis"
+    },
+    {
+      "label": "10. Pending / belum selesai",
+      "file_type": "document",
+      "source_file": "HANDOVER.md",
+      "source_location": "L109",
+      "_origin": "ast",
+      "id": "handover_10_pending_belum_selesai",
+      "community": 30,
+      "norm_label": "10. pending / belum selesai"
+    },
+    {
+      "label": "11. Riwayat keputusan penting (ringkas)",
+      "file_type": "document",
+      "source_file": "HANDOVER.md",
+      "source_location": "L116",
+      "_origin": "ast",
+      "id": "handover_11_riwayat_keputusan_penting_ringkas",
+      "community": 30,
+      "norm_label": "11. riwayat keputusan penting (ringkas)"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "readme",
+      "community": 32,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "Codex Review GUI \u2014 WISE/ESCM",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "readme_codex_review_gui_wise_escm",
+      "community": 32,
+      "norm_label": "codex review gui \u2014 wise/escm"
+    },
+    {
+      "label": "Mode demo",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "readme_mode_demo",
+      "community": 32,
+      "norm_label": "mode demo"
+    },
+    {
+      "label": "Jalankan lokal",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "readme_jalankan_lokal",
+      "community": 32,
+      "norm_label": "jalankan lokal"
+    },
+    {
+      "label": "Deploy ke Render (gratis)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L44",
+      "_origin": "ast",
+      "id": "readme_deploy_ke_render_gratis",
+      "community": 32,
+      "norm_label": "deploy ke render (gratis)"
+    },
+    {
+      "label": "Deploy ke Koyeb (alternatif Render \u2014 gratis, via Docker)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L60",
+      "_origin": "ast",
+      "id": "readme_deploy_ke_koyeb_alternatif_render_gratis_via_docker",
+      "community": 32,
+      "norm_label": "deploy ke koyeb (alternatif render \u2014 gratis, via docker)"
+    },
+    {
+      "label": "Environment variables",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L77",
+      "_origin": "ast",
+      "id": "readme_environment_variables",
+      "community": 32,
+      "norm_label": "environment variables"
+    },
+    {
+      "label": "Rulebook (30 aturan inti)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L93",
+      "_origin": "ast",
+      "id": "readme_rulebook_30_aturan_inti",
+      "community": 32,
+      "norm_label": "rulebook (30 aturan inti)"
+    },
+    {
+      "label": "Domain Citadel \u2014 CTDL-01 \u2026 CTDL-15 (teknis/universal)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L95",
+      "_origin": "ast",
+      "id": "readme_domain_citadel_ctdl_01_ctdl_15_teknis_universal",
+      "community": 32,
+      "norm_label": "domain citadel \u2014 ctdl-01 ... ctdl-15 (teknis/universal)"
+    },
+    {
+      "label": "Domain WIKA/ESCM \u2014 WIKA-Q01 \u2026 WIKA-Q15 (khas organisasi/tacit)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L115",
+      "_origin": "ast",
+      "id": "readme_domain_wika_escm_wika_q01_wika_q15_khas_organisasi_tacit",
+      "community": 32,
+      "norm_label": "domain wika/escm \u2014 wika-q01 ... wika-q15 (khas organisasi/tacit)"
+    },
+    {
+      "label": "Struktur folder",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L139",
+      "_origin": "ast",
+      "id": "readme_struktur_folder",
+      "community": 32,
+      "norm_label": "struktur folder"
+    },
+    {
+      "label": "Konteks skripsi",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L162",
+      "_origin": "ast",
+      "id": "readme_konteks_skripsi",
+      "community": 32,
+      "norm_label": "konteks skripsi"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "deploy/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_readme",
+      "community": 36,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "Deploy ke Oracle Cloud Always Free (VM)",
+      "file_type": "document",
+      "source_file": "deploy/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_readme_deploy_ke_oracle_cloud_always_free_vm",
+      "community": 36,
+      "norm_label": "deploy ke oracle cloud always free (vm)"
+    },
+    {
+      "label": "Ringkas",
+      "file_type": "document",
+      "source_file": "deploy/README.md",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "deploy_readme_ringkas",
+      "community": 36,
+      "norm_label": "ringkas"
+    },
+    {
+      "label": "Detail VM",
+      "file_type": "document",
+      "source_file": "deploy/README.md",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "deploy_readme_detail_vm",
+      "community": 36,
+      "norm_label": "detail vm"
+    },
+    {
+      "label": "Swap (hanya bila pakai AMD 1 GB, agar build tak OOM)",
+      "file_type": "document",
+      "source_file": "deploy/README.md",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "deploy_readme_swap_hanya_bila_pakai_amd_1_gb_agar_build_tak_oom",
+      "community": 36,
+      "norm_label": "swap (hanya bila pakai amd 1 gb, agar build tak oom)"
+    },
+    {
+      "label": "Perintah berguna",
+      "file_type": "document",
+      "source_file": "deploy/README.md",
+      "source_location": "L33",
+      "_origin": "ast",
+      "id": "deploy_readme_perintah_berguna",
+      "community": 36,
+      "norm_label": "perintah berguna"
+    },
+    {
+      "label": "(Opsional) HTTPS tanpa beli domain",
+      "file_type": "document",
+      "source_file": "deploy/README.md",
+      "source_location": "L40",
+      "_origin": "ast",
+      "id": "deploy_readme_opsional_https_tanpa_beli_domain",
+      "community": 36,
+      "norm_label": "(opsional) https tanpa beli domain"
+    },
+    {
+      "label": "2026-06-26-sus-inapp-uat.md",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat",
+      "community": 31,
+      "norm_label": "2026-06-26-sus-inapp-uat.md"
+    },
+    {
+      "label": "SUS In-App UAT (\"Red Carpet\") \u2014 Implementation Plan (repo: escm-codex-review)",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_sus_in_app_uat_red_carpet_implementation_plan_repo_escm_codex_review",
+      "community": 31,
+      "norm_label": "sus in-app uat (\"red carpet\") \u2014 implementation plan (repo: escm-codex-review)"
+    },
+    {
+      "label": "Global Constraints",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_global_constraints",
+      "community": 31,
+      "norm_label": "global constraints"
+    },
+    {
+      "label": "File Structure",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L30",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_file_structure",
+      "community": 31,
+      "norm_label": "file structure"
+    },
+    {
+      "label": "Task 1: Backend \u2014 validasi & forwarder UAT",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L51",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_task_1_backend_validasi_forwarder_uat",
+      "community": 31,
+      "norm_label": "task 1: backend \u2014 validasi & forwarder uat"
+    },
+    {
+      "label": "Task 2: Backend \u2014 endpoint /api/uat & /api/uat/check",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L141",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_task_2_backend_endpoint_api_uat_api_uat_check",
+      "community": 31,
+      "norm_label": "task 2: backend \u2014 endpoint /api/uat & /api/uat/check"
+    },
+    {
+      "label": "Task 3: Google Apps Script (siap-tempel)",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L203",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_task_3_google_apps_script_siap_tempel",
+      "community": 31,
+      "norm_label": "task 3: google apps script (siap-tempel)"
+    },
+    {
+      "label": "Task 4: Frontend \u2014 tipe, klien API, daftar item SUS",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L251",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_task_4_frontend_tipe_klien_api_daftar_item_sus",
+      "community": 31,
+      "norm_label": "task 4: frontend \u2014 tipe, klien api, daftar item sus"
+    },
+    {
+      "label": "Task 5: Frontend \u2014 SusItem, SusScale, UatProgress",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L315",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_task_5_frontend_susitem_susscale_uatprogress",
+      "community": 31,
+      "norm_label": "task 5: frontend \u2014 susitem, susscale, uatprogress"
+    },
+    {
+      "label": "Task 6: Frontend \u2014 Welcome, Consent, Demographics, ThankYou",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L397",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_task_6_frontend_welcome_consent_demographics_thankyou",
+      "community": 31,
+      "norm_label": "task 6: frontend \u2014 welcome, consent, demographics, thankyou"
+    },
+    {
+      "label": "Task 7: Frontend \u2014 UatView + integrasi App + CTA",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L524",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_task_7_frontend_uatview_integrasi_app_cta",
+      "community": 31,
+      "norm_label": "task 7: frontend \u2014 uatview + integrasi app + cta"
+    },
+    {
+      "label": "Task 8: Styles (light theme + overlay navy/emas) + instrumen + E2E",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L640",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_task_8_styles_light_theme_overlay_navy_emas_instrumen_e2e",
+      "community": 31,
+      "norm_label": "task 8: styles (light theme + overlay navy/emas) + instrumen + e2e"
+    },
+    {
+      "label": "Self-Review",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L746",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_self_review",
+      "community": 31,
+      "norm_label": "self-review"
+    },
+    {
+      "label": "_task9-report.md",
+      "file_type": "document",
+      "source_file": "gui/_task9-report.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "gui_task9_report",
+      "community": 44,
+      "norm_label": "_task9-report.md"
+    },
+    {
+      "label": "Task 9 Report",
+      "file_type": "document",
+      "source_file": "gui/_task9-report.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "gui_task9_report_task_9_report",
+      "community": 44,
+      "norm_label": "task 9 report"
+    },
+    {
+      "label": "Files changed",
+      "file_type": "document",
+      "source_file": "gui/_task9-report.md",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "gui_task9_report_files_changed",
+      "community": 44,
+      "norm_label": "files changed"
+    },
+    {
+      "label": "Build result",
+      "file_type": "document",
+      "source_file": "gui/_task9-report.md",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "gui_task9_report_build_result",
+      "community": 44,
+      "norm_label": "build result"
+    },
+    {
+      "label": "codex_diff_review.md",
+      "file_type": "document",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "prompts_codex_diff_review",
+      "community": 28,
+      "norm_label": "codex_diff_review.md"
+    },
+    {
+      "label": "Codex Merge Request Diff Review Prompt \u2014 WISE/ESCM (Laravel + Citadel)",
+      "file_type": "document",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "prompts_codex_diff_review_codex_merge_request_diff_review_prompt_wise_escm_laravel_citadel",
+      "community": 28,
+      "norm_label": "codex merge request diff review prompt \u2014 wise/escm (laravel + citadel)"
+    },
+    {
+      "label": "Technology Stack",
+      "file_type": "document",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "prompts_codex_diff_review_technology_stack",
+      "community": 28,
+      "norm_label": "technology stack"
+    },
+    {
+      "label": "Project Conventions (Review Rulebook)",
+      "file_type": "document",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "prompts_codex_diff_review_project_conventions_review_rulebook",
+      "community": 28,
+      "norm_label": "project conventions (review rulebook)"
+    },
+    {
+      "label": "Database & ORM (CTDL-01 High, CTDL-10 Low)",
+      "file_type": "document",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "prompts_codex_diff_review_database_orm_ctdl_01_high_ctdl_10_low",
+      "community": 28,
+      "norm_label": "database & orm (ctdl-01 high, ctdl-10 low)"
+    },
+    {
+      "label": "Mass Assignment (CTDL-02 High, WIKA-Q03 Medium)",
+      "file_type": "document",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "prompts_codex_diff_review_mass_assignment_ctdl_02_high_wika_q03_medium",
+      "community": 28,
+      "norm_label": "mass assignment (ctdl-02 high, wika-q03 medium)"
+    },
+    {
+      "label": "XSS Prevention (CTDL-03 High)",
+      "file_type": "document",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L28",
+      "_origin": "ast",
+      "id": "prompts_codex_diff_review_xss_prevention_ctdl_03_high",
+      "community": 28,
+      "norm_label": "xss prevention (ctdl-03 high)"
+    },
+    {
+      "label": "Authentication & Authorization (CTDL-04 High, CTDL-11 High, WIKA-Q07 High, WIKA-Q14 High)",
+      "file_type": "document",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L32",
+      "_origin": "ast",
+      "id": "prompts_codex_diff_review_authentication_authorization_ctdl_04_high_ctdl_11_high_wika_q07_high_wika_q14_high",
+      "community": 28,
+      "norm_label": "authentication & authorization (ctdl-04 high, ctdl-11 high, wika-q07 high, wika-q14 high)"
+    },
+    {
+      "label": "Validation (CTDL-05 Medium, WIKA-Q02 Medium)",
+      "file_type": "document",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L38",
+      "_origin": "ast",
+      "id": "prompts_codex_diff_review_validation_ctdl_05_medium_wika_q02_medium",
+      "community": 28,
+      "norm_label": "validation (ctdl-05 medium, wika-q02 medium)"
+    },
+    {
+      "label": "Citadel Framework (CTDL-06 Medium, CTDL-13 High, CTDL-14 Low)",
+      "file_type": "document",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L43",
+      "_origin": "ast",
+      "id": "prompts_codex_diff_review_citadel_framework_ctdl_06_medium_ctdl_13_high_ctdl_14_low",
+      "community": 28,
+      "norm_label": "citadel framework (ctdl-06 medium, ctdl-13 high, ctdl-14 low)"
+    },
+    {
+      "label": "Audit & Tracking (CTDL-07 High, CTDL-08 Medium, CTDL-09 Medium)",
+      "file_type": "document",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L49",
+      "_origin": "ast",
+      "id": "prompts_codex_diff_review_audit_tracking_ctdl_07_high_ctdl_08_medium_ctdl_09_medium",
+      "community": 28,
+      "norm_label": "audit & tracking (ctdl-07 high, ctdl-08 medium, ctdl-09 medium)"
+    },
+    {
+      "label": "Architecture (CTDL-12 Medium, WIKA-Q01 Low, WIKA-Q04 Low, WIKA-Q13 Low)",
+      "file_type": "document",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L54",
+      "_origin": "ast",
+      "id": "prompts_codex_diff_review_architecture_ctdl_12_medium_wika_q01_low_wika_q04_low_wika_q13_low",
+      "community": 28,
+      "norm_label": "architecture (ctdl-12 medium, wika-q01 low, wika-q04 low, wika-q13 low)"
+    },
+    {
+      "label": "Integration (WIKA-Q05 High, WIKA-Q06 Medium)",
+      "file_type": "document",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L61",
+      "_origin": "ast",
+      "id": "prompts_codex_diff_review_integration_wika_q05_high_wika_q06_medium",
+      "community": 28,
+      "norm_label": "integration (wika-q05 high, wika-q06 medium)"
+    },
+    {
+      "label": "Security (WIKA-Q08 High, WIKA-Q15 High)",
+      "file_type": "document",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L66",
+      "_origin": "ast",
+      "id": "prompts_codex_diff_review_security_wika_q08_high_wika_q15_high",
+      "community": 28,
+      "norm_label": "security (wika-q08 high, wika-q15 high)"
+    },
+    {
+      "label": "Workflow (WIKA-Q11 High, WIKA-Q12 Medium, CTDL-15 Medium)",
+      "file_type": "document",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L71",
+      "_origin": "ast",
+      "id": "prompts_codex_diff_review_workflow_wika_q11_high_wika_q12_medium_ctdl_15_medium",
+      "community": 28,
+      "norm_label": "workflow (wika-q11 high, wika-q12 medium, ctdl-15 medium)"
+    },
+    {
+      "label": "Responsibilities",
+      "file_type": "document",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L77",
+      "_origin": "ast",
+      "id": "prompts_codex_diff_review_responsibilities",
+      "community": 28,
+      "norm_label": "responsibilities"
+    },
+    {
+      "label": "Output format",
+      "file_type": "document",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L85",
+      "_origin": "ast",
+      "id": "prompts_codex_diff_review_output_format",
+      "community": 28,
+      "norm_label": "output format"
+    },
+    {
+      "label": "CRITICAL \u2014 Line Numbers",
+      "file_type": "document",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L129",
+      "_origin": "ast",
+      "id": "prompts_codex_diff_review_critical_line_numbers",
+      "community": 28,
+      "norm_label": "critical \u2014 line numbers"
+    },
+    {
+      "label": "CRITICAL \u2014 No Duplicate Findings",
+      "file_type": "document",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L136",
+      "_origin": "ast",
+      "id": "prompts_codex_diff_review_critical_no_duplicate_findings",
+      "community": 28,
+      "norm_label": "critical \u2014 no duplicate findings"
+    },
+    {
+      "label": "codex_full_scan.md",
+      "file_type": "document",
+      "source_file": "prompts/codex_full_scan.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "prompts_codex_full_scan",
+      "community": 34,
+      "norm_label": "codex_full_scan.md"
+    },
+    {
+      "label": "Codex Full Repository Assessment Prompt \u2014 WISE/ESCM (Laravel + Citadel)",
+      "file_type": "document",
+      "source_file": "prompts/codex_full_scan.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "prompts_codex_full_scan_codex_full_repository_assessment_prompt_wise_escm_laravel_citadel",
+      "community": 34,
+      "norm_label": "codex full repository assessment prompt \u2014 wise/escm (laravel + citadel)"
+    },
+    {
+      "label": "Repository Structure",
+      "file_type": "document",
+      "source_file": "prompts/codex_full_scan.md",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "prompts_codex_full_scan_repository_structure",
+      "community": 34,
+      "norm_label": "repository structure"
+    },
+    {
+      "label": "Review Rulebook (30 Rules from Knowledge Elicitation)",
+      "file_type": "document",
+      "source_file": "prompts/codex_full_scan.md",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "prompts_codex_full_scan_review_rulebook_30_rules_from_knowledge_elicitation",
+      "community": 34,
+      "norm_label": "review rulebook (30 rules from knowledge elicitation)"
+    },
+    {
+      "label": "Citadel Domain Rules (CTDL-01 to CTDL-15)",
+      "file_type": "document",
+      "source_file": "prompts/codex_full_scan.md",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "prompts_codex_full_scan_citadel_domain_rules_ctdl_01_to_ctdl_15",
+      "community": 34,
+      "norm_label": "citadel domain rules (ctdl-01 to ctdl-15)"
+    },
+    {
+      "label": "WIKA/ESCM Domain Rules (WIKA-Q01 to WIKA-Q15)",
+      "file_type": "document",
+      "source_file": "prompts/codex_full_scan.md",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "prompts_codex_full_scan_wika_escm_domain_rules_wika_q01_to_wika_q15",
+      "community": 34,
+      "norm_label": "wika/escm domain rules (wika-q01 to wika-q15)"
+    },
+    {
+      "label": "Objectives",
+      "file_type": "document",
+      "source_file": "prompts/codex_full_scan.md",
+      "source_location": "L62",
+      "_origin": "ast",
+      "id": "prompts_codex_full_scan_objectives",
+      "community": 34,
+      "norm_label": "objectives"
+    },
+    {
+      "label": "Output requirements",
+      "file_type": "document",
+      "source_file": "prompts/codex_full_scan.md",
+      "source_location": "L71",
+      "_origin": "ast",
+      "id": "prompts_codex_full_scan_output_requirements",
+      "community": 34,
+      "norm_label": "output requirements"
+    },
+    {
+      "label": "codex_security_only.md",
+      "file_type": "document",
+      "source_file": "prompts/codex_security_only.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "prompts_codex_security_only",
+      "community": 35,
+      "norm_label": "codex_security_only.md"
+    },
+    {
+      "label": "Codex Security-Only Review \u2014 WISE/ESCM (Laravel + Citadel)",
+      "file_type": "document",
+      "source_file": "prompts/codex_security_only.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "prompts_codex_security_only_codex_security_only_review_wise_escm_laravel_citadel",
+      "community": 35,
+      "norm_label": "codex security-only review \u2014 wise/escm (laravel + citadel)"
+    },
+    {
+      "label": "Security Context",
+      "file_type": "document",
+      "source_file": "prompts/codex_security_only.md",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "prompts_codex_security_only_security_context",
+      "community": 35,
+      "norm_label": "security context"
+    },
+    {
+      "label": "Security Rules from Review Rulebook",
+      "file_type": "document",
+      "source_file": "prompts/codex_security_only.md",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "prompts_codex_security_only_security_rules_from_review_rulebook",
+      "community": 35,
+      "norm_label": "security rules from review rulebook"
+    },
+    {
+      "label": "Scope",
+      "file_type": "document",
+      "source_file": "prompts/codex_security_only.md",
+      "source_location": "L30",
+      "_origin": "ast",
+      "id": "prompts_codex_security_only_scope",
+      "community": 35,
+      "norm_label": "scope"
+    },
+    {
+      "label": "Labeling requirements",
+      "file_type": "document",
+      "source_file": "prompts/codex_security_only.md",
+      "source_location": "L45",
+      "_origin": "ast",
+      "id": "prompts_codex_security_only_labeling_requirements",
+      "community": 35,
+      "norm_label": "labeling requirements"
+    },
+    {
+      "label": "Output format",
+      "file_type": "document",
+      "source_file": "prompts/codex_security_only.md",
+      "source_location": "L53",
+      "_origin": "ast",
+      "id": "prompts_codex_security_only_output_format",
+      "community": 35,
+      "norm_label": "output format"
+    },
+    {
+      "label": "Summary guidance",
+      "file_type": "document",
+      "source_file": "prompts/codex_security_only.md",
+      "source_location": "L85",
+      "_origin": "ast",
+      "id": "prompts_codex_security_only_summary_guidance",
+      "community": 35,
+      "norm_label": "summary guidance"
+    },
+    {
       "label": "Graphify Pipeline",
       "file_type": "concept",
       "source_file": ".codex/skills/graphify/SKILL.md",
@@ -3486,9 +4928,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_skills_graphify_skill_graphify_pipeline",
       "community": 24,
-      "norm_label": "graphify pipeline"
+      "norm_label": "graphify pipeline",
+      "id": "codex_skills_graphify_skill_graphify_pipeline"
     },
     {
       "label": "Existing Graph Fast Path",
@@ -3499,9 +4941,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_skills_graphify_skill_existing_graph_fast_path",
-      "community": 14,
-      "norm_label": "existing graph fast path"
+      "community": 53,
+      "norm_label": "existing graph fast path",
+      "id": "codex_skills_graphify_skill_existing_graph_fast_path"
     },
     {
       "label": "Structural Extraction",
@@ -3512,9 +4954,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_skills_graphify_skill_structural_extraction",
-      "community": 18,
-      "norm_label": "structural extraction"
+      "community": 55,
+      "norm_label": "structural extraction",
+      "id": "codex_skills_graphify_skill_structural_extraction"
     },
     {
       "label": "Semantic Extraction",
@@ -3525,9 +4967,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_skills_graphify_skill_semantic_extraction",
-      "community": 18,
-      "norm_label": "semantic extraction"
+      "community": 54,
+      "norm_label": "semantic extraction",
+      "id": "codex_skills_graphify_skill_semantic_extraction"
     },
     {
       "label": "Graph Outputs",
@@ -3538,9 +4980,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_skills_graphify_skill_graph_outputs",
       "community": 23,
-      "norm_label": "graph outputs"
+      "norm_label": "graph outputs",
+      "id": "codex_skills_graphify_skill_graph_outputs"
     },
     {
       "label": "Graph Query Traversal",
@@ -3551,9 +4993,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_skills_graphify_references_query_traversal",
-      "community": 14,
-      "norm_label": "graph query traversal"
+      "community": 51,
+      "norm_label": "graph query traversal",
+      "id": "codex_skills_graphify_references_query_traversal"
     },
     {
       "label": "Incremental Update",
@@ -3564,9 +5006,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_skills_graphify_references_update_incremental_update",
-      "community": 14,
-      "norm_label": "incremental update"
+      "community": 52,
+      "norm_label": "incremental update",
+      "id": "codex_skills_graphify_references_update_incremental_update"
     },
     {
       "label": "Subagent Extraction Schema",
@@ -3577,9 +5019,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_skills_graphify_references_extraction_spec_subagent_schema",
       "community": 18,
-      "norm_label": "subagent extraction schema"
+      "norm_label": "subagent extraction schema",
+      "id": "codex_skills_graphify_references_extraction_spec_subagent_schema"
     },
     {
       "label": "Graphify Project Instructions",
@@ -3590,9 +5032,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "agents_graphify_project_instructions",
       "community": 14,
-      "norm_label": "graphify project instructions"
+      "norm_label": "graphify project instructions",
+      "id": "agents_graphify_project_instructions"
     },
     {
       "label": "Claude Graphify Project Instructions",
@@ -3603,9 +5045,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "claude_graphify_project_instructions",
-      "community": 14,
-      "norm_label": "claude graphify project instructions"
+      "community": 50,
+      "norm_label": "claude graphify project instructions",
+      "id": "claude_graphify_project_instructions"
     },
     {
       "label": "Codex Review GUI Handover",
@@ -3616,9 +5058,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "handover_codex_review_gui",
-      "community": 5,
-      "norm_label": "codex review gui handover"
+      "community": 62,
+      "norm_label": "codex review gui handover",
+      "id": "handover_codex_review_gui"
     },
     {
       "label": "Advisory Only Precision First",
@@ -3629,9 +5071,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "handover_advisory_precision",
-      "community": 5,
-      "norm_label": "advisory only precision first"
+      "community": 61,
+      "norm_label": "advisory only precision first",
+      "id": "handover_advisory_precision"
     },
     {
       "label": "Dual Repo Boundary",
@@ -3642,9 +5084,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "handover_dual_repo_boundary",
-      "community": 5,
-      "norm_label": "dual repo boundary"
+      "community": 63,
+      "norm_label": "dual repo boundary",
+      "id": "handover_dual_repo_boundary"
     },
     {
       "label": "Shared Review Engine",
@@ -3655,9 +5097,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "handover_shared_review_engine",
-      "community": 5,
-      "norm_label": "shared review engine"
+      "community": 65,
+      "norm_label": "shared review engine",
+      "id": "handover_shared_review_engine"
     },
     {
       "label": "Oracle VM Deployment",
@@ -3668,9 +5110,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "handover_oracle_vm_deployment",
-      "community": 20,
-      "norm_label": "oracle vm deployment"
+      "community": 64,
+      "norm_label": "oracle vm deployment",
+      "id": "handover_oracle_vm_deployment"
     },
     {
       "label": "Codex Review GUI",
@@ -3681,9 +5123,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_codex_review_gui",
       "community": 5,
-      "norm_label": "codex review gui"
+      "norm_label": "codex review gui",
+      "id": "readme_codex_review_gui"
     },
     {
       "label": "Demo Modes",
@@ -3694,9 +5136,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_demo_modes",
-      "community": 5,
-      "norm_label": "demo modes"
+      "community": 75,
+      "norm_label": "demo modes",
+      "id": "readme_demo_modes"
     },
     {
       "label": "Thirty Rule Review Rulebook",
@@ -3707,9 +5149,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_rulebook_30",
-      "community": 5,
-      "norm_label": "thirty rule review rulebook"
+      "community": 78,
+      "norm_label": "thirty rule review rulebook",
+      "id": "readme_rulebook_30"
     },
     {
       "label": "Project Folder Structure",
@@ -3720,9 +5162,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_project_structure",
-      "community": 5,
-      "norm_label": "project folder structure"
+      "community": 77,
+      "norm_label": "project folder structure",
+      "id": "readme_project_structure"
     },
     {
       "label": "Render Deployment",
@@ -3733,9 +5175,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_render_deployment",
       "community": 5,
-      "norm_label": "render deployment"
+      "norm_label": "render deployment",
+      "id": "readme_render_deployment"
     },
     {
       "label": "Koyeb Deployment",
@@ -3746,9 +5188,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_koyeb_deployment",
-      "community": 5,
-      "norm_label": "koyeb deployment"
+      "community": 76,
+      "norm_label": "koyeb deployment",
+      "id": "readme_koyeb_deployment"
     },
     {
       "label": "Oracle Cloud Deployment",
@@ -3759,9 +5201,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "deploy_readme_oracle_cloud_deployment",
       "community": 20,
-      "norm_label": "oracle cloud deployment"
+      "norm_label": "oracle cloud deployment",
+      "id": "deploy_readme_oracle_cloud_deployment"
     },
     {
       "label": "SUS In App UAT Plan",
@@ -3772,9 +5214,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_sus_inapp_uat_plan",
-      "community": 15,
-      "norm_label": "sus in app uat plan"
+      "community": 59,
+      "norm_label": "sus in app uat plan",
+      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_sus_inapp_uat_plan"
     },
     {
       "label": "Apps Script Proxy",
@@ -3785,9 +5227,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_apps_script_proxy",
       "community": 15,
-      "norm_label": "apps script proxy"
+      "norm_label": "apps script proxy",
+      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_apps_script_proxy"
     },
     {
       "label": "Email Uniqueness Rule",
@@ -3798,9 +5240,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_email_uniqueness",
-      "community": 15,
-      "norm_label": "email uniqueness rule"
+      "community": 57,
+      "norm_label": "email uniqueness rule",
+      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_email_uniqueness"
     },
     {
       "label": "Red Carpet Overlay",
@@ -3811,9 +5253,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_red_carpet_overlay",
-      "community": 15,
-      "norm_label": "red carpet overlay"
+      "community": 58,
+      "norm_label": "red carpet overlay",
+      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_red_carpet_overlay"
     },
     {
       "label": "Backend UAT Endpoint",
@@ -3824,22 +5266,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_backend_uat_endpoint",
-      "community": 15,
-      "norm_label": "backend uat endpoint"
-    },
-    {
-      "label": "Task 9 Report",
-      "file_type": "document",
-      "source_file": "gui/_task9-report.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "gui__task9_report_task9_report",
-      "community": 5,
-      "norm_label": "task 9 report"
+      "community": 56,
+      "norm_label": "backend uat endpoint",
+      "id": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_backend_uat_endpoint"
     },
     {
       "label": "Frontend Rewrite",
@@ -3850,9 +5279,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "gui__task9_report_frontend_rewrite",
-      "community": 5,
-      "norm_label": "frontend rewrite"
+      "community": 60,
+      "norm_label": "frontend rewrite",
+      "id": "gui__task9_report_frontend_rewrite"
     },
     {
       "label": "Codex Review Summary Page",
@@ -3863,9 +5292,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "gui_index_codex_review_summary_page",
       "community": 22,
-      "norm_label": "codex review summary page"
+      "norm_label": "codex review summary page",
+      "id": "gui_index_codex_review_summary_page"
     },
     {
       "label": "React Entrypoint",
@@ -3876,9 +5305,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "gui_index_react_entrypoint",
       "community": 22,
-      "norm_label": "react entrypoint"
+      "norm_label": "react entrypoint",
+      "id": "gui_index_react_entrypoint"
     },
     {
       "label": "Merge Request Diff Review Prompt",
@@ -3889,9 +5318,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "prompts_codex_diff_review_diff_review_prompt",
-      "community": 5,
-      "norm_label": "merge request diff review prompt"
+      "community": 66,
+      "norm_label": "merge request diff review prompt",
+      "id": "prompts_codex_diff_review_diff_review_prompt"
     },
     {
       "label": "Diff Review Rulebook Conventions",
@@ -3902,9 +5331,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "prompts_codex_diff_review_rulebook_conventions",
-      "community": 5,
-      "norm_label": "diff review rulebook conventions"
+      "community": 68,
+      "norm_label": "diff review rulebook conventions",
+      "id": "prompts_codex_diff_review_rulebook_conventions"
     },
     {
       "label": "Diff Review JSON Output Schema",
@@ -3915,9 +5344,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "prompts_codex_diff_review_json_output_schema",
-      "community": 5,
-      "norm_label": "diff review json output schema"
+      "community": 67,
+      "norm_label": "diff review json output schema",
+      "id": "prompts_codex_diff_review_json_output_schema"
     },
     {
       "label": "Full Repository Assessment Prompt",
@@ -3928,9 +5357,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "prompts_codex_full_scan_full_repository_assessment",
-      "community": 5,
-      "norm_label": "full repository assessment prompt"
+      "community": 69,
+      "norm_label": "full repository assessment prompt",
+      "id": "prompts_codex_full_scan_full_repository_assessment"
     },
     {
       "label": "Full Scan Thirty Rule Rulebook",
@@ -3941,9 +5370,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "prompts_codex_full_scan_rulebook_30_rules",
-      "community": 5,
-      "norm_label": "full scan thirty rule rulebook"
+      "community": 71,
+      "norm_label": "full scan thirty rule rulebook",
+      "id": "prompts_codex_full_scan_rulebook_30_rules"
     },
     {
       "label": "Full Scan JSON Output Schema",
@@ -3954,9 +5383,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "prompts_codex_full_scan_json_output_schema",
-      "community": 5,
-      "norm_label": "full scan json output schema"
+      "community": 70,
+      "norm_label": "full scan json output schema",
+      "id": "prompts_codex_full_scan_json_output_schema"
     },
     {
       "label": "Security Only Review Prompt",
@@ -3967,9 +5396,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "prompts_codex_security_only_security_review_prompt",
-      "community": 5,
-      "norm_label": "security only review prompt"
+      "community": 72,
+      "norm_label": "security only review prompt",
+      "id": "prompts_codex_security_only_security_review_prompt"
     },
     {
       "label": "Security Review Rules",
@@ -3980,9 +5409,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "prompts_codex_security_only_security_rules",
-      "community": 5,
-      "norm_label": "security review rules"
+      "community": 73,
+      "norm_label": "security review rules",
+      "id": "prompts_codex_security_only_security_rules"
     },
     {
       "label": "Security Strict JSON Schema",
@@ -3993,9 +5422,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "prompts_codex_security_only_strict_json_schema",
-      "community": 5,
-      "norm_label": "security strict json schema"
+      "community": 74,
+      "norm_label": "security strict json schema",
+      "id": "prompts_codex_security_only_strict_json_schema"
     },
     {
       "label": "Render Blueprint",
@@ -4006,9 +5435,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "render_render_blueprint",
       "community": 5,
-      "norm_label": "render blueprint"
+      "norm_label": "render blueprint",
+      "id": "render_render_blueprint"
     },
     {
       "label": "Render Environment Variables",
@@ -4019,9 +5448,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "render_render_env_vars",
       "community": 5,
-      "norm_label": "render environment variables"
+      "norm_label": "render environment variables",
+      "id": "render_render_env_vars"
     }
   ],
   "links": [
@@ -5096,7 +6525,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "gui/src/components/ReportControls.tsx",
-      "source_location": "L21",
+      "source_location": "L23",
       "weight": 1.0,
       "source": "gui_src_components_reportcontrols",
       "target": "gui_src_components_reportcontrols_filemeta",
@@ -5106,7 +6535,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "gui/src/components/ReportControls.tsx",
-      "source_location": "L7",
+      "source_location": "L9",
       "weight": 1.0,
       "source": "gui_src_components_reportcontrols",
       "target": "gui_src_components_reportcontrols_props",
@@ -5116,7 +6545,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "gui/src/components/ReportControls.tsx",
-      "source_location": "L28",
+      "source_location": "L30",
       "weight": 1.0,
       "source": "gui_src_components_reportcontrols",
       "target": "gui_src_components_reportcontrols_reportcontrols",
@@ -5149,7 +6578,7 @@
       "context": "field",
       "confidence": "EXTRACTED",
       "source_file": "gui/src/components/ReportControls.tsx",
-      "source_location": "L8",
+      "source_location": "L10",
       "weight": 1.0,
       "source": "gui_src_components_reportcontrols_props",
       "target": "gui_src_types_healthresponse",
@@ -5160,7 +6589,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "gui/src/components/ReportControls.tsx",
-      "source_location": "L133",
+      "source_location": "L135",
       "weight": 1.0,
       "source": "gui_src_components_reportcontrols_reportcontrols",
       "target": "gui_src_components_reportcontrols_filemeta",
@@ -9238,194 +10667,1304 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": ".codex/skills/graphify/SKILL.md",
-      "source_location": null,
+      "source_location": "L6",
       "weight": 1.0,
-      "source": "codex_skills_graphify_skill_existing_graph_fast_path",
-      "target": "codex_skills_graphify_references_query_traversal"
+      "source": "codex_skills_graphify_skill",
+      "target": "codex_skills_graphify_skill_graphify",
+      "confidence_score": 1.0
     },
     {
-      "relation": "conceptually_related_to",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": ".codex/skills/graphify/SKILL.md",
-      "source_location": null,
+      "source_location": "L656",
       "weight": 1.0,
-      "source": "codex_skills_graphify_skill_structural_extraction",
-      "target": "codex_skills_graphify_skill_semantic_extraction"
+      "source": "codex_skills_graphify_skill_graphify",
+      "target": "codex_skills_graphify_skill_for_graphify_add_and_watch",
+      "confidence_score": 1.0
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": ".codex/skills/graphify/SKILL.md",
-      "source_location": null,
+      "source_location": "L644",
       "weight": 1.0,
-      "source": "codex_skills_graphify_skill_semantic_extraction",
-      "target": "codex_skills_graphify_references_extraction_spec_subagent_schema"
+      "source": "codex_skills_graphify_skill_graphify",
+      "target": "codex_skills_graphify_skill_for_graphify_query",
+      "confidence_score": 1.0
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L662",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_skill_graphify",
+      "target": "codex_skills_graphify_skill_for_the_commit_hook_and_native_claude_md_integration",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L638",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_skill_graphify",
+      "target": "codex_skills_graphify_skill_for_update_and_cluster_only",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L668",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_skill_graphify",
+      "target": "codex_skills_graphify_skill_honesty_rules",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L620",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_skill_graphify",
+      "target": "codex_skills_graphify_skill_interpreter_guard_for_subcommands",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_skill_graphify",
+      "target": "codex_skills_graphify_skill_usage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_skill_graphify",
+      "target": "codex_skills_graphify_skill_what_graphify_is_for",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L49",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_skill_graphify",
+      "target": "codex_skills_graphify_skill_what_you_must_do_when_invoked",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_skill_what_you_must_do_when_invoked",
+      "target": "codex_skills_graphify_skill_step_0_github_repos_and_multi_path_merge_only_if_a_url_or_several_paths",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L65",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_skill_what_you_must_do_when_invoked",
+      "target": "codex_skills_graphify_skill_step_1_ensure_graphify_is_installed",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L144",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_skill_what_you_must_do_when_invoked",
+      "target": "codex_skills_graphify_skill_step_2_5_video_and_audio_only_if_video_files_detected",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L107",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_skill_what_you_must_do_when_invoked",
+      "target": "codex_skills_graphify_skill_step_2_detect_files",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L148",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_skill_what_you_must_do_when_invoked",
+      "target": "codex_skills_graphify_skill_step_3_extract_entities_and_relationships",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L447",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_skill_what_you_must_do_when_invoked",
+      "target": "codex_skills_graphify_skill_step_4_5_graph_health_check_read_only_integrity_gate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L384",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_skill_what_you_must_do_when_invoked",
+      "target": "codex_skills_graphify_skill_step_4_build_graph_cluster_analyze_generate_outputs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L473",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_skill_what_you_must_do_when_invoked",
+      "target": "codex_skills_graphify_skill_step_5_label_communities",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L514",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_skill_what_you_must_do_when_invoked",
+      "target": "codex_skills_graphify_skill_step_6_generate_obsidian_vault_opt_in_html",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L540",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_skill_what_you_must_do_when_invoked",
+      "target": "codex_skills_graphify_skill_step_9_save_manifest_update_cost_tracker_clean_up_and_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L534",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_skill_what_you_must_do_when_invoked",
+      "target": "codex_skills_graphify_skill_steps_6b_8_wiki_neo4j_falkordb_svg_graphml_mcp_benchmark_only_on_their_flags",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L167",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_skill_step_3_extract_entities_and_relationships",
+      "target": "codex_skills_graphify_skill_part_a_structural_extraction_for_code_files",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L193",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_skill_step_3_extract_entities_and_relationships",
+      "target": "codex_skills_graphify_skill_part_b_semantic_extraction_parallel_subagents",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/SKILL.md",
+      "source_location": "L350",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_skill_step_3_extract_entities_and_relationships",
+      "target": "codex_skills_graphify_skill_part_c_merge_ast_semantic_into_final_extraction",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/add-watch.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_add_watch",
+      "target": "codex_skills_graphify_references_add_watch_graphify_reference_add_a_url_and_watch_a_folder",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/add-watch.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_add_watch_graphify_reference_add_a_url_and_watch_a_folder",
+      "target": "codex_skills_graphify_references_add_watch_for_graphify_add",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/add-watch.md",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_add_watch_graphify_reference_add_a_url_and_watch_a_folder",
+      "target": "codex_skills_graphify_references_add_watch_for_watch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/exports.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_exports",
+      "target": "codex_skills_graphify_references_exports_graphify_reference_extra_exports_and_benchmark",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/exports.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_exports_graphify_reference_extra_exports_and_benchmark",
+      "target": "codex_skills_graphify_references_exports_step_6b_wiki_only_if_wiki_flag",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/exports.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_exports_graphify_reference_extra_exports_and_benchmark",
+      "target": "codex_skills_graphify_references_exports_step_7_neo4j_export_only_if_neo4j_or_neo4j_push_flag",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/exports.md",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_exports_graphify_reference_extra_exports_and_benchmark",
+      "target": "codex_skills_graphify_references_exports_step_7a_falkordb_export_only_if_falkordb_or_falkordb_push_flag",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/exports.md",
+      "source_location": "L47",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_exports_graphify_reference_extra_exports_and_benchmark",
+      "target": "codex_skills_graphify_references_exports_step_7b_svg_export_only_if_svg_flag",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/exports.md",
+      "source_location": "L53",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_exports_graphify_reference_extra_exports_and_benchmark",
+      "target": "codex_skills_graphify_references_exports_step_7c_graphml_export_only_if_graphml_flag",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/exports.md",
+      "source_location": "L59",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_exports_graphify_reference_extra_exports_and_benchmark",
+      "target": "codex_skills_graphify_references_exports_step_7d_mcp_server_only_if_mcp_flag",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/exports.md",
+      "source_location": "L79",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_exports_graphify_reference_extra_exports_and_benchmark",
+      "target": "codex_skills_graphify_references_exports_step_8_token_reduction_benchmark_only_if_total_words_5000",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/extraction-spec.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_extraction_spec",
+      "target": "codex_skills_graphify_references_extraction_spec_graphify_reference_extraction_subagent_prompt_compact",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/github-and-merge.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_github_and_merge",
+      "target": "codex_skills_graphify_references_github_and_merge_graphify_reference_github_clone_and_cross_repo_merge",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/github-and-merge.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_github_and_merge_graphify_reference_github_clone_and_cross_repo_merge",
+      "target": "codex_skills_graphify_references_github_and_merge_step_0_clone_github_repo_s_only_if_a_github_url_was_given",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/hooks.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_hooks",
+      "target": "codex_skills_graphify_references_hooks_graphify_reference_commit_hook_and_native_claude_md_integration",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/hooks.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_hooks_graphify_reference_commit_hook_and_native_claude_md_integration",
+      "target": "codex_skills_graphify_references_hooks_for_git_commit_hook",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/hooks.md",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_hooks_graphify_reference_commit_hook_and_native_claude_md_integration",
+      "target": "codex_skills_graphify_references_hooks_for_native_claude_md_integration",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/query.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_query",
+      "target": "codex_skills_graphify_references_query_graphify_reference_query_path_explain",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/query.md",
+      "source_location": "L254",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_query_graphify_reference_query_path_explain",
+      "target": "codex_skills_graphify_references_query_for_graphify_explain",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/query.md",
+      "source_location": "L186",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_query_graphify_reference_query_path_explain",
+      "target": "codex_skills_graphify_references_query_for_graphify_path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/query.md",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_query_graphify_reference_query_path_explain",
+      "target": "codex_skills_graphify_references_query_step_0_constrained_query_expansion_required_before_traversal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/query.md",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_query_graphify_reference_query_path_explain",
+      "target": "codex_skills_graphify_references_query_step_1_traversal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/transcribe.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_transcribe",
+      "target": "codex_skills_graphify_references_transcribe_graphify_reference_transcribe_video_and_audio",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/transcribe.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_transcribe_graphify_reference_transcribe_video_and_audio",
+      "target": "codex_skills_graphify_references_transcribe_step_2_5_transcribe_video_audio_files_only_if_video_files_detected",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/update.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_update",
+      "target": "codex_skills_graphify_references_update_graphify_reference_incremental_update_and_cluster_only",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/update.md",
+      "source_location": "L184",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_update_graphify_reference_incremental_update_and_cluster_only",
+      "target": "codex_skills_graphify_references_update_for_cluster_only",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".codex/skills/graphify/references/update.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "codex_skills_graphify_references_update_graphify_reference_incremental_update_and_cluster_only",
+      "target": "codex_skills_graphify_references_update_for_update_incremental_re_extraction",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "AGENTS.md",
-      "source_location": null,
+      "source_location": "L1",
       "weight": 1.0,
-      "source": "agents_graphify_project_instructions",
-      "target": "codex_skills_graphify_references_query_traversal"
+      "source": "agents",
+      "target": "agents_graphify",
+      "confidence_score": 1.0
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "AGENTS.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "agents_graphify_project_instructions",
-      "target": "codex_skills_graphify_references_update_incremental_update"
-    },
-    {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
       "source_file": "CLAUDE.md",
-      "source_location": null,
+      "source_location": "L1",
       "weight": 1.0,
-      "source": "claude_graphify_project_instructions",
-      "target": "agents_graphify_project_instructions"
+      "source": "claude",
+      "target": "claude_graphify",
+      "confidence_score": 1.0
     },
     {
-      "relation": "rationale_for",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "HANDOVER.md",
-      "source_location": null,
+      "source_location": "L1",
       "weight": 1.0,
-      "source": "handover_advisory_precision",
-      "target": "handover_codex_review_gui"
+      "source": "handover",
+      "target": "handover_handover_codex_review_gui_wise_escm",
+      "confidence_score": 1.0
     },
     {
-      "relation": "rationale_for",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "HANDOVER.md",
-      "source_location": null,
+      "source_location": "L7",
       "weight": 1.0,
-      "source": "handover_dual_repo_boundary",
-      "target": "handover_codex_review_gui"
+      "source": "handover_handover_codex_review_gui_wise_escm",
+      "target": "handover_0_cara_pakai_dokumen_ini",
+      "confidence_score": 1.0
     },
     {
-      "relation": "conceptually_related_to",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "HANDOVER.md",
-      "source_location": null,
+      "source_location": "L109",
       "weight": 1.0,
-      "source": "handover_shared_review_engine",
-      "target": "handover_codex_review_gui"
+      "source": "handover_handover_codex_review_gui_wise_escm",
+      "target": "handover_10_pending_belum_selesai",
+      "confidence_score": 1.0
     },
     {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": null,
+      "source_location": "L116",
       "weight": 1.0,
-      "source": "handover_advisory_precision",
-      "target": "readme_codex_review_gui"
+      "source": "handover_handover_codex_review_gui_wise_escm",
+      "target": "handover_11_riwayat_keputusan_penting_ringkas",
+      "confidence_score": 1.0
     },
     {
-      "relation": "references",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": null,
+      "source_location": "L13",
       "weight": 1.0,
-      "source": "handover_shared_review_engine",
-      "target": "prompts_codex_diff_review_diff_review_prompt"
+      "source": "handover_handover_codex_review_gui_wise_escm",
+      "target": "handover_1_apa_proyek_ini",
+      "confidence_score": 1.0
     },
     {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "HANDOVER.md",
-      "source_location": null,
+      "source_location": "L18",
       "weight": 1.0,
-      "source": "handover_shared_review_engine",
-      "target": "readme_codex_review_gui"
+      "source": "handover_handover_codex_review_gui_wise_escm",
+      "target": "handover_2_dua_repo_jangan_tertukar_paling_sering_bikin_bingung",
+      "confidence_score": 1.0
     },
     {
-      "relation": "semantically_similar_to",
-      "confidence": "AMBIGUOUS",
-      "confidence_score": 0.2,
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "HANDOVER.md",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "handover_handover_codex_review_gui_wise_escm",
+      "target": "handover_3_menjalankan_lokal_node_20",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "HANDOVER.md",
+      "source_location": "L43",
+      "weight": 1.0,
+      "source": "handover_handover_codex_review_gui_wise_escm",
+      "target": "handover_4_arsitektur",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "HANDOVER.md",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "handover_handover_codex_review_gui_wise_escm",
+      "target": "handover_5_deployment_oracle_cloud_vm",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "HANDOVER.md",
+      "source_location": "L72",
+      "weight": 1.0,
+      "source": "handover_handover_codex_review_gui_wise_escm",
+      "target": "handover_6_fitur_yang_sudah_ada_status_selesai_ter_build",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "HANDOVER.md",
+      "source_location": "L83",
+      "weight": 1.0,
+      "source": "handover_handover_codex_review_gui_wise_escm",
+      "target": "handover_7_prinsip_batasan_wajib_dijaga",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "HANDOVER.md",
+      "source_location": "L90",
+      "weight": 1.0,
+      "source": "handover_handover_codex_review_gui_wise_escm",
+      "target": "handover_8_build_test",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "HANDOVER.md",
+      "source_location": "L99",
+      "weight": 1.0,
+      "source": "handover_handover_codex_review_gui_wise_escm",
+      "target": "handover_9_gotchas_catatan_teknis",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "readme",
+      "target": "readme_codex_review_gui_wise_escm",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L60",
+      "weight": 1.0,
+      "source": "readme_codex_review_gui_wise_escm",
+      "target": "readme_deploy_ke_koyeb_alternatif_render_gratis_via_docker",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "readme_codex_review_gui_wise_escm",
+      "target": "readme_deploy_ke_render_gratis",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L77",
+      "weight": 1.0,
+      "source": "readme_codex_review_gui_wise_escm",
+      "target": "readme_environment_variables",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "readme_codex_review_gui_wise_escm",
+      "target": "readme_jalankan_lokal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L162",
+      "weight": 1.0,
+      "source": "readme_codex_review_gui_wise_escm",
+      "target": "readme_konteks_skripsi",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "readme_codex_review_gui_wise_escm",
+      "target": "readme_mode_demo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L93",
+      "weight": 1.0,
+      "source": "readme_codex_review_gui_wise_escm",
+      "target": "readme_rulebook_30_aturan_inti",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L139",
+      "weight": 1.0,
+      "source": "readme_codex_review_gui_wise_escm",
+      "target": "readme_struktur_folder",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L95",
+      "weight": 1.0,
+      "source": "readme_rulebook_30_aturan_inti",
+      "target": "readme_domain_citadel_ctdl_01_ctdl_15_teknis_universal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L115",
+      "weight": 1.0,
+      "source": "readme_rulebook_30_aturan_inti",
+      "target": "readme_domain_wika_escm_wika_q01_wika_q15_khas_organisasi_tacit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "deploy/README.md",
-      "source_location": null,
+      "source_location": "L1",
       "weight": 1.0,
-      "source": "deploy_readme_oracle_cloud_deployment",
-      "target": "handover_oracle_vm_deployment"
+      "source": "deploy_readme",
+      "target": "deploy_readme_deploy_ke_oracle_cloud_always_free_vm",
+      "confidence_score": 1.0
     },
     {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.75,
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/README.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "deploy_readme_deploy_ke_oracle_cloud_always_free_vm",
+      "target": "deploy_readme_detail_vm",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/README.md",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "deploy_readme_deploy_ke_oracle_cloud_always_free_vm",
+      "target": "deploy_readme_opsional_https_tanpa_beli_domain",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/README.md",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "deploy_readme_deploy_ke_oracle_cloud_always_free_vm",
+      "target": "deploy_readme_perintah_berguna",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/README.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "deploy_readme_deploy_ke_oracle_cloud_always_free_vm",
+      "target": "deploy_readme_ringkas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/README.md",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "deploy_readme_deploy_ke_oracle_cloud_always_free_vm",
+      "target": "deploy_readme_swap_hanya_bila_pakai_amd_1_gb_agar_build_tak_oom",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_06_26_sus_inapp_uat",
+      "target": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_sus_in_app_uat_red_carpet_implementation_plan_repo_escm_codex_review",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_sus_in_app_uat_red_carpet_implementation_plan_repo_escm_codex_review",
+      "target": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_file_structure",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_sus_in_app_uat_red_carpet_implementation_plan_repo_escm_codex_review",
+      "target": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_global_constraints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L746",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_sus_in_app_uat_red_carpet_implementation_plan_repo_escm_codex_review",
+      "target": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_self_review",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L51",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_sus_in_app_uat_red_carpet_implementation_plan_repo_escm_codex_review",
+      "target": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_task_1_backend_validasi_forwarder_uat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L141",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_sus_in_app_uat_red_carpet_implementation_plan_repo_escm_codex_review",
+      "target": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_task_2_backend_endpoint_api_uat_api_uat_check",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L203",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_sus_in_app_uat_red_carpet_implementation_plan_repo_escm_codex_review",
+      "target": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_task_3_google_apps_script_siap_tempel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L251",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_sus_in_app_uat_red_carpet_implementation_plan_repo_escm_codex_review",
+      "target": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_task_4_frontend_tipe_klien_api_daftar_item_sus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L315",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_sus_in_app_uat_red_carpet_implementation_plan_repo_escm_codex_review",
+      "target": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_task_5_frontend_susitem_susscale_uatprogress",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L397",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_sus_in_app_uat_red_carpet_implementation_plan_repo_escm_codex_review",
+      "target": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_task_6_frontend_welcome_consent_demographics_thankyou",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L524",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_sus_in_app_uat_red_carpet_implementation_plan_repo_escm_codex_review",
+      "target": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_task_7_frontend_uatview_integrasi_app_cta",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
+      "source_location": "L640",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_sus_in_app_uat_red_carpet_implementation_plan_repo_escm_codex_review",
+      "target": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_task_8_styles_light_theme_overlay_navy_emas_instrumen_e2e",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "gui/_task9-report.md",
-      "source_location": null,
+      "source_location": "L1",
       "weight": 1.0,
-      "source": "gui__task9_report_frontend_rewrite",
-      "target": "readme_codex_review_gui"
+      "source": "gui_task9_report",
+      "target": "gui_task9_report_task_9_report",
+      "confidence_score": 1.0
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": null,
+      "source_file": "gui/_task9-report.md",
+      "source_location": "L9",
       "weight": 1.0,
-      "source": "readme_codex_review_gui",
-      "target": "readme_demo_modes"
+      "source": "gui_task9_report_task_9_report",
+      "target": "gui_task9_report_build_result",
+      "confidence_score": 1.0
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": null,
+      "source_file": "gui/_task9-report.md",
+      "source_location": "L5",
       "weight": 1.0,
-      "source": "readme_codex_review_gui",
-      "target": "readme_koyeb_deployment"
+      "source": "gui_task9_report_task_9_report",
+      "target": "gui_task9_report_files_changed",
+      "confidence_score": 1.0
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": null,
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L1",
       "weight": 1.0,
-      "source": "readme_codex_review_gui",
-      "target": "readme_project_structure"
+      "source": "prompts_codex_diff_review",
+      "target": "prompts_codex_diff_review_codex_merge_request_diff_review_prompt_wise_escm_laravel_citadel",
+      "confidence_score": 1.0
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": null,
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L85",
       "weight": 1.0,
-      "source": "readme_codex_review_gui",
-      "target": "readme_render_deployment"
+      "source": "prompts_codex_diff_review_codex_merge_request_diff_review_prompt_wise_escm_laravel_citadel",
+      "target": "prompts_codex_diff_review_output_format",
+      "confidence_score": 1.0
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": null,
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L15",
       "weight": 1.0,
-      "source": "readme_codex_review_gui",
-      "target": "readme_rulebook_30"
+      "source": "prompts_codex_diff_review_codex_merge_request_diff_review_prompt_wise_escm_laravel_citadel",
+      "target": "prompts_codex_diff_review_project_conventions_review_rulebook",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L77",
+      "weight": 1.0,
+      "source": "prompts_codex_diff_review_codex_merge_request_diff_review_prompt_wise_escm_laravel_citadel",
+      "target": "prompts_codex_diff_review_responsibilities",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "prompts_codex_diff_review_codex_merge_request_diff_review_prompt_wise_escm_laravel_citadel",
+      "target": "prompts_codex_diff_review_technology_stack",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L54",
+      "weight": 1.0,
+      "source": "prompts_codex_diff_review_project_conventions_review_rulebook",
+      "target": "prompts_codex_diff_review_architecture_ctdl_12_medium_wika_q01_low_wika_q04_low_wika_q13_low",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L49",
+      "weight": 1.0,
+      "source": "prompts_codex_diff_review_project_conventions_review_rulebook",
+      "target": "prompts_codex_diff_review_audit_tracking_ctdl_07_high_ctdl_08_medium_ctdl_09_medium",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "prompts_codex_diff_review_project_conventions_review_rulebook",
+      "target": "prompts_codex_diff_review_authentication_authorization_ctdl_04_high_ctdl_11_high_wika_q07_high_wika_q14_high",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L43",
+      "weight": 1.0,
+      "source": "prompts_codex_diff_review_project_conventions_review_rulebook",
+      "target": "prompts_codex_diff_review_citadel_framework_ctdl_06_medium_ctdl_13_high_ctdl_14_low",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "prompts_codex_diff_review_project_conventions_review_rulebook",
+      "target": "prompts_codex_diff_review_database_orm_ctdl_01_high_ctdl_10_low",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "prompts_codex_diff_review_project_conventions_review_rulebook",
+      "target": "prompts_codex_diff_review_integration_wika_q05_high_wika_q06_medium",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "prompts_codex_diff_review_project_conventions_review_rulebook",
+      "target": "prompts_codex_diff_review_mass_assignment_ctdl_02_high_wika_q03_medium",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L66",
+      "weight": 1.0,
+      "source": "prompts_codex_diff_review_project_conventions_review_rulebook",
+      "target": "prompts_codex_diff_review_security_wika_q08_high_wika_q15_high",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "prompts_codex_diff_review_project_conventions_review_rulebook",
+      "target": "prompts_codex_diff_review_validation_ctdl_05_medium_wika_q02_medium",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L71",
+      "weight": 1.0,
+      "source": "prompts_codex_diff_review_project_conventions_review_rulebook",
+      "target": "prompts_codex_diff_review_workflow_wika_q11_high_wika_q12_medium_ctdl_15_medium",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "prompts_codex_diff_review_project_conventions_review_rulebook",
+      "target": "prompts_codex_diff_review_xss_prevention_ctdl_03_high",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L129",
+      "weight": 1.0,
+      "source": "prompts_codex_diff_review_output_format",
+      "target": "prompts_codex_diff_review_critical_line_numbers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_diff_review.md",
+      "source_location": "L136",
+      "weight": 1.0,
+      "source": "prompts_codex_diff_review_output_format",
+      "target": "prompts_codex_diff_review_critical_no_duplicate_findings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_full_scan.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "prompts_codex_full_scan",
+      "target": "prompts_codex_full_scan_codex_full_repository_assessment_prompt_wise_escm_laravel_citadel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_full_scan.md",
+      "source_location": "L62",
+      "weight": 1.0,
+      "source": "prompts_codex_full_scan_codex_full_repository_assessment_prompt_wise_escm_laravel_citadel",
+      "target": "prompts_codex_full_scan_objectives",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_full_scan.md",
+      "source_location": "L71",
+      "weight": 1.0,
+      "source": "prompts_codex_full_scan_codex_full_repository_assessment_prompt_wise_escm_laravel_citadel",
+      "target": "prompts_codex_full_scan_output_requirements",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_full_scan.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "prompts_codex_full_scan_codex_full_repository_assessment_prompt_wise_escm_laravel_citadel",
+      "target": "prompts_codex_full_scan_repository_structure",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_full_scan.md",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "prompts_codex_full_scan_codex_full_repository_assessment_prompt_wise_escm_laravel_citadel",
+      "target": "prompts_codex_full_scan_review_rulebook_30_rules_from_knowledge_elicitation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_full_scan.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "prompts_codex_full_scan_review_rulebook_30_rules_from_knowledge_elicitation",
+      "target": "prompts_codex_full_scan_citadel_domain_rules_ctdl_01_to_ctdl_15",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_full_scan.md",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "prompts_codex_full_scan_review_rulebook_30_rules_from_knowledge_elicitation",
+      "target": "prompts_codex_full_scan_wika_escm_domain_rules_wika_q01_to_wika_q15",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_security_only.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "prompts_codex_security_only",
+      "target": "prompts_codex_security_only_codex_security_only_review_wise_escm_laravel_citadel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_security_only.md",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "prompts_codex_security_only_codex_security_only_review_wise_escm_laravel_citadel",
+      "target": "prompts_codex_security_only_labeling_requirements",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_security_only.md",
+      "source_location": "L53",
+      "weight": 1.0,
+      "source": "prompts_codex_security_only_codex_security_only_review_wise_escm_laravel_citadel",
+      "target": "prompts_codex_security_only_output_format",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_security_only.md",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "prompts_codex_security_only_codex_security_only_review_wise_escm_laravel_citadel",
+      "target": "prompts_codex_security_only_scope",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_security_only.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "prompts_codex_security_only_codex_security_only_review_wise_escm_laravel_citadel",
+      "target": "prompts_codex_security_only_security_context",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_security_only.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "prompts_codex_security_only_codex_security_only_review_wise_escm_laravel_citadel",
+      "target": "prompts_codex_security_only_security_rules_from_review_rulebook",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "prompts/codex_security_only.md",
+      "source_location": "L85",
+      "weight": 1.0,
+      "source": "prompts_codex_security_only_codex_security_only_review_wise_escm_laravel_citadel",
+      "target": "prompts_codex_security_only_summary_guidance",
+      "confidence_score": 1.0
     },
     {
       "relation": "conceptually_related_to",
@@ -9438,26 +11977,6 @@
       "target": "readme_codex_review_gui"
     },
     {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "prompts/codex_diff_review.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "prompts_codex_diff_review_rulebook_conventions",
-      "target": "readme_rulebook_30"
-    },
-    {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "prompts/codex_full_scan.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "prompts_codex_full_scan_rulebook_30_rules",
-      "target": "readme_rulebook_30"
-    },
-    {
       "relation": "implements",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -9466,66 +11985,6 @@
       "weight": 1.0,
       "source": "render_render_blueprint",
       "target": "readme_render_deployment"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_email_uniqueness",
-      "target": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_sus_inapp_uat_plan"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_sus_inapp_uat_plan",
-      "target": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_apps_script_proxy"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_sus_inapp_uat_plan",
-      "target": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_backend_uat_endpoint"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_sus_inapp_uat_plan",
-      "target": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_red_carpet_overlay"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_backend_uat_endpoint",
-      "target": "docs_superpowers_plans_2026_06_26_sus_inapp_uat_apps_script_proxy"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "gui/_task9-report.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "gui__task9_report_task9_report",
-      "target": "gui__task9_report_frontend_rewrite"
     },
     {
       "relation": "references",
@@ -9541,76 +12000,6 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "prompts/codex_diff_review.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "prompts_codex_diff_review_diff_review_prompt",
-      "target": "prompts_codex_diff_review_json_output_schema"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "prompts/codex_diff_review.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "prompts_codex_diff_review_diff_review_prompt",
-      "target": "prompts_codex_diff_review_rulebook_conventions"
-    },
-    {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "prompts/codex_security_only.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "prompts_codex_security_only_security_rules",
-      "target": "prompts_codex_diff_review_rulebook_conventions"
-    },
-    {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "prompts/codex_full_scan.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "prompts_codex_full_scan_json_output_schema",
-      "target": "prompts_codex_diff_review_json_output_schema"
-    },
-    {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.75,
-      "source_file": "prompts/codex_security_only.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "prompts_codex_security_only_strict_json_schema",
-      "target": "prompts_codex_diff_review_json_output_schema"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "prompts/codex_full_scan.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "prompts_codex_full_scan_full_repository_assessment",
-      "target": "prompts_codex_full_scan_rulebook_30_rules"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "prompts/codex_security_only.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "prompts_codex_security_only_security_review_prompt",
-      "target": "prompts_codex_security_only_security_rules"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "render.yaml",
       "source_location": null,
       "weight": 1.0,
@@ -9618,52 +12007,6 @@
       "target": "render_render_env_vars"
     }
   ],
-  "hyperedges": [
-    {
-      "id": "graphify_build_pipeline",
-      "label": "Graphify Build Pipeline",
-      "nodes": [
-        "codex_skills_graphify_skill_graphify_pipeline",
-        "codex_skills_graphify_skill_structural_extraction",
-        "codex_skills_graphify_skill_semantic_extraction",
-        "codex_skills_graphify_skill_graph_outputs",
-        "codex_skills_graphify_references_update_incremental_update"
-      ],
-      "relation": "form",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".codex/skills/graphify/SKILL.md"
-    },
-    {
-      "id": "code_review_rulebook_family",
-      "label": "Code Review Rulebook Family",
-      "nodes": [
-        "readme_rulebook_30",
-        "prompts_codex_diff_review_rulebook_conventions",
-        "prompts_codex_full_scan_rulebook_30_rules",
-        "prompts_codex_security_only_security_rules",
-        "handover_advisory_precision"
-      ],
-      "relation": "form",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "README.md"
-    },
-    {
-      "id": "uat_red_carpet_flow",
-      "label": "UAT Red Carpet Flow",
-      "nodes": [
-        "docs_superpowers_plans_2026_06_26_sus_inapp_uat_sus_inapp_uat_plan",
-        "docs_superpowers_plans_2026_06_26_sus_inapp_uat_backend_uat_endpoint",
-        "docs_superpowers_plans_2026_06_26_sus_inapp_uat_apps_script_proxy",
-        "docs_superpowers_plans_2026_06_26_sus_inapp_uat_email_uniqueness",
-        "docs_superpowers_plans_2026_06_26_sus_inapp_uat_red_carpet_overlay"
-      ],
-      "relation": "implement",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-06-26-sus-inapp-uat.md"
-    }
-  ],
-  "built_at_commit": "9766132d9368d032ec09b9b9e57c8aa689e0e023"
+  "hyperedges": [],
+  "built_at_commit": "753479af34a2e87f4463cc9c6fc2e503129488b3"
 }

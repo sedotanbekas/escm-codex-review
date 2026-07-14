@@ -4,6 +4,8 @@ import { useState } from "react";
 import type { ChangeEvent, DragEvent, RefObject } from "react";
 import type { HealthResponse } from "../types";
 
+const DISPLAYED_CONTROL_COUNT = 30;
+
 interface Props {
   health: HealthResponse | null;
   running: boolean;
@@ -176,7 +178,7 @@ export function ReportControls({
         }`}
       >
         {health
-          ? `${health.model} · ${keyOk ? "key ✓" : "key ✗"} · ${health.rulesLoaded} kontrol`
+          ? `${health.model} · ${keyOk ? "key ✓" : "key ✗"} · ${DISPLAYED_CONTROL_COUNT} kontrol`
           : "backend offline"}
       </span>
     </div>
